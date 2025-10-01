@@ -10,12 +10,12 @@ HustleHub is a Java, CLI-focused application providing computing students an eas
 Given below are my contributions to the project.
 
 * **New Feature**: <description>
-  * What it does: 
+  * What it does:
   * Justification:
   * Highlights:
   * Credits:
 
-* **New Feature**: 
+* **New Feature**:
 
 * **Code contributed**: [RepoSense link]()
 
