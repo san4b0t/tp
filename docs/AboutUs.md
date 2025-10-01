@@ -38,15 +38,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Ryan Tan Zheng Rong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ryantanzr.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ryantanzr)]
+[[portfolio](team/ryantanzr.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Back-end developer, data engineering, project management
 
 ### James Doe
 
