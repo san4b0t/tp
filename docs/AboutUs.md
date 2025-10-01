@@ -48,12 +48,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Jerome Goh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jeromeg89.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/JeromeG89)]
+[[portfolio](team/jeromeg89.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: FullStack + Coffee + Food
