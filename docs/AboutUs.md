@@ -31,7 +31,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### James Lim
 
-<img src="images/janes.png" width="200px">
+<img src="images/lim-james.JPG" width="200px">
 
 [[github](http://github.com/lim-james)] [[portfolio](team/lim-james.md)]
 
