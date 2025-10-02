@@ -9,51 +9,51 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Feng Qilong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/fengql123.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[portfolio](team/fengql123.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: UI, Frontend, Backend
 
-### Jean Doe
+### Sanfo Bimal Thomas
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/san4b0t.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/san4b0t)]
+[[portfolio](team/san4b0t.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: UI, Frontend
+
+### James Lim
+
+<img src="images/lim-james.png" width="200px">
+
+[[github](http://github.com/lim-james)] [[portfolio](team/lim-james.md)]
+
+* Role: Developer
+* Responsibilities: Architecture & Clarity
+
+### Ryan Tan Zheng Rong
+
+<img src="images/ryantanzr.png" width="200px">
+
+[[github](http://github.com/ryantanzr)]
+[[portfolio](team/ryantanzr.md)]
+
+* Role: Developer
+* Responsibilities: Back-end developer, data engineering, project management
+
+### Jerome Goh
+
+<img src="images/jeromeg89.png" width="200px">
+
+[[github](http://github.com/JeromeG89)]
+[[portfolio](team/jeromeg89.md)]
+
+* Role: Developer
+* Responsibilities: FullStack + Coffee + Food
