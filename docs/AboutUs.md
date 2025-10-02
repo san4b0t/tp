@@ -19,15 +19,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: UI, Frontend, Backend
 
-### Jane Doe
+### Sanfo Bimal Thomas
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/san4b0t.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/san4b0t)]
+[[portfolio](team/san4b0t.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: UI, Frontend
 
 ### James Lim
 
