@@ -9,15 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Feng Qilong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/fengql123.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/fengql123.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: UI, Frontend, Backend
 
 ### Sanfo Bimal Thomas
 
@@ -29,14 +29,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: UI, Frontend
 
-### Johnny Doe
+### James Lim
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lim-james.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/lim-james)] [[portfolio](team/lim-james.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Architecture & Clarity
 
 ### Jean Doe
 
