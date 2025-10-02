@@ -4,8 +4,8 @@ HustleHub is a Java, CLI-focused application providing computing students an eas
 Given below are my contributions to the project.
 
 * **New Feature**: 
-    * What it does: 
-    * Justification: 
+    * What it does:
+    * Justification:
     * Highlights:
     * Credits:
 
@@ -14,9 +14,9 @@ Given below are my contributions to the project.
 * **Project management**:
 
 * **Enhancements to existing features**:
-    
+
 * **Documentation**:
-    
+
 * **Community**:
-   
+
 * **Tools**:
