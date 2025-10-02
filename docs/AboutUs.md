@@ -9,15 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Feng Qilong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/fengql123.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/fengql123.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: UI, Frontend, Backend
 
 ### Jane Doe
 
