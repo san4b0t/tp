@@ -1,13 +1,21 @@
-### Project: AddressBook Level 3
+---
+layout: page
+title: Ryan's Project Portfolio Page
+---
+
+### Project: HustleHub
 
 HustleHub is a Java, CLI-focused application providing computing students an easy way to visualise, add and modify their job application details to multiple positions at multiple companies.
+
 Given below are my contributions to the project.
 
-* **New Feature**: 
-    * What it does:
-    * Justification:
-    * Highlights:
-    * Credits:
+* **New Feature**: <description>
+  * What it does:
+  * Justification:
+  * Highlights:
+  * Credits:
+
+* **New Feature**:
 
 * **Code contributed**: [RepoSense link]()
 
@@ -16,6 +24,8 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**:
 
 * **Documentation**:
+  * User Guide:
+  * Developer Guide:
 
 * **Community**:
 
