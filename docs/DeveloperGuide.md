@@ -293,9 +293,10 @@ _For all use cases below:_
 <br>
 **Actor**: `user`
 
+![UseCases.png](images/UseCases.png)
 
 <details>
-    <summary><b>UC01 - View Job Applications</b></summary>
+    <summary><b>UC01 - View job applications</b></summary>
 
 **MSS**
 1. User opens HustleHub
@@ -313,7 +314,7 @@ _For all use cases below:_
 </details>
 
 <details>
-    <summary><b>UC02 - Add Job Application</b></summary>
+    <summary><b>UC02 - Add job applications</b></summary>
 
 **Preconditions**
 * User already opened the system
@@ -336,7 +337,7 @@ _For all use cases below:_
 </details>
 
 <details>
-    <summary><b>UC03 - Delete a Job Application</b></summary>
+    <summary><b>UC03 - Delete a job applications</b></summary>
 
 **Preconditions**
 * User already opened the system
@@ -359,7 +360,7 @@ _For all use cases below:_
 </details>
 
 <details>
-    <summary><b>UC04 - Save Job Applications</b></summary>
+    <summary><b>UC04 - Save job applications</b></summary>
 
 **Preconditions**
 * User already opened the system
@@ -382,7 +383,7 @@ _For all use cases below:_
 </details>
 
 <details>
-    <summary><b>UC05 - Update Job Application</b></summary>
+    <summary><b>UC05 - Update job application</b></summary>
 
 **Preconditions**
 * User already opened the system
@@ -406,7 +407,7 @@ _For all use cases below:_
 </details>
 
 <details>
-    <summary><b>UC06 - Tagging a Job Application</b></summary>
+    <summary><b>UC06 - Tagging a job application</b></summary>
 
 **Preconditions**
 * User already opened the system
@@ -430,7 +431,7 @@ _For all use cases below:_
 </details>
 
 <details>
-    <summary><b>UC07 - Sorting Job Applications</b></summary>
+    <summary><b>UC07 - Sorting job applications</b></summary>
 
 **Preconditions**
 * User already opened the system
@@ -454,7 +455,7 @@ Use case ends.
 </details>
 
 <details>
-    <summary><b>UC08 - Filtering Job Applications</b></summary>
+    <summary><b>UC08 - Filtering job applications</b></summary>
 
 **Preconditions**
 * User already opened the system
@@ -477,7 +478,7 @@ Use case ends.
 </details>
 
 <details>
-    <summary><b>UC09 - Archiving a Job Application</b></summary>
+    <summary><b>UC09 - Archiving a job application</b></summary>
 
 **Preconditions**
 * User already opened the system
