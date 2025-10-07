@@ -31,7 +31,13 @@ public class JobApplication {
     private final Status status;
 
     /**
+     * Constructs a JobApplication.
      * Every field must be present and not null.
+     *
+     * @param companyName The name of the company.
+     * @param role The job role applied for.
+     * @param deadline The application deadline.
+     * @param status The current status of the application.
      */
     public JobApplication(String companyName, String role, LocalDateTime deadline, Status status) {
         requireAllNonNull(companyName, role, deadline, status);
@@ -41,18 +47,38 @@ public class JobApplication {
         this.status = status;
     }
 
+    /**
+     * Returns the company name.
+     *
+     * @return The name of the company.
+     */
     public String getCompanyName() {
         return companyName;
     }
 
+    /**
+     * Returns the job role.
+     *
+     * @return The job role applied for.
+     */
     public String getRole() {
         return role;
     }
 
+    /**
+     * Returns the application deadline.
+     *
+     * @return The deadline for the job application.
+     */
     public LocalDateTime getDeadline() {
         return deadline;
     }
 
+    /**
+     * Returns the application status.
+     *
+     * @return The current status of the application.
+     */
     public Status getStatus() {
         return status;
     }
@@ -60,6 +86,9 @@ public class JobApplication {
     /**
      * Returns true if both job applications have the same company name and role.
      * This defines a weaker notion of equality between two job applications.
+     *
+     * @param otherJobApplication The other job application to compare with.
+     * @return True if both job applications have the same company name and role.
      */
     public boolean isSameJobApplication(JobApplication otherJobApplication) {
         if (otherJobApplication == this) {
@@ -74,6 +103,9 @@ public class JobApplication {
     /**
      * Returns true if both job applications have the same identity and data fields.
      * This defines a stronger notion of equality between two job applications.
+     *
+     * @param other The other object to compare with.
+     * @return True if both job applications are equal in all fields.
      */
     @Override
     public boolean equals(Object other) {
@@ -88,23 +120,33 @@ public class JobApplication {
 
         JobApplication otherJobApplication = (JobApplication) other;
         return companyName.equals(otherJobApplication.companyName)
-                && role.equals(otherJobApplication.role)
-                && deadline.equals(otherJobApplication.deadline)
-                && status.equals(otherJobApplication.status);
+            && role.equals(otherJobApplication.role)
+            && deadline.equals(otherJobApplication.deadline)
+            && status.equals(otherJobApplication.status);
     }
 
+    /**
+     * Returns the hash code for this job application.
+     *
+     * @return The hash code value.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(companyName, role, deadline, status);
     }
 
+    /**
+     * Returns a string representation of this job application.
+     *
+     * @return A string containing all job application details.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("companyName", companyName)
-                .add("role", role)
-                .add("deadline", deadline)
-                .add("status", status)
-                .toString();
+            .add("companyName", companyName)
+            .add("role", role)
+            .add("deadline", deadline)
+            .add("status", status)
+            .toString();
     }
 }
