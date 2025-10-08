@@ -27,7 +27,7 @@ public class JsonSerializableJobApplicationList {
     public JsonSerializableJobApplicationList(@JsonProperty("jobApplications")
         List<SerializableJobApplication> jobApplications) {
         this.applications.addAll(jobApplications);
-}
+    }
 
     /**
      * Converts this job application list into the model's {@code List<JobApplication>} object.
