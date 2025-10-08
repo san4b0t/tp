@@ -1,13 +1,16 @@
 package seedu.address.storage;
 
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.jobapplication.JobApplication;
 
-
-import java.time.LocalDateTime;
-
+/**
+ * Jackson-friendly version of {@link JobApplication}.
+ */
 public class SerializableJobApplication {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Job Application's %s field is missing!";
@@ -62,7 +65,8 @@ public class SerializableJobApplication {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Status"));
         }
 
-        return new JobApplication(companyName, role, LocalDateTime.parse(deadline), JobApplication.Status.valueOf(status));
+        return new JobApplication(companyName, role,
+            LocalDateTime.parse(deadline), JobApplication.Status.valueOf(status));
     }
 
 }
