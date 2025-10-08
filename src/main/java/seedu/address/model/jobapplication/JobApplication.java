@@ -23,12 +23,12 @@ public class JobApplication {
     }
 
     // Identity fields
-    private final String companyName;
-    private final String role;
+    private String companyName;
+    private String role;
 
     // Data fields
-    private final LocalDateTime deadline;
-    private final Status status;
+    private LocalDateTime deadline;
+    private Status status;
 
     /**
      * Constructs a JobApplication.
@@ -96,8 +96,8 @@ public class JobApplication {
         }
 
         return otherJobApplication != null
-                && otherJobApplication.getCompanyName().equals(getCompanyName())
-                && otherJobApplication.getRole().equals(getRole());
+                && otherJobApplication.companyName.equals(this.companyName)
+                && otherJobApplication.role.equals(this.role);
     }
 
     /**
@@ -119,10 +119,10 @@ public class JobApplication {
         }
 
         JobApplication otherJobApplication = (JobApplication) other;
-        return getCompanyName().equals(otherJobApplication.getCompanyName())
-            && getRole().equals(otherJobApplication.getRole())
-            && getDeadline().equals(otherJobApplication.getDeadline())
-            && getStatus().equals(otherJobApplication.getStatus());
+        return companyName.equals(otherJobApplication.companyName)
+            && role.equals(otherJobApplication.role)
+            && deadline.equals(otherJobApplication.deadline)
+            && status.equals(otherJobApplication.status);
     }
 
     /**
