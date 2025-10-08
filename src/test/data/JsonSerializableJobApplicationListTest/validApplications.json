@@ -1,0 +1,18 @@
+{
+  "jobApplications": [ {
+    "companyName": "Google",
+    "role": "Software Engineer",
+    "status": "INPROGRESS",
+    "deadline": "2025-11-10T00:10"
+  }, {
+    "companyName": "Meta",
+    "role": "Data Engineer",
+    "status": "APPLIED",
+    "deadline": "2025-11-12T09:10"
+  }, {
+    "companyName": "Microsoft",
+    "role": "QA Engineer",
+    "status": "REJECTED",
+    "deadline": "2025-10-11T10:30"
+  } ]
+}
