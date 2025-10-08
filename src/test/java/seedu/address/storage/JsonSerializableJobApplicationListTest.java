@@ -2,13 +2,9 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -19,7 +15,8 @@ import seedu.address.model.jobapplication.JobApplication;
 
 public class JsonSerializableJobApplicationListTest {
 
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableJobApplicationListTest");
+    private static final String FOLDER_NAME = "JsonSerializableJobApplicationListTest";
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", FOLDER_NAME);
     private static final Path VALID_APPLICATIONS = TEST_DATA_FOLDER.resolve("validApplications.json");
     private static final Path DUPLICATE_APPLICATIONS = TEST_DATA_FOLDER.resolve("duplicateApplications.json");
 

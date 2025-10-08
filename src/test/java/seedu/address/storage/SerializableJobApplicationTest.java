@@ -25,7 +25,8 @@ public class SerializableJobApplicationTest {
 
     @Test
     public void toModelType_validSerializableJobApplication_returnsJobApplication() throws Exception {
-        JobApplication jobApplication = new JobApplication(VALID_COMPANY_NAME, VALID_ROLE, VALID_DEADLINE, VALID_STATUS);
+        JobApplication jobApplication = new JobApplication(VALID_COMPANY_NAME,
+            VALID_ROLE, VALID_DEADLINE, VALID_STATUS);
         SerializableJobApplication serializableJobApplication = new SerializableJobApplication(jobApplication);
 
         // Verify that the serializable object can be converted back to model type
