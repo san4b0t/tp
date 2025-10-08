@@ -15,7 +15,7 @@ public class JsonSerializableJobApplicationList {
     public static final String MESSAGE_DUPLICATE_APPLICATION = "Duplicate applications have been detected.";
 
     private final List<SerializableJobApplication> applications = new ArrayList<>();
-    
+
     /**
      * Constructs a {@code JsonSerializableJobApplicationList} with the given job applications.
      */
@@ -39,5 +39,4 @@ public class JsonSerializableJobApplicationList {
         }
         return listOfApplications;
     }
-
 }
