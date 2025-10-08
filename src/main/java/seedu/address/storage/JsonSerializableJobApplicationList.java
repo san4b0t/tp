@@ -18,7 +18,7 @@ public class JsonSerializableJobApplicationList {
 
     public static final String MESSAGE_DUPLICATE_APPLICATION = "Duplicate applications have been detected.";
 
-    private final List<SerializableJobApplication> applications = new ArrayList<>();
+    private final List<SerializableJobApplication> jobApplications = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableJobApplicationList} with the given job applications.
@@ -26,7 +26,7 @@ public class JsonSerializableJobApplicationList {
     @JsonCreator
     public JsonSerializableJobApplicationList(@JsonProperty("jobApplications")
         List<SerializableJobApplication> jobApplications) {
-        this.applications.addAll(jobApplications);
+        this.jobApplications.addAll(jobApplications);
     }
 
     /**
@@ -35,7 +35,7 @@ public class JsonSerializableJobApplicationList {
      */
     public List<JobApplication> toModelType() throws IllegalValueException {
         List<JobApplication> listOfApplications = new ArrayList<>();
-        for (SerializableJobApplication serializableApplication : applications) {
+        for (SerializableJobApplication serializableApplication : jobApplications) {
             JobApplication application = serializableApplication.toModelType();
             if (listOfApplications.contains(application)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_APPLICATION);
