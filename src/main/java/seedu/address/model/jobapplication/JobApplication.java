@@ -119,10 +119,10 @@ public class JobApplication {
         }
 
         JobApplication otherJobApplication = (JobApplication) other;
-        return companyName.equals(otherJobApplication.companyName)
-            && role.equals(otherJobApplication.role)
-            && deadline.equals(otherJobApplication.deadline)
-            && status.equals(otherJobApplication.status);
+        return getCompanyName().equals(otherJobApplication.getCompanyName())
+            && getRole().equals(otherJobApplication.getRole())
+            && getDeadline().equals(otherJobApplication.getDeadline())
+            && getStatus().equals(otherJobApplication.getStatus());
     }
 
     /**
