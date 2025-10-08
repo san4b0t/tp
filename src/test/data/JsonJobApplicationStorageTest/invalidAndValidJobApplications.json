@@ -1,0 +1,18 @@
+{
+  "jobApplications": [ {
+    "companyName": "Google",
+    "role": "Software Engineer",
+    "status": "APPLIED",
+    "deadline": "2025-11-10T00:10"
+  }, {
+    "companyName": "Meta",
+    "role": "Engineer",
+    "status": "APPLIED",
+    "deadline": "2025-11-10T00:10"
+  }, {
+    "companyName": "Google",
+    "role": "Software Engineer",
+    "status": "APPLIED",
+    "deadline": "2025-11-10T00:10"
+  }]
+}
