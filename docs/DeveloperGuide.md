@@ -262,13 +262,15 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* is a **university student, entrepreneur, or early-career professional** managing multiple side projects, collaborations, or commitments  
+* values **speed and organisation** in managing tasks, contacts, and project updates  
+* prefers **desktop or web-based productivity tools** over mobile-only solutions  
+* is **comfortable with command-driven or keyboard-first interfaces** (CLI or quick command palette)  
+* seeks **a single, streamlined hub** for tracking collaborations, project progress, and key contacts  
+* is **tech-savvy** and appreciates integrations with platforms like Notion, GitHub, or Google Calendar  
 
-**Value proposition**: A one-stop solution for prospective interns to track, manage and stay on top of their internship applications.
+**Value proposition**:  
+HustleHub empowers driven individuals to **manage projects, people, and productivity from one place** — combining contact management, task tracking, and collaboration features in a fast, keyboard-optimised interface.
 
 
 ### User stories
