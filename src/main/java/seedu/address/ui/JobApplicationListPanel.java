@@ -41,7 +41,8 @@ public class JobApplicationListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new JobApplicationCard(jobApplication, getIndex() + 1).getRoot());
+                int displayedIndex = getIndex() + 1;
+                setGraphic(new JobApplicationCard(jobApplication, displayedIndex).getRoot());
             }
         }
     }
