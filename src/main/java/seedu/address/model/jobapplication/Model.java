@@ -37,52 +37,53 @@ public interface Model {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getJobBookFilePath();
 
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setJobBookFilePath(Path jobBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces address book data with the data in {@code JobBook}.
      */
     void setJobBook(ReadOnlyJobBook jobBook);
 
-    /** Returns the AddressBook */
-    ReadOnlyJobBook getAddressBook();
+    /** Returns the JobBook */
+    ReadOnlyJobBook getJobBook();
 
     /**
-     * Returns true if a application with the same identity as {@code person} exists in the address book.
+     * Returns true if a application with the same identity as {@code JobApplication} exists in the address book.
      */
     boolean hasApplication(JobApplication application);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given JobApplication.
+     * The JobApplication must exist in the address book.
      */
     void deleteJobApplication(JobApplication target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given JobApplication.
+     * {@code JobApplication} must not already exist in the address book.
      */
     void addJobApplication(JobApplication application);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given JobApplication {@code target} with {@code editedJobApplication}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The JobApplication identity of {@code editedJobApplication} must not be the same as another existing
+     * JobApplication in the address book.
      */
-    void setJobApplication(JobApplication target, JobApplication editedPerson);
+    void setJobApplication(JobApplication target, JobApplication editedJobApplication);
 
     /**
-     * Returns an unmodifiable view of the filtered person list
+     * Returns an unmodifiable view of the filtered JobApplication list
      */
     ObservableList<JobApplication> getFilteredApplicationList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered JobApplication list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredJobApplicationList(Predicate<JobApplication> predicate);

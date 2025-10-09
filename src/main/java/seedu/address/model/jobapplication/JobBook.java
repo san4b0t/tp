@@ -8,7 +8,7 @@ import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameApplication comparison)
  */
 public class JobBook implements ReadOnlyJobBook {
 
@@ -28,7 +28,7 @@ public class JobBook implements ReadOnlyJobBook {
     public JobBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the JobApplications in the {@code toBeCopied}
      */
     public JobBook(ReadOnlyJobBook toBeCopied) {
         this();
@@ -38,15 +38,15 @@ public class JobBook implements ReadOnlyJobBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the JobApplication list with {@code JobApplications}.
+     * {@code JobApplications} must not contain duplicate JobApplications.
      */
     public void setApplications(List<JobApplication> applications) {
         this.applications.setJobApplications(applications);
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code JobBook} with {@code newData}.
      */
     public void resetData(ReadOnlyJobBook newData) {
         requireNonNull(newData);
@@ -54,10 +54,10 @@ public class JobBook implements ReadOnlyJobBook {
         setApplications(newData.getApplicationList());
     }
 
-    //// person-level operations
+    //// JobApplication-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a JobApplication with the same identity as {@code JobApplication} exists in the Job book.
      */
     public boolean hasJobApplication(JobApplication application) {
         requireNonNull(application);
@@ -65,27 +65,28 @@ public class JobBook implements ReadOnlyJobBook {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a JobApplication to the Job book.
+     * The JobApplication must not already exist in the Job book.
      */
     public void addApplication(JobApplication p) {
         applications.add(p);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given JobApplication {@code target} in the list with {@code editedJobApplication}.
+     * {@code target} must exist in the Job book.
+     * The JobApplication identity of {@code editedJobApplication} must not be the same as another existing
+     * JobApplication in the Job book.
      */
-    public void setApplication(JobApplication target, JobApplication editedPerson) {
-        requireNonNull(editedPerson);
+    public void setApplication(JobApplication target, JobApplication editedJobApplication) {
+        requireNonNull(editedJobApplication);
 
-        applications.setJobApplication(target, editedPerson);
+        applications.setJobApplication(target, editedJobApplication);
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code JobBook}.
+     * {@code key} must exist in the Job book.
      */
     public void removeApplication(JobApplication key) {
         applications.remove(key);
@@ -96,7 +97,7 @@ public class JobBook implements ReadOnlyJobBook {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("persons", applications)
+                .add("JobApplications", applications)
                 .toString();
     }
 

@@ -23,7 +23,7 @@ public class ModelManager implements Model {
     private final FilteredList<JobApplication> filteredApplications;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given JobBook and userPrefs.
      */
     public ModelManager(ReadOnlyJobBook jobBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(jobBook, userPrefs);
@@ -64,25 +64,25 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getJobBookFilePath() {
+        return userPrefs.getJobBookFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setJobBookFilePath(Path jobBookFilePath) {
+        requireNonNull(jobBookFilePath);
+        userPrefs.setJobBookFilePath(jobBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== JobBook ================================================================================
 
     @Override
-    public void setJobBook(ReadOnlyJobBook addressBook) {
-        this.jobBook.resetData(addressBook);
+    public void setJobBook(ReadOnlyJobBook jobBook) {
+        this.jobBook.resetData(jobBook);
     }
 
     @Override
-    public ReadOnlyJobBook getAddressBook() {
+    public ReadOnlyJobBook getJobBook() {
         return jobBook;
     }
 
@@ -114,7 +114,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedJobBook}
      */
     @Override
     public ObservableList<JobApplication> getFilteredApplicationList() {
