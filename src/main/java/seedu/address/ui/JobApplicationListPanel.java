@@ -11,37 +11,37 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of job application.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class JobApplicationListPanel extends UiPart<Region> {
+    private static final String FXML = "JobApplicationListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(JobApplicationListPanel.class);
 
     @FXML
-    private ListView<Person> personListView;
+    private ListView<Person> jobApplicationListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code JobApplicationListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList) {
+    public JobApplicationListPanel(ObservableList<Person> jobApplicationList) {
         super(FXML);
-        personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        jobApplicationListView.setItems(jobApplicationList);
+        jobApplicationListView.setCellFactory(listView -> new JobApplicationListViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code JobApplicationCard}.
      */
-    class PersonListViewCell extends ListCell<Person> {
+    class JobApplicationListViewCell extends ListCell<Person> {
         @Override
-        protected void updateItem(Person person, boolean empty) {
-            super.updateItem(person, empty);
+        protected void updateItem(Person jobApplication, boolean empty) {
+            super.updateItem(jobApplication, empty);
 
-            if (empty || person == null) {
+            if (empty || jobApplication == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                setGraphic(new JobApplicationCard(jobApplication, getIndex() + 1).getRoot());
             }
         }
     }
