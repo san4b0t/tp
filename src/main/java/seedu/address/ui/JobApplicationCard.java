@@ -42,7 +42,7 @@ public class JobApplicationCard extends UiPart<Region> {
     private FlowPane tags;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code JobApplicationCard} with the given {@code Person} and index to display.
      */
     public JobApplicationCard(Person jobApplication, int displayedIndex) {
         super(FXML);
