@@ -78,7 +78,6 @@ public class MainApp extends Application {
     private Model initModelManager(DataStorage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getDataFilePath());
 
-        Optional<ReadOnlyJobBook> jobBookOptional;
         ReadOnlyJobBook initialData;
         JobBook book = new JobBook();
 
