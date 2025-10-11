@@ -1,7 +1,5 @@
 package seedu.address.logic;
 
-import static seedu.address.testutil.Assert.assertThrows;
-
 import java.nio.file.Path;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +10,6 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.jobapplication.Model;
 import seedu.address.model.jobapplication.ModelManager;
 import seedu.address.storage.DataStorageManager;
-import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonJobApplicationStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 
@@ -26,10 +23,9 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+
         JsonJobApplicationStorage jobApplicationStorage =
-                new JsonJobApplicationStorage(temporaryFolder.resolve("addressBook.json"));
+                new JsonJobApplicationStorage(temporaryFolder.resolve("jobApplication.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         DataStorageManager storage = new DataStorageManager(jobApplicationStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
