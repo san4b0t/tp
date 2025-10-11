@@ -3,21 +3,18 @@ package seedu.address.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.jobcommands.Command;
 import seedu.address.logic.jobcommands.CommandResult;
-import seedu.address.logic.jobcommands.SaveCommand;
 import seedu.address.logic.jobcommands.exceptions.JobCommandException;
 import seedu.address.logic.parser.JobBookCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.jobapplication.JobApplication;
 import seedu.address.model.jobapplication.Model;
 import seedu.address.model.person.Person;
 import seedu.address.storage.DataStorage;
@@ -53,14 +50,9 @@ public class LogicManager implements Logic {
     public CommandResult execute(String commandText) throws JobCommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
-        List<JobApplication> temporary = new ArrayList<>();
-
         CommandResult commandResult;
-        //Command command = jobBookCommandParser.parseCommand(commandText);
-        //commandResult = command.execute(model);
-
-        // Temporary code, remove during further integration
-        commandResult = new SaveCommand().execute(model);
+        Command command = jobBookCommandParser.parseCommand(commandText);
+        commandResult = command.execute(model);
 
         // Only save if the command indicates it should trigger a save operation
         if (commandResult.shouldSave()) {
