@@ -15,8 +15,10 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.jobapplication.JobApplication;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
+
 
 /**
  * The main LogicManager of the app.
@@ -30,14 +32,16 @@ public class LogicManager implements Logic {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
+    private final seedu.address.model.jobapplication.Model jobModel;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
-    public LogicManager(Model model, Storage storage) {
+    public LogicManager(Model model, seedu.address.model.jobapplication.Model jobModel, Storage storage) {
         this.model = model;
+        this.jobModel = jobModel;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
     }
@@ -72,6 +76,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public ObservableList<JobApplication> getFilteredJobsList() {
+        return jobModel.getFilteredApplicationList();
     }
 
     @Override

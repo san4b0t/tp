@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -7,10 +9,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.jobapplication.JobApplication;
 import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code JobApplication}.
  */
 public class JobApplicationCard extends UiPart<Region> {
 
@@ -24,36 +27,31 @@ public class JobApplicationCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person jobApplication;
+    public final JobApplication jobApplication;
 
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
-    @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label companyName;
     @FXML
-    private Label address;
+    private Label role;
     @FXML
-    private Label email;
+    private Label deadline;
     @FXML
-    private FlowPane tags;
+    private Label status;
 
     /**
-     * Creates a {@code JobApplicationCard} with the given {@code Person} and index to display.
+     * Creates a {@code JobApplicationCard} with the given {@code JobApplication} and index to display.
      */
-    public JobApplicationCard(Person jobApplication, int displayedIndex) {
+    public JobApplicationCard(JobApplication jobApplication, int displayedIndex) {
         super(FXML);
         this.jobApplication = jobApplication;
         id.setText(displayedIndex + ". ");
-        name.setText(jobApplication.getName().fullName);
-        phone.setText(jobApplication.getPhone().value);
-        address.setText(jobApplication.getAddress().value);
-        email.setText(jobApplication.getEmail().value);
-        jobApplication.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        companyName.setText(jobApplication.getCompanyName());
+        role.setText(jobApplication.getRole());
+        deadline.setText(jobApplication.getDeadline().format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm")));
+        status.setText(jobApplication.getStatus().toString());
     }
 }
