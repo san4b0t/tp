@@ -8,6 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.jobapplication.JobApplication;
 import seedu.address.model.person.Person;
 
 /**
@@ -18,7 +19,7 @@ public class JobApplicationListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(JobApplicationListPanel.class);
 
     @FXML
-    private ListView<Person> jobApplicationListView;
+    private ListView<JobApplication> jobApplicationListView;
 
     /**
      * Creates a {@code JobApplicationListPanel} with the given {@code ObservableList}.
@@ -32,9 +33,9 @@ public class JobApplicationListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code JobApplicationCard}.
      */
-    class JobApplicationListViewCell extends ListCell<Person> {
+    class JobApplicationListViewCell extends ListCell<JobApplication> {
         @Override
-        protected void updateItem(Person jobApplication, boolean empty) {
+        protected void updateItem(JobApplication jobApplication, boolean empty) {
             super.updateItem(jobApplication, empty);
 
             if (empty || jobApplication == null) {
