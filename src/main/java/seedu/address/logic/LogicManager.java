@@ -3,8 +3,15 @@ package seedu.address.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.logging.Logger;
 
+import com.sun.javafx.collections.ObservableListWrapper;
+import javafx.beans.InvalidationListener;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -15,6 +22,7 @@ import seedu.address.logic.parser.JobBookCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.jobapplication.JobApplication;
 import seedu.address.model.jobapplication.Model;
 import seedu.address.model.person.Person;
 import seedu.address.storage.DataStorage;
@@ -77,6 +85,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return null;
+    }
+
+    @Override
+    public ObservableList<JobApplication> getFilteredApplicationsList() {
+        return model.getFilteredApplicationList();
     }
 
     @Override

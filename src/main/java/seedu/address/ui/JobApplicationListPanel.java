@@ -24,14 +24,14 @@ public class JobApplicationListPanel extends UiPart<Region> {
     /**
      * Creates a {@code JobApplicationListPanel} with the given {@code ObservableList}.
      */
-    public JobApplicationListPanel(ObservableList<Person> jobApplicationList) {
+    public JobApplicationListPanel(ObservableList<JobApplication> jobApplicationList) {
         super(FXML);
         jobApplicationListView.setItems(jobApplicationList);
         jobApplicationListView.setCellFactory(listView -> new JobApplicationListViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code JobApplicationCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Job Application} using a {@code JobApplicationCard}.
      */
     class JobApplicationListViewCell extends ListCell<JobApplication> {
         @Override
