@@ -30,7 +30,8 @@ public class JobApplicationListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code JobApplicationCard}.
+     * Custom {@code ListCell} that displays the graphics of
+     * a {@code Job Application} using a {@code JobApplicationCard}.
      */
     class JobApplicationListViewCell extends ListCell<JobApplication> {
         @Override

@@ -1,14 +1,15 @@
 package seedu.address.ui;
 
+import java.time.format.DateTimeFormatter;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.jobapplication.JobApplication;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code JobApplication}.
  */
 public class JobApplicationCard extends UiPart<Region> {
 
@@ -27,29 +28,26 @@ public class JobApplicationCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
-    @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label companyName;
     @FXML
-    private Label address;
+    private Label role;
     @FXML
-    private Label email;
+    private Label deadline;
     @FXML
-    private FlowPane tags;
+    private Label status;
 
     /**
-     * Creates a {@code JobApplicationCard} with the given {@code Person} and index to display.
+     * Creates a {@code JobApplicationCard} with the given {@code JobApplication} and index to display.
      */
     public JobApplicationCard(JobApplication jobApplication, int displayedIndex) {
         super(FXML);
         this.jobApplication = jobApplication;
         id.setText(displayedIndex + ". ");
-        name.setText(jobApplication.getCompanyName().toString());
-        phone.setText(jobApplication.getRole().toString());
-        address.setText(jobApplication.getDeadline().toString());
-        email.setText(jobApplication.getStatus().toString());
-
+        companyName.setText(jobApplication.getCompanyName());
+        role.setText(jobApplication.getRole());
+        deadline.setText(jobApplication.getDeadline().format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm")));
+        status.setText(jobApplication.getStatus().toString());
     }
 }

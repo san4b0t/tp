@@ -78,6 +78,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<JobApplication> getFilteredApplicationsList() {
+        return model.getFilteredApplicationList();
+    }
+
+    @Override
     public Path getJobBookFilePath() {
         return model.getJobBookFilePath();
     }
