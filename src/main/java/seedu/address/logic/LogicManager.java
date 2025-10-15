@@ -68,8 +68,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyJobBook getAddressBook() {
-        //return model.getAddressBook();
+    public ReadOnlyJobBook getJobBook() {
         return model.getJobBook();
     }
 

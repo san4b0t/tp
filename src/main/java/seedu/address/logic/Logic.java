@@ -28,7 +28,7 @@ public interface Logic {
      *
      * @see seedu.address.model.Model#getAddressBook()
      */
-    ReadOnlyJobBook getAddressBook();
+    ReadOnlyJobBook getJobBook();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<JobApplication> getFilteredApplicationList();

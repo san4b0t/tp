@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_APPLICATION;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +14,8 @@ public class JobBookCommandParserTest {
     public void parseCommand_delete() throws Exception {
 
         DeleteJobCommand command = (DeleteJobCommand) parser.parseCommand(
-            DeleteJobCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteJobCommand(INDEX_FIRST_PERSON), command);
+            DeleteJobCommand.COMMAND_WORD + " " + INDEX_FIRST_APPLICATION.getOneBased());
+        assertEquals(new DeleteJobCommand(INDEX_FIRST_APPLICATION), command);
     }
 
 
