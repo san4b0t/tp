@@ -13,11 +13,9 @@ import seedu.address.logic.jobcommands.CommandResult;
 import seedu.address.logic.jobcommands.exceptions.JobCommandException;
 import seedu.address.logic.parser.JobBookCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.jobapplication.JobApplication;
 import seedu.address.model.jobapplication.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.jobapplication.ReadOnlyJobBook;
 import seedu.address.storage.DataStorage;
 
 /**
@@ -70,14 +68,13 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        //return model.getAddressBook();
-        return new AddressBook();
+    public ReadOnlyJobBook getJobBook() {
+        return model.getJobBook();
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return null;
+    public ObservableList<JobApplication> getFilteredApplicationList() {
+        return model.getFilteredApplicationList();
     }
 
     @Override
@@ -86,7 +83,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
+    public Path getJobBookFilePath() {
         return model.getJobBookFilePath();
     }
 

@@ -7,9 +7,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.jobcommands.CommandResult;
 import seedu.address.logic.jobcommands.exceptions.JobCommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.jobapplication.JobApplication;
-import seedu.address.model.person.Person;
+import seedu.address.model.jobapplication.ReadOnlyJobBook;
 
 /**
  * API of the Logic component
@@ -29,10 +28,10 @@ public interface Logic {
      *
      * @see seedu.address.model.Model#getAddressBook()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyJobBook getJobBook();
 
     /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    ObservableList<JobApplication> getFilteredApplicationList();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<JobApplication> getFilteredApplicationsList();
@@ -40,7 +39,7 @@ public interface Logic {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getJobBookFilePath();
 
     /**
      * Returns the user prefs' GUI settings.
