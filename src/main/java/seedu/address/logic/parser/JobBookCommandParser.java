@@ -49,7 +49,7 @@ public class JobBookCommandParser {
         switch (commandWord) {
 
         case AddJobCommand.COMMAND_WORD:
-            //return new AddCommandParser().parse(arguments);
+            return new AddCommandParser().parse(arguments);
 
         case DeleteJobCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);

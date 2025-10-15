@@ -3,12 +3,29 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_APPLICATION;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.jobcommands.AddJobCommand;
 import seedu.address.logic.jobcommands.DeleteJobCommand;
+import seedu.address.model.jobapplication.JobApplication;
 
 public class JobBookCommandParserTest {
     private final JobBookCommandParser parser = new JobBookCommandParser();
+
+    @Test
+    public void parseCommand_add() throws Exception {
+        String companyName = "Google";
+        String role = "SoftwareEngineer";
+        LocalDateTime deadline = LocalDateTime.parse("2025-12-31T23:59");
+        JobApplication.Status status = JobApplication.Status.APPLIED;
+
+        JobApplication application = new JobApplication(companyName, role, deadline, status);
+        AddJobCommand command = (AddJobCommand) parser.parseCommand(
+            AddJobCommand.COMMAND_WORD + " " + companyName + " " + role + " " + "2025-12-31T23:59" + " " + status);
+        assertEquals(new AddJobCommand(application), command);
+    }
 
     @Test
     public void parseCommand_delete() throws Exception {
@@ -17,14 +34,6 @@ public class JobBookCommandParserTest {
             DeleteJobCommand.COMMAND_WORD + " " + INDEX_FIRST_APPLICATION.getOneBased());
         assertEquals(new DeleteJobCommand(INDEX_FIRST_APPLICATION), command);
     }
-
-
-    // @Test
-    // public void parseCommand_add() throws Exception {
-    //     Person person = new PersonBuilder().build();
-    //     AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-    //     assertEquals(new AddCommand(person), command);
-    // }
 
     // @Test
     // public void parseCommand_clear() throws Exception {
