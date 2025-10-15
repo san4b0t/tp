@@ -51,7 +51,7 @@ public class JobBookCommandParser {
             //return new AddCommandParser().parse(arguments);
 
         case DeleteJobCommand.COMMAND_WORD:
-            //return new DeleteCommandParser().parse(arguments);
+            return new DeleteCommandParser().parse(arguments);
 
         case SaveCommand.COMMAND_WORD:
             return new SaveCommand();
