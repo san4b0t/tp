@@ -1,10 +1,15 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.stream.Stream;
 
 import seedu.address.logic.jobcommands.AddJobCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -23,24 +28,24 @@ public class AddCommandParser implements JobParser<AddJobCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddJobCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddJobCommand.MESSAGE_USAGE));
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ROLE, PREFIX_STATUS, PREFIX_DEADLINE);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ROLE, PREFIX_STATUS, PREFIX_DEADLINE)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddJobCommand.MESSAGE_USAGE));
         }
 
-        String[] argParts = trimmedArgs.split("\\s+");
-
-        if (argParts.length < 4) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddJobCommand.MESSAGE_USAGE));
-        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ROLE, PREFIX_STATUS, PREFIX_DEADLINE);
 
         try {
-            String companyName = argParts[0];
-            String role = argParts[1];
-            LocalDateTime deadline = LocalDateTime.parse(argParts[2], DATETIME_FORMATTER);
-            JobApplication.Status status = JobApplication.Status.valueOf(argParts[3].toUpperCase());
+            String companyName = argMultimap.getValue(PREFIX_NAME).get();
+            String role = argMultimap.getValue(PREFIX_ROLE).get();
+            String deadlineStr = argMultimap.getValue(PREFIX_DEADLINE).get();
+            String statusStr = argMultimap.getValue(PREFIX_STATUS).get();
+
+            LocalDateTime deadline = LocalDateTime.parse(deadlineStr, DATETIME_FORMATTER);
+            JobApplication.Status status = JobApplication.Status.valueOf(statusStr.toUpperCase());
 
             JobApplication application = new JobApplication(companyName, role, deadline, status);
             return new AddJobCommand(application);
@@ -49,5 +54,13 @@ public class AddCommandParser implements JobParser<AddJobCommand> {
         } catch (IllegalArgumentException e) {
             throw new ParseException("Invalid status. Valid values are: APPLIED, INPROGRESS, REJECTED", e);
         }
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

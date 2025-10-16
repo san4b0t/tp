@@ -23,7 +23,7 @@ public class JobBookCommandParserTest {
 
         JobApplication application = new JobApplication(companyName, role, deadline, status);
         AddJobCommand command = (AddJobCommand) parser.parseCommand(
-            AddJobCommand.COMMAND_WORD + " " + companyName + " " + role + " " + "2025-12-31T23:59" + " " + status);
+            AddJobCommand.COMMAND_WORD + " n/Google r/SoftwareEngineer s/APPLIED d/2025-12-31T23:59");
         assertEquals(new AddJobCommand(application), command);
     }
 

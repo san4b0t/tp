@@ -29,7 +29,7 @@ public class AddCommandParserTest {
         JobApplication.Status status = JobApplication.Status.APPLIED;
 
         JobApplication expectedApplication = new JobApplication(companyName, role, deadline, status);
-        assertParseSuccess(parser, "Google SoftwareEngineer 2025-12-31T23:59 APPLIED",
+        assertParseSuccess(parser, " n/Google r/SoftwareEngineer s/APPLIED d/2025-12-31T23:59",
                 new AddJobCommand(expectedApplication));
     }
 
@@ -41,7 +41,7 @@ public class AddCommandParserTest {
         JobApplication.Status status = JobApplication.Status.INPROGRESS;
 
         JobApplication expectedApplication = new JobApplication(companyName, role, deadline, status);
-        assertParseSuccess(parser, "Microsoft DataScientist 2025-11-30T17:00 INPROGRESS",
+        assertParseSuccess(parser, " n/Microsoft r/DataScientist s/INPROGRESS d/2025-11-30T17:00",
                 new AddJobCommand(expectedApplication));
     }
 
@@ -54,27 +54,31 @@ public class AddCommandParserTest {
     @Test
     public void parse_missingArgs_throwsParseException() {
         // Only company name
-        assertParseFailure(parser, "Google",
+        assertParseFailure(parser, " n/Google",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddJobCommand.MESSAGE_USAGE));
 
         // Only company name and role
-        assertParseFailure(parser, "Google SoftwareEngineer",
+        assertParseFailure(parser, " n/Google r/SoftwareEngineer",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddJobCommand.MESSAGE_USAGE));
 
         // Missing status
-        assertParseFailure(parser, "Google SoftwareEngineer 2025-12-31T23:59",
+        assertParseFailure(parser, " n/Google r/SoftwareEngineer d/2025-12-31T23:59",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddJobCommand.MESSAGE_USAGE));
+
+        // Missing deadline
+        assertParseFailure(parser, " n/Google r/SoftwareEngineer s/APPLIED",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddJobCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidDeadline_throwsParseException() {
-        assertParseFailure(parser, "Google SoftwareEngineer invalid-date APPLIED",
+        assertParseFailure(parser, " n/Google r/SoftwareEngineer s/APPLIED d/invalid-date",
                 "Invalid deadline format. Expected format: yyyy-MM-ddTHH:mm");
     }
 
     @Test
     public void parse_invalidStatus_throwsParseException() {
-        assertParseFailure(parser, "Google SoftwareEngineer 2025-12-31T23:59 INVALID_STATUS",
+        assertParseFailure(parser, " n/Google r/SoftwareEngineer s/INVALID_STATUS d/2025-12-31T23:59",
                 "Invalid status. Valid values are: APPLIED, INPROGRESS, REJECTED");
     }
 }
