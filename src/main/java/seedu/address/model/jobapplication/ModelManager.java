@@ -30,7 +30,7 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + jobBook + " and user prefs " + userPrefs);
 
-        this.jobBook = new JobBook(new JobBook());
+        this.jobBook = new JobBook(jobBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredApplications = new FilteredList<>(this.jobBook.getApplicationList());
     }
