@@ -55,7 +55,7 @@ public class TagJobCommandTest {
         TagJobCommand commandOne = new TagJobCommand(indexOne, tags);
 
         JobApplication application = new JobApplication("Google", "SWE",
-                LocalDateTime.now(), JobApplication.Status.APPLIED);
+                LocalDateTime.now(), JobApplication.Status.APPLIED, new HashSet<>());
 
         CommandResult result = commandOne.execute(new ModelStubWithJobApplication(application));
 
@@ -84,7 +84,7 @@ public class TagJobCommandTest {
         TagJobCommand commandOne = new TagJobCommand(indexOne, tags);
 
         JobApplication application = new JobApplication("Google", "SWE",
-                LocalDateTime.now(), JobApplication.Status.APPLIED);
+                LocalDateTime.now(), JobApplication.Status.APPLIED, new HashSet<>());
 
         assertThrows(JobCommandException.class, () -> commandOne.execute(new ModelStubWithJobApplication(application)));
     }

@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.HashSet;
 import java.util.stream.Stream;
 
 import seedu.address.logic.jobcommands.AddJobCommand;
@@ -47,7 +48,7 @@ public class AddCommandParser implements JobParser<AddJobCommand> {
             LocalDateTime deadline = LocalDateTime.parse(deadlineStr, DATETIME_FORMATTER);
             JobApplication.Status status = JobApplication.Status.valueOf(statusStr.toUpperCase());
 
-            JobApplication application = new JobApplication(companyName, role, deadline, status);
+            JobApplication application = new JobApplication(companyName, role, deadline, status, new HashSet<>());
             return new AddJobCommand(application);
         } catch (DateTimeParseException e) {
             throw new ParseException("Invalid deadline format. Expected format: yyyy-MM-ddTHH:mm", e);
