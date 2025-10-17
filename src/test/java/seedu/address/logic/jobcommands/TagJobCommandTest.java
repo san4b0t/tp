@@ -155,7 +155,7 @@ public class TagJobCommandTest {
     /**
      * Represents a default stub to default all methods to failing
      */
-    private class ModelStub implements Model {
+    private static class ModelStub implements Model {
 
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -228,7 +228,7 @@ public class TagJobCommandTest {
         }
     }
 
-    private class ModelStubWithJobApplication extends ModelStub {
+    private static class ModelStubWithJobApplication extends ModelStub {
         private final FilteredList<JobApplication> list;
 
         ModelStubWithJobApplication(JobApplication application) {
@@ -241,6 +241,10 @@ public class TagJobCommandTest {
         @Override
         public ObservableList<JobApplication> getFilteredApplicationList() {
             return list;
+        }
+
+        @Override
+        public void updateFilteredJobApplicationList(Predicate<JobApplication> predicate) {
         }
     }
 }
