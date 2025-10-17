@@ -34,6 +34,8 @@ public class TagJobCommand extends Command {
      * Creates an AddJobCommand to add the specified {@code JobApplication}
      */
     public TagJobCommand(Index targetIndex, Set<Tag> tags) {
+        requireNonNull(targetIndex);
+        requireNonNull(tags);
         this.targetIndex = targetIndex;
         this.tags = tags;
     }
@@ -82,7 +84,8 @@ public class TagJobCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
+                .add("targetIndex", targetIndex.getZeroBased())
+                .add("tags", tags.toString())
                 .toString();
     }
 }
