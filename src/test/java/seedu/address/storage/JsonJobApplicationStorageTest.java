@@ -29,7 +29,7 @@ public class JsonJobApplicationStorageTest {
 
     private static final JobApplication MICROSOFT_APPLICATION = new JobApplication(
             "Microsoft", "Product Manager", LocalDateTime.of(2024, 11, 15, 17, 30),
-            JobApplication.Status.INPROGRESS,new HashSet<>());
+            JobApplication.Status.INPROGRESS, new HashSet<>());
 
     private static final JobApplication APPLE_APPLICATION = new JobApplication(
             "Apple", "iOS Developer", LocalDateTime.of(2024, 10, 20, 12, 0),

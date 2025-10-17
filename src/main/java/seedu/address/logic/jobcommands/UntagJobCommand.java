@@ -1,5 +1,11 @@
 package seedu.address.logic.jobcommands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.jobapplication.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
+
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.JobMessages;
@@ -7,12 +13,6 @@ import seedu.address.logic.jobcommands.exceptions.JobCommandException;
 import seedu.address.model.jobapplication.JobApplication;
 import seedu.address.model.jobapplication.Model;
 import seedu.address.model.tag.Tag;
-
-import java.util.List;
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.jobapplication.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
 
 /**
  * Removes tags from a job application.
