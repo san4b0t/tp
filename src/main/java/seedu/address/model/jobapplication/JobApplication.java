@@ -3,7 +3,6 @@ package seedu.address.model.jobapplication;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -43,13 +42,13 @@ public class JobApplication {
      * @param deadline The application deadline.
      * @param status The current status of the application.
      */
-    public JobApplication(String companyName, String role, LocalDateTime deadline, Status status) {
+    public JobApplication(String companyName, String role, LocalDateTime deadline, Status status, Set<Tag> tags) {
         requireAllNonNull(companyName, role, deadline, status);
         this.companyName = companyName;
         this.role = role;
         this.deadline = deadline;
         this.status = status;
-        this.tags = new HashSet<Tag>();
+        this.tags = tags;
     }
 
     /**
