@@ -1,6 +1,7 @@
 package seedu.address.logic.jobcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.jobapplication.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
 
 import java.util.List;
 import java.util.Set;
@@ -57,8 +58,10 @@ public class TagJobCommand extends Command {
             throw new JobCommandException(MESSAGE_MAX_TAGS);
         }
 
-        //Tagging logic is held here
         jobToTag.setTags(tags);
+
+        // Update the viewed job applications
+        model.updateFilteredJobApplicationList(PREDICATE_SHOW_ALL_APPLICATIONS);
 
         return new CommandResult(String.format(MESSAGE_TAG_APPLICATION_SUCCESS, JobMessages.format(jobToTag)));
     }
