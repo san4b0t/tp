@@ -13,6 +13,7 @@ import seedu.address.logic.jobcommands.DeleteJobCommand;
 import seedu.address.logic.jobcommands.ExitCommand;
 import seedu.address.logic.jobcommands.SaveCommand;
 import seedu.address.logic.jobcommands.TagJobCommand;
+import seedu.address.logic.jobcommands.UntagJobCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -60,6 +61,9 @@ public class JobBookCommandParser {
 
         case TagJobCommand.COMMAND_WORD:
             return new TagCommandParser().parse(arguments);
+
+        case UntagJobCommand.COMMAND_WORD:
+            return new UntagCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
