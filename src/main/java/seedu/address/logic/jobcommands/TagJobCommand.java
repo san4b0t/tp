@@ -1,6 +1,7 @@
 package seedu.address.logic.jobcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.jobapplication.JobApplication.MAX_TAGS;
 import static seedu.address.model.jobapplication.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
 
 import java.util.List;
@@ -21,7 +22,6 @@ public class TagJobCommand extends Command {
 
     public static final String MESSAGE_TAG_APPLICATION_SUCCESS = "Application has been tagged!";
     public static final String COMMAND_WORD = "tag";
-    private static final int MAX_TAGS = 3;
 
     public static final String MESSAGE_MAX_TAGS = "Each application can have up to " + MAX_TAGS + " tags.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Tags a job application.\n"

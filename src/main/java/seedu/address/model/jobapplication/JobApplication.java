@@ -24,6 +24,9 @@ public class JobApplication {
         REJECTED
     }
 
+    // Limiter on number of tags
+    public static final int MAX_TAGS = 3;
+
     // Identity fields
     private String companyName;
     private String role;
