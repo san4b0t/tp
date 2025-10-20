@@ -32,7 +32,7 @@ public class TagJobCommand extends Command {
     private final Set<Tag> tags;
 
     /**
-     * Creates an AddJobCommand to add the specified {@code JobApplication}
+     * Creates an TagJobCommand to add the specified {@code JobApplication}
      */
     public TagJobCommand(Index targetIndex, Set<Tag> tags) {
         requireNonNull(targetIndex);
@@ -52,13 +52,12 @@ public class TagJobCommand extends Command {
         }
 
         JobApplication jobToTag = lastShownList.get(targetIndex.getZeroBased());
-        this.tags.addAll(jobToTag.getTags());
 
-        if (this.tags.size() > MAX_TAGS) {
+        if (!jobToTag.hasCapacityForNewTags(tags)) {
             throw new JobCommandException(MESSAGE_MAX_TAGS);
         }
 
-        jobToTag.setTags(tags);
+        jobToTag.addTags(tags);
 
         // Update the viewed job applications
         model.updateFilteredJobApplicationList(PREDICATE_SHOW_ALL_APPLICATIONS);

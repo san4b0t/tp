@@ -3,6 +3,7 @@ package seedu.address.model.jobapplication;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -91,20 +92,49 @@ public class JobApplication {
     }
 
     /**
-     * Returns the list of tags
+     * Returns the set of tags
      *
-     * @return The list of tags
+     * @return The set of tags
      */
     public Set<Tag> getTags() {
         return tags;
     }
 
     /**
-     * Sets the list of tags
+     * Validates if we can add to the set of tags
+     *
+     * @return True if we can add all tags
      */
-    public void setTags(Set<Tag> tags) {
-        this.tags = tags;
+    public boolean hasCapacityForNewTags(Set<Tag> newTags) {
+        Set<Tag> combined = new HashSet<>(tags);
+        combined.addAll(newTags);
+        return combined.size() > MAX_TAGS;
     }
+
+    /**
+     * Adds to the set of tags
+     */
+    public void addTags(Set<Tag> newTags) {
+        tags.addAll(newTags);
+    }
+
+    /**
+     * Validates tag removal if all provided tags exist
+     *
+     * @return True if we can remove all tags
+     */
+    public boolean canRemoveProvidedTags(Set<Tag> tagsToRemove) {
+        return tags.containsAll(tagsToRemove);
+    }
+
+    /**
+     * Removes tags from the set
+     */
+    public void removeTags(Set<Tag> tagsToRemove) {
+        tags.removeAll(tagsToRemove);
+    }
+
+
 
     /**
      * Returns true if both job applications have the same company name and role.

@@ -31,7 +31,7 @@ public class UntagJobCommand extends Command {
     private final Set<Tag> tagsToRemove;
 
     /**
-     * Creates an AddJobCommand to add the specified {@code JobApplication}
+     * Creates an UntagJobCommand to add the specified {@code JobApplication}
      */
     public UntagJobCommand(Index targetIndex, Set<Tag> tags) {
         requireNonNull(targetIndex);
@@ -51,15 +51,12 @@ public class UntagJobCommand extends Command {
         }
 
         JobApplication jobToUntag = lastShownList.get(targetIndex.getZeroBased());
-        Set<Tag> existingTags = jobToUntag.getTags();
 
-        for (Tag tag : tagsToRemove) {
-            if (existingTags.contains(tag)) {
-                existingTags.remove(tag);
-            } else {
-                throw new JobCommandException(MESSAGE_MISSING_TAG);
-            }
+        if (!jobToUntag.canRemoveProvidedTags(tagsToRemove)) {
+            throw new JobCommandException(MESSAGE_MISSING_TAG);
         }
+
+        jobToUntag.removeTags(tagsToRemove);
 
         model.updateFilteredJobApplicationList(PREDICATE_SHOW_ALL_APPLICATIONS);
 
