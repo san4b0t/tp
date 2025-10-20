@@ -7,11 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.jobcommands.AddJobCommand;
-import seedu.address.logic.jobcommands.Command;
-import seedu.address.logic.jobcommands.DeleteJobCommand;
-import seedu.address.logic.jobcommands.ExitCommand;
-import seedu.address.logic.jobcommands.SaveCommand;
+import seedu.address.logic.jobcommands.*;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -56,6 +52,9 @@ public class JobBookCommandParser {
 
         case SaveCommand.COMMAND_WORD:
             return new SaveCommand();
+
+        case FilterCommand.COMMAND_WORD:
+            return new FilterCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
