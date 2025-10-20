@@ -1,0 +1,95 @@
+package seedu.address.logic.parser;
+
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.address.model.jobapplication.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.function.Predicate;
+
+import seedu.address.logic.jobcommands.FilterCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.jobapplication.JobApplication;
+
+/**
+ * Represents an object that parses input arguments and creates a new FilterCommand object
+ */
+public class FilterCommandParser implements JobParser<FilterCommand> {
+
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE;
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the FilterCommand
+     * and returns a FilterCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public FilterCommand parse(String args) throws ParseException {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ROLE, PREFIX_STATUS, PREFIX_DEADLINE);
+
+        String preamble = argMultimap.getPreamble().trim();
+
+        // Check if user wants to remove the current filter
+        if (preamble.equalsIgnoreCase("none")) {
+            return new FilterCommand(PREDICATE_SHOW_ALL_APPLICATIONS);
+        }
+
+        if (preamble.isEmpty()) {
+            // Identify which flag is present to filter accordingly
+            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+                argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
+                String keyword = argMultimap.getValue(PREFIX_NAME).get();
+
+                Predicate<JobApplication> predicate = app ->
+                        app.getCompanyName().toLowerCase().contains(keyword.toLowerCase());
+
+                return new FilterCommand(predicate);
+
+            } else if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
+                argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROLE);
+                String keyword = argMultimap.getValue(PREFIX_ROLE).get();
+
+                Predicate<JobApplication> predicate = app ->
+                        app.getRole().toLowerCase().contains(keyword.toLowerCase());
+
+                return new FilterCommand(predicate);
+
+            } else if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
+                argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STATUS);
+                String statusStr = argMultimap.getValue(PREFIX_STATUS).get();
+
+                try {
+                    JobApplication.Status status = JobApplication.Status.valueOf(statusStr.toUpperCase());
+                    Predicate<JobApplication> predicate = app ->
+                            app.getStatus().equals(status);
+
+                    return new FilterCommand(predicate);
+
+                } catch (IllegalArgumentException e) {
+                    throw new ParseException("Invalid status. Valid values are: APPLIED, INPROGRESS, REJECTED", e);
+                }
+            } else if (argMultimap.getValue(PREFIX_DEADLINE).isPresent()) {
+                argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DEADLINE);
+                String dateStr = argMultimap.getValue(PREFIX_DEADLINE).get();
+
+                try {
+                    LocalDate date = LocalDate.parse(dateStr, DATE_FORMATTER);
+                    Predicate<JobApplication> predicate = app ->
+                            app.getDeadline().toLocalDate().equals(date);
+
+                    return new FilterCommand(predicate);
+
+                } catch (DateTimeParseException e) {
+                    throw new ParseException("Invalid date format. Expected format: yyyy-MM-dd", e);
+                }
+            }
+        }
+
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+    }
+}
