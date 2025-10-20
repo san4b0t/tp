@@ -60,6 +60,7 @@ public class TagTest {
 
         // Allow a mix of alphabets and symbols
         assertTrue(Tag.isValidTagName("C#"));
+        assertTrue(Tag.isValidTagName("C++"));
 
         // Allow a purely alphabetical word
         assertTrue(Tag.isValidTagName("FinTech"));

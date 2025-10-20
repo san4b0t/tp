@@ -15,7 +15,7 @@ public class Tag {
     public static final String MESSAGE_CONSTRAINTS = "Tags should be a single word with at most 2 special characters"
             + "(-, ., @, #, _) and cannot exceed " + MAX_TAG_LENGTH + " characters";
     public static final String VALIDATION_REGEX =
-            "^[a-zA-Z0-9]*[\\-.@#_]?[a-zA-Z0-9]*[\\-.@#_]?[a-zA-Z0-9]*$";
+            "^[a-zA-Z0-9]*[\\-.@#_+]?[a-zA-Z0-9]*[\\-.@#_+]?[a-zA-Z0-9]*$";
 
     public final String tagName;
 
