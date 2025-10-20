@@ -10,8 +10,8 @@ import seedu.address.model.jobapplication.JobApplication;
 import seedu.address.model.jobapplication.Model;
 
 /**
- * Represents a command that filters and lists all job applications whose
- * company name, role, or deadline matches the keyword.
+ * Represents a command that filters and lists all job applications
+ * whose role, status, deadline or tags matches the keyword.
  * Keyword matching is case-insensitive.
  */
 public class FilterCommand extends Command {
@@ -19,14 +19,14 @@ public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Filters all job applications by company name, role, status or application deadline "
-            + "that is input as keyword with the appropriate n/, r/, s/ or d/ flag respectively (case-insensitive) "
+            + ": Filters all job applications by tags, role, status or application deadline "
+            + "that is input as keyword with the appropriate t/, r/, s/ or d/ flag respectively (case-insensitive) "
             + "and displays them as a list with index numbers.\n"
-            + "Company name and role filters match if the keyword is contained in the field.\n"
+            + "Tag and role filters match if the keyword is contained in the field.\n"
             + "Deadline filter matches by date only (format: yyyy-MM-dd), ignoring time.\n"
             + "To remove filters and show all job applications, use: " + COMMAND_WORD + " none\n"
             + "Parameters: FLAG [KEYWORD]... OR none\n"
-            + "Example: " + COMMAND_WORD + " n/Google, " + COMMAND_WORD + " d/2025-12-31";
+            + "Example: " + COMMAND_WORD + " t/engineer, " + COMMAND_WORD + " d/2025-12-31";
 
     private final Predicate<JobApplication> predicate;
 

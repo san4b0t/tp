@@ -65,6 +65,7 @@ public class JobBookCommandParser {
 
         case UntagJobCommand.COMMAND_WORD:
             return new UntagCommandParser().parse(arguments);
+
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
 
