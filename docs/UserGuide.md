@@ -148,57 +148,6 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Filtering Job Applications: `filter` 
-
-Filters the list of job applications based on a single field: **Company Name**, **Role**, **Status**, or **Application Deadline**.
-
-Format: `filter FLAG/KEYWORD`
-
-or, to remove all filters: `filter none`
-
----
-
-#### **Filtering Rules**
-
-* **Company Name (`n/`)** and **Role (`r/`)**: Matches if the `KEYWORD` is **contained** in the respective field 
-(e.g., `n/engineer` matches "Software Engineer").
-    * The search is **case-insensitive**.
-
-
-* **Application Deadline (`d/`)**: Matches the exact date only, ignoring the time component.
-    * The date must be in the **`yyyy-MM-dd`** format (e.g., `2025-12-31`).
-  
-
-* **Application Status (`s/`)**: Matches an exact, **case-insensitive** status.
-    * Valid keywords are: **APPLIED**, **INPROGRESS**, or **REJECTED**.
-
----
-
-#### **Examples**
-
-* `filter n/Google`
-    * Returns applications where the company name contains "Google" (e.g., "Google LLC", "Googler Inc.").
-  
-
-* `filter r/engineer`
-    * Returns applications for roles containing "engineer" (e.g., "Software Engineer", "Data Engineering Intern").
-
-
-* `filter s/applied`
-    * Returns applications with the status "APPLIED".
-
-
-* `filter d/2025-10-20`
-    * Returns applications with an application deadline on October 20, 2025.
-
-
-* `filter none`
-    * Removes all current filters and shows the complete list of job applications.
-
-
-* `filter s/inprogress` returns 4 job application with status INPROGRESS<br>
-  ![result for 'filter s/inprogress'](images/filterInProgressResult.png)
-
 ### Exiting the program : `exit`
 
 Exits the program.
