@@ -10,7 +10,8 @@ import seedu.address.model.jobapplication.JobApplication;
 import seedu.address.model.jobapplication.Model;
 
 /**
- * Filters and lists all job applications whose company name, role, or deadline matches the keyword.
+ * Represents a command that filters and lists all job applications whose
+ * company name, role, or deadline matches the keyword.
  * Keyword matching is case-insensitive.
  */
 public class FilterCommand extends Command {

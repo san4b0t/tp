@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-
 import static seedu.address.model.jobapplication.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
 
 import java.time.LocalDate;
@@ -18,7 +17,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.jobapplication.JobApplication;
 
 /**
- * Parses input arguments and creates a new FilterCommand object
+ * Represents an object that parses input arguments and creates a new FilterCommand object
  */
 public class FilterCommandParser implements JobParser<FilterCommand> {
 
