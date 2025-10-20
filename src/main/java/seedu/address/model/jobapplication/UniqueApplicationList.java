@@ -83,6 +83,9 @@ public class UniqueApplicationList implements Iterable<JobApplication> {
         }
     }
 
+    /**
+     * Sorts the entire application list based on application deadline.
+     */
     public void sort() {
         internalList.sort(Comparator.comparing((JobApplication j) -> j.getDeadline()));
     }
