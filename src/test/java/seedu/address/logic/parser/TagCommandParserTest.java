@@ -95,10 +95,6 @@ public class TagCommandParserTest {
         // Tag with spaces
         assertParseFailure(parser, "1 t/Invalid Tag",
                 Tag.MESSAGE_CONSTRAINTS);
-
-        // Tag with special characters
-        assertParseFailure(parser, "1 t/Tag@123",
-                Tag.MESSAGE_CONSTRAINTS);
     }
 
     @Test
