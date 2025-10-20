@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
+import static seedu.address.model.jobapplication.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -33,45 +35,56 @@ public class FilterCommandParser implements JobParser<FilterCommand> {
 
         String preamble = argMultimap.getPreamble().trim();
 
-        // Check if user wants to remove filter
+        // Check if user wants to remove the current filter
         if (preamble.equalsIgnoreCase("none")) {
-            Predicate<JobApplication> showAllPredicate = app -> true;
-            return new FilterCommand(showAllPredicate);
+            return new FilterCommand(PREDICATE_SHOW_ALL_APPLICATIONS);
         }
 
         if (preamble.isEmpty()) {
-            // Check which prefix is present
+            // Identify which flag is present to filter accordingly
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
                 String keyword = argMultimap.getValue(PREFIX_NAME).get();
+
                 Predicate<JobApplication> predicate = app ->
                         app.getCompanyName().toLowerCase().contains(keyword.toLowerCase());
+
                 return new FilterCommand(predicate);
+
             } else if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
                 argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROLE);
                 String keyword = argMultimap.getValue(PREFIX_ROLE).get();
+
                 Predicate<JobApplication> predicate = app ->
                         app.getRole().toLowerCase().contains(keyword.toLowerCase());
+
                 return new FilterCommand(predicate);
+
             } else if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
                 argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STATUS);
                 String statusStr = argMultimap.getValue(PREFIX_STATUS).get();
+
                 try {
                     JobApplication.Status status = JobApplication.Status.valueOf(statusStr.toUpperCase());
                     Predicate<JobApplication> predicate = app ->
                             app.getStatus().equals(status);
+
                     return new FilterCommand(predicate);
+
                 } catch (IllegalArgumentException e) {
                     throw new ParseException("Invalid status. Valid values are: APPLIED, INPROGRESS, REJECTED", e);
                 }
             } else if (argMultimap.getValue(PREFIX_DEADLINE).isPresent()) {
                 argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DEADLINE);
                 String dateStr = argMultimap.getValue(PREFIX_DEADLINE).get();
+
                 try {
                     LocalDate date = LocalDate.parse(dateStr, DATE_FORMATTER);
                     Predicate<JobApplication> predicate = app ->
                             app.getDeadline().toLocalDate().equals(date);
+
                     return new FilterCommand(predicate);
+
                 } catch (DateTimeParseException e) {
                     throw new ParseException("Invalid date format. Expected format: yyyy-MM-dd", e);
                 }
