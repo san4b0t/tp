@@ -17,7 +17,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.jobapplication.JobApplication;
 
 /**
- * Parses input arguments and creates a new FilterCommand object
+ * Represents an object that parses input arguments and creates a new FilterCommand object
  */
 public class FilterCommandParser implements JobParser<FilterCommand> {
 
