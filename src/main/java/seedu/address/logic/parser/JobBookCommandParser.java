@@ -11,8 +11,8 @@ import seedu.address.logic.jobcommands.AddJobCommand;
 import seedu.address.logic.jobcommands.Command;
 import seedu.address.logic.jobcommands.DeleteJobCommand;
 import seedu.address.logic.jobcommands.ExitCommand;
-import seedu.address.logic.jobcommands.SaveCommand;
 import seedu.address.logic.jobcommands.FilterCommand;
+import seedu.address.logic.jobcommands.SaveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
