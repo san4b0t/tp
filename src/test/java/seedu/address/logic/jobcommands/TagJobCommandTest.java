@@ -31,9 +31,14 @@ import seedu.address.model.tag.Tag;
  */
 public class TagJobCommandTest {
 
+    private static final Tag SWE_TAG = new Tag("SWE");
+    private static final Tag SUMMER_TAG = new Tag("summer");
+    private static final Tag SIX_MONTHS_TAG = new Tag("6-months");
+    private static final Tag THREE_MONTHS_TAG = new Tag("3-months");
+
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullTag_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new TagJobCommand(null, null));
     }
 
@@ -42,15 +47,10 @@ public class TagJobCommandTest {
 
         Index indexOne = ParserUtil.parseIndex("1");
 
-        Tag swe = new Tag("SWE");
-        Tag summer = new Tag("summer");
-        Tag sixMonths = new Tag("6-months");
-
-
         Set<Tag> tags = new HashSet<>();
-        tags.add(swe);
-        tags.add(summer);
-        tags.add(sixMonths);
+        tags.add(SWE_TAG);
+        tags.add(SUMMER_TAG);
+        tags.add(SIX_MONTHS_TAG);
 
         TagJobCommand commandOne = new TagJobCommand(indexOne, tags);
 
@@ -70,16 +70,12 @@ public class TagJobCommandTest {
 
         Index indexOne = ParserUtil.parseIndex("1");
 
-        Tag swe = new Tag("SWE");
-        Tag summer = new Tag("summer");
-        Tag sixMonths = new Tag("6-months");
-        Tag threeMonths = new Tag("3-months");
 
         Set<Tag> tags = new HashSet<>();
-        tags.add(swe);
-        tags.add(summer);
-        tags.add(sixMonths);
-        tags.add(threeMonths);
+        tags.add(SWE_TAG);
+        tags.add(SUMMER_TAG);
+        tags.add(SIX_MONTHS_TAG);
+        tags.add(THREE_MONTHS_TAG);
 
         TagJobCommand commandOne = new TagJobCommand(indexOne, tags);
 
@@ -94,12 +90,9 @@ public class TagJobCommandTest {
 
         Index indexOne = ParserUtil.parseIndex("1");
 
-        Tag swe = new Tag("SWE");
-        Tag summer = new Tag("summer");
-
         Set<Tag> tags = new HashSet<>();
-        tags.add(swe);
-        tags.add(summer);
+        tags.add(SWE_TAG);
+        tags.add(SUMMER_TAG);
 
         TagJobCommand commandOne = new TagJobCommand(indexOne, tags);
 
@@ -120,18 +113,13 @@ public class TagJobCommandTest {
         Index indexOne = ParserUtil.parseIndex("1");
         Index indexTwo = ParserUtil.parseIndex("2");
 
-        Tag swe = new Tag("SWE");
-        Tag summer = new Tag("summer");
-        Tag sixMonths = new Tag("6-months");
-
-
         Set<Tag> tagOne = new HashSet<Tag>();
-        tagOne.add(swe);
-        tagOne.add(summer);
+        tagOne.add(SWE_TAG);
+        tagOne.add(SUMMER_TAG);
 
         Set<Tag> tagTwo = new HashSet<Tag>();
-        tagOne.add(swe);
-        tagOne.add(sixMonths);
+        tagTwo.add(SWE_TAG);
+        tagTwo.add(SIX_MONTHS_TAG);
 
         TagJobCommand commandOne = new TagJobCommand(indexOne, tagOne);
         TagJobCommand commandTwo = new TagJobCommand(indexOne, tagOne);
