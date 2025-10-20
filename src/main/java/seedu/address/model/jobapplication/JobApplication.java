@@ -108,7 +108,7 @@ public class JobApplication {
     public boolean hasCapacityForNewTags(Set<Tag> newTags) {
         Set<Tag> combined = new HashSet<>(tags);
         combined.addAll(newTags);
-        return combined.size() > MAX_TAGS;
+        return combined.size() <= MAX_TAGS;
     }
 
     /**
