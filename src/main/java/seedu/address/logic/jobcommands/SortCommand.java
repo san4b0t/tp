@@ -21,7 +21,7 @@ public class SortCommand extends Command {
         + ": Sorts the Application identified \n"
         + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SORT_APPLICATION_SUCCESS = "Sorted Application: %1$s";
+    public static final String MESSAGE_SORT_APPLICATION_SUCCESS = "Sorted Application";
 
     public SortCommand() {}
 
