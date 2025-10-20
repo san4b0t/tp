@@ -3,6 +3,7 @@ package seedu.address.model.jobapplication;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -80,6 +81,10 @@ public class UniqueApplicationList implements Iterable<JobApplication> {
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
+    }
+
+    public void sort() {
+        internalList.sort(Comparator.comparing((JobApplication j) -> j.getDeadline()));
     }
 
     public void setJobApplications(UniqueApplicationList replacement) {

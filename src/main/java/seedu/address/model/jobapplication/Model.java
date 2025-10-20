@@ -70,6 +70,11 @@ public interface Model {
     void addJobApplication(JobApplication application);
 
     /**
+     * Sorts the given JobApplication by the deadline.
+     */
+    void sortJobApplication();
+
+    /**
      * Replaces the given JobApplication {@code target} with {@code editedJobApplication}.
      * {@code target} must exist in the address book.
      * The JobApplication identity of {@code editedJobApplication} must not be the same as another existing

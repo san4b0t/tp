@@ -104,6 +104,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void sortJobApplication() {
+        jobBook.sortApplication();
+    }
+
+    @Override
     public void setJobApplication(JobApplication target, JobApplication editedApplication) {
         requireAllNonNull(target, editedApplication);
 

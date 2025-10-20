@@ -92,6 +92,14 @@ public class JobBook implements ReadOnlyJobBook {
         applications.remove(key);
     }
 
+    /**
+     * Removes {@code key} from this {@code JobBook}.
+     * {@code key} must exist in the Job book.
+     */
+    public void sortApplication() {
+        applications.sort();
+    }
+
     //// util methods
 
     @Override
