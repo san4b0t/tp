@@ -127,6 +127,8 @@ Examples:
 * `find morgan` returns `Morgan Stanley` and `J.P. Morgan Chase`
 * `find Tiger America` returns `Tiger Management`, `Bank of America`<br>
 
+![find command](images/find-command.png)
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
