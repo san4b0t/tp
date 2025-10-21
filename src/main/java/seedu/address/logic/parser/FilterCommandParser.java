@@ -13,7 +13,12 @@ import java.time.format.DateTimeParseException;
 
 import seedu.address.logic.jobcommands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.jobapplication.*;
+import seedu.address.model.jobapplication.DeadlinePredicate;
+import seedu.address.model.jobapplication.JobApplication;
+import seedu.address.model.jobapplication.RoleContainsKeywordPredicate;
+import seedu.address.model.jobapplication.StatusMatchesKeywordPredicate;
+import seedu.address.model.jobapplication.TagsContainKeywordPredicate;
+
 
 /**
  * Represents an object that parses input arguments and creates a new FilterCommand object
