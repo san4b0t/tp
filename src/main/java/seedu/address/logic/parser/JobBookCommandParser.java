@@ -2,12 +2,12 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.jobcommands.AddJobCommand;
@@ -18,7 +18,6 @@ import seedu.address.logic.jobcommands.FindCommand;
 import seedu.address.logic.jobcommands.SaveCommand;
 import seedu.address.logic.jobcommands.TagJobCommand;
 import seedu.address.logic.jobcommands.UntagJobCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 import seedu.address.model.jobapplication.NameContainsKeywordsPredicate;
