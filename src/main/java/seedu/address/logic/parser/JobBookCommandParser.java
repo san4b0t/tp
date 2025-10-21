@@ -16,6 +16,8 @@ import seedu.address.logic.jobcommands.DeleteJobCommand;
 import seedu.address.logic.jobcommands.ExitCommand;
 import seedu.address.logic.jobcommands.FindCommand;
 import seedu.address.logic.jobcommands.SaveCommand;
+import seedu.address.logic.jobcommands.TagJobCommand;
+import seedu.address.logic.jobcommands.UntagJobCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -69,6 +71,12 @@ public class JobBookCommandParser {
             List<String> keywordList = new ArrayList<>(Arrays.asList(keywords));
             var predicate = new NameContainsKeywordsPredicate(keywordList);
             return new FindCommand(predicate);
+
+        case TagJobCommand.COMMAND_WORD:
+            return new TagCommandParser().parse(arguments);
+
+        case UntagJobCommand.COMMAND_WORD:
+            return new UntagCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
