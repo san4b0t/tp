@@ -10,11 +10,10 @@ import static seedu.address.model.jobapplication.Model.PREDICATE_SHOW_ALL_APPLIC
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.function.Predicate;
 
 import seedu.address.logic.jobcommands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.jobapplication.JobApplication;
+import seedu.address.model.jobapplication.*;
 
 /**
  * Represents an object that parses input arguments and creates a new FilterCommand object
@@ -45,9 +44,7 @@ public class FilterCommandParser implements JobParser<FilterCommand> {
                 argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TAG);
                 String keyword = argMultimap.getValue(PREFIX_TAG).get();
 
-                Predicate<JobApplication> predicate = app ->
-                        app.getTags().stream()
-                                .anyMatch(tag -> tag.tagName.toLowerCase().contains(keyword.toLowerCase()));
+                TagsContainKeywordPredicate predicate = new TagsContainKeywordPredicate(keyword.toLowerCase());
 
                 return new FilterCommand(predicate);
 
@@ -55,8 +52,7 @@ public class FilterCommandParser implements JobParser<FilterCommand> {
                 argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROLE);
                 String keyword = argMultimap.getValue(PREFIX_ROLE).get();
 
-                Predicate<JobApplication> predicate = app ->
-                        app.getRole().toLowerCase().contains(keyword.toLowerCase());
+                RoleContainsKeywordPredicate predicate = new RoleContainsKeywordPredicate(keyword.toLowerCase());
 
                 return new FilterCommand(predicate);
 
@@ -66,8 +62,7 @@ public class FilterCommandParser implements JobParser<FilterCommand> {
 
                 try {
                     JobApplication.Status status = JobApplication.Status.valueOf(statusStr.toUpperCase());
-                    Predicate<JobApplication> predicate = app ->
-                            app.getStatus().equals(status);
+                    StatusMatchesKeywordPredicate predicate = new StatusMatchesKeywordPredicate(status);
 
                     return new FilterCommand(predicate);
 
@@ -80,8 +75,7 @@ public class FilterCommandParser implements JobParser<FilterCommand> {
 
                 try {
                     LocalDate date = LocalDate.parse(dateStr, DATE_FORMATTER);
-                    Predicate<JobApplication> predicate = app ->
-                            app.getDeadline().toLocalDate().equals(date);
+                    DeadlinePredicate predicate = new DeadlinePredicate(date);
 
                     return new FilterCommand(predicate);
 
