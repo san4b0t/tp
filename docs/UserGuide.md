@@ -112,21 +112,20 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds Job Applications whose company's name contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The search is not case-insensitive. e.g `tiktok` will match `TikTok`
+* The order of the keywords does not matter. e.g. `American Airlines` will match `Airlines American`
+* Only the company name is searched.
+* Only full words will be matched e.g. `Jan` will not match `Jane`
+* Joob Application copmanies matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Morgan` will return `J.P. Morgan`, `Morgan Stanley`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find morgan` returns `Morgan Stanley` and `J.P. Morgan Chase`
+* `find Tiger America` returns `Tiger Management`, `Bank of America`<br>
 
 ### Deleting a person : `delete`
 
