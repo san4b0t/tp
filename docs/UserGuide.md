@@ -127,6 +127,7 @@ Examples:
 * `find morgan` returns `Morgan Stanley` and `J.P. Morgan Chase`
 * `find Tiger America` returns `Tiger Management`, `Bank of America`<br>
 
+![find command before ](images/find-command-before.png)
 ![find command](images/find-command.png)
 
 ### Deleting a person : `delete`
