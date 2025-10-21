@@ -207,6 +207,13 @@ Format: `sort`
 * Applies to the current application list (including any active filters).
 * The sorted order is shown immediately in the UI.
 
+Before:
+
+![sort_before.png](images/sort_before.png)
+
+After:
+![sort_after.png](images/sort_after.png)
+
 
 ### Clearing all entries : `clear`
 
