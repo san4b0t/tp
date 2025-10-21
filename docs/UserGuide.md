@@ -64,6 +64,38 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Command summary
+
+### General Commands
+
+Command  | Description                                  | Example
+-------- |----------------------------------------------|------------------
+**Help** | Displays how to use all commands in a window |`help`
+**exit** | Exits the program                            |`exit`
+
+### Application Management
+Command  | Description                                  | Example
+-------- |----------------------------------------------|------------------
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Clear** | `clear`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**List** | `list`
+**Help** | `help`
+
+### Tag Management
+
+Command  | Description                                   | Example
+-------- |-----------------------------------------------|------------------
+**tag** | Adds new tags to a specified job application  |`tag JOB_APPLICATION_INDEX t/NEW_TAG`
+**untag** | Removes tags from a specified job application |`untag JOB_APPLICATION_INDEX t/NEW_TAG`
+---
+
+## General Commands
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -72,6 +104,30 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+Result for `help`:
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+### Saving data
+
+HustleHub data is automatically saved after any command that changes the data. There is no need to save manually.
+
+### Editing the data file
+
+HustleHub data is saved automatically as a JSON file `[JAR file location]/data/JobApplications.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, HustleHub will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the HustleHub to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</div>
+
+---
+
+## General Commands
 
 ### Adding a person: `add`
 
@@ -198,39 +254,68 @@ or, to remove all filters: `filter none`
 
 
 * `filter s/inprogress` returns the 4 jobs that currently have status 'INPROGRESS'
-    * Enter command `filter s/inprogress`
-      ![result for 'filter s/inprogress'](images/filterInProgressCommand.png)
-    * Result of filtering by status:INPROGRESS
-      ![result for 'filter s/inprogress'](images/filterInProgressResult.png)
 
+Enter command: `filter s/inprogress`
 
-### Exiting the program : `exit`
+![result for 'filter s/inprogress'](images/filterInProgressCommand.png)
+      
+Result of filtering by status: `INPROGRESS`
 
-Exits the program.
-
-Format: `exit`
-
-### Saving the data: `save`
-
-Saves the current state of the program.
-
-Format: `save`
-
-
-### Editing the data file
-
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
+![result for 'filter s/inprogress'](images/filterInProgressResult.png)
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Tag Management
+
+### Adding tags: `tag`
+
+Adds tags to a job application.
+
+Format: `tag JOB_APPLICATION_INDEX t/TAG...`
+
+Input restrictions:
+1. A `TAG` must be between 1 to 30 characters long, it cannot be blank.
+2. A `TAG` allows letters, numbers, and up to 2 hyphens, underscores, full-stops, at signs, plus signs, and minus signs.
+3. A `TAG` cannot have spaces.
+
+Examples:
+- `tag 1 t/C#`
+- `tag 2 t/6-Month t/C++ t/@HQ`
+- `tag 3 t/python_v3.12 t/BlockChain t/FinTech` 
+
+Before:
+
+![tag_before.png](images/tag_before.png)
+
+After:
+![tag_after.png](images/tag_after.png)
+
+### Removing tags: `untag`
+
+Removes tags to a job application.
+
+Format: `untag JOB_APPLICATION_INDEX t/TAG...`
+
+Input restrictions:
+1. A `TAG` must be between 1 to 30 characters long, it cannot be blank.
+2. A `TAG` allows letters, numbers, and up to 2 hyphens, underscores, full-stops, ampersands, plus signs, and minus signs.
+3. A `TAG` cannot have spaces.
+4. Inputted tags must already exist.
+
+Examples:
+- `untag 1 t/SQL`
+- `untag 2 t/6-Month t/C++`
+- `untag 3 t/python_v3.12 t/BlockChain t/Full-Stack`
+
+Before:
+
+![Untag_before.png](images/Untag_before.png)
+
+After:
+
+![Untag_after.png](images/Untag_after.png)
+
+---
 
 ## FAQ
 
@@ -243,17 +328,3 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
