@@ -152,7 +152,7 @@ Format: `clear`
 
 Filters the list of job applications based on a single field: **Company Name**, **Role**, **Status**, or **Application Deadline**.
 
-Format: `filter FLAG/KEYWORD`
+Format: `filter FLAG/KEYWORD
 
 or, to remove all filters: `filter none`
 
@@ -160,8 +160,9 @@ or, to remove all filters: `filter none`
 
 #### **Filtering Rules**
 
-* **Company Name (`n/`)** and **Role (`r/`)**: Matches if the `KEYWORD` is **contained** in the respective field 
-(e.g., `n/backend` matches "Backend Engineer").
+
+* **Company Name (`n/`)** and **Role (`r/`)**: Matches if the `KEYWORD` is **contained** in the respective field
+  (e.g., `n/backend` matches "Backend Engineer").
     * The search is **case-insensitive**.
 
 
@@ -187,7 +188,7 @@ or, to remove all filters: `filter none`
 * `filter s/applied`
     * Returns applications with the status "APPLIED".
 
-    
+
 * `filter d/2025-10-20`
     * Returns applications with an application deadline on October 20, 2025.
 
@@ -197,7 +198,11 @@ or, to remove all filters: `filter none`
 
 
 * `filter s/inprogress` returns the 4 jobs that currently have status 'INPROGRESS'
-![result for 'filter s/inprogress'](images/filterInProgressResult.png)
+    * Enter command `filter s/inprogress`
+      ![result for 'filter s/inprogress'](images/filterInProgressCommand.png)
+    * Result of filtering by status:INPROGRESS
+      ![result for 'filter s/inprogress'](images/filterInProgressResult.png)
+
 
 ### Exiting the program : `exit`
 
