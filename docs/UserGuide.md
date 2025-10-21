@@ -106,7 +106,7 @@ Format: `help`
 
 Result for `help`:
 
-### Exiting the program : `exit` {#exit}
+### Exiting the program : `exit`
 
 Exits the program.
 
