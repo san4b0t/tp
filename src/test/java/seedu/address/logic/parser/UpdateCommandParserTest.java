@@ -71,6 +71,10 @@ public class UpdateCommandParserTest {
 
         assertParseFailure(parser, "1 " + PREFIX_DEADLINE + "invalid-date",
                 "Invalid deadline format. Expected format: yyyy-MM-ddTHH:mm");
+
+        // past deadline
+        assertParseFailure(parser, "1 " + PREFIX_DEADLINE + "2020-01-01T00:00",
+                "Deadline cannot be in the past. Please provide a future date and time.");
     }
 
     @Test

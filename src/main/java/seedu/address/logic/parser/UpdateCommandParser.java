@@ -72,6 +72,7 @@ public class UpdateCommandParser implements JobParser<UpdateJobCommand> {
             try {
                 String deadlineStr = argMultimap.getValue(PREFIX_DEADLINE).get();
                 LocalDateTime deadline = LocalDateTime.parse(deadlineStr, DATETIME_FORMATTER);
+                ParserUtil.validateDeadlineNotInPast(deadline);
                 updateJobDescriptor.setDeadline(deadline);
             } catch (DateTimeParseException e) {
                 throw new ParseException("Invalid deadline format. Expected format: yyyy-MM-ddTHH:mm", e);
