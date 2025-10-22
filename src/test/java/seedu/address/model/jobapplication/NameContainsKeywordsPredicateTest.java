@@ -26,7 +26,7 @@ public class NameContainsKeywordsPredicateTest {
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        NameContainsKeywordsPredicate firstPredicateCopy = 
+        NameContainsKeywordsPredicate firstPredicateCopy =
                 new NameContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
@@ -43,7 +43,7 @@ public class NameContainsKeywordsPredicateTest {
     @Test
     public void test_companyNameContainsKeywords_returnsTrue() {
         // One keyword
-        NameContainsKeywordsPredicate predicate = 
+        NameContainsKeywordsPredicate predicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("Google"));
         assertTrue(predicate.test(new JobApplicationBuilder().withCompanyName("Google Inc").build()));
 
@@ -79,12 +79,12 @@ public class NameContainsKeywordsPredicateTest {
     @Test
     public void test_emptyKeywordsFiltered() {
         // Empty strings should be filtered out
-        NameContainsKeywordsPredicate predicate = 
+        NameContainsKeywordsPredicate predicate =
                 new NameContainsKeywordsPredicate(Arrays.asList("Google", "", "Microsoft", ""));
-        
+
         // Should match "Google" even though empty strings were in the list
         assertTrue(predicate.test(new JobApplicationBuilder().withCompanyName("Google Inc").build()));
-        
+
         // Should match "Microsoft" even though empty strings were in the list
         assertTrue(predicate.test(new JobApplicationBuilder().withCompanyName("Microsoft Corp").build()));
     }
