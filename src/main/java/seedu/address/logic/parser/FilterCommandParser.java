@@ -2,19 +2,23 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.jobapplication.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.function.Predicate;
 
 import seedu.address.logic.jobcommands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.jobapplication.DeadlinePredicate;
 import seedu.address.model.jobapplication.JobApplication;
+import seedu.address.model.jobapplication.RoleContainsKeywordPredicate;
+import seedu.address.model.jobapplication.StatusMatchesKeywordPredicate;
+import seedu.address.model.jobapplication.TagsContainKeywordPredicate;
+
 
 /**
  * Represents an object that parses input arguments and creates a new FilterCommand object
@@ -30,23 +34,22 @@ public class FilterCommandParser implements JobParser<FilterCommand> {
      */
     public FilterCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ROLE, PREFIX_STATUS, PREFIX_DEADLINE);
+                ArgumentTokenizer.tokenize(args, PREFIX_TAG, PREFIX_ROLE, PREFIX_STATUS, PREFIX_DEADLINE);
 
         String preamble = argMultimap.getPreamble().trim();
 
-        // Check if user wants to remove the current filter
+        // Check if user wants to remove the existing filter
         if (preamble.equalsIgnoreCase("none")) {
             return new FilterCommand(PREDICATE_SHOW_ALL_APPLICATIONS);
         }
 
         if (preamble.isEmpty()) {
-            // Identify which flag is present to filter accordingly
-            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-                argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
-                String keyword = argMultimap.getValue(PREFIX_NAME).get();
+            // Identify the flag to filter by the correct field
+            if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+                argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TAG);
+                String keyword = argMultimap.getValue(PREFIX_TAG).get();
 
-                Predicate<JobApplication> predicate = app ->
-                        app.getCompanyName().toLowerCase().contains(keyword.toLowerCase());
+                TagsContainKeywordPredicate predicate = new TagsContainKeywordPredicate(keyword.toLowerCase());
 
                 return new FilterCommand(predicate);
 
@@ -54,8 +57,7 @@ public class FilterCommandParser implements JobParser<FilterCommand> {
                 argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROLE);
                 String keyword = argMultimap.getValue(PREFIX_ROLE).get();
 
-                Predicate<JobApplication> predicate = app ->
-                        app.getRole().toLowerCase().contains(keyword.toLowerCase());
+                RoleContainsKeywordPredicate predicate = new RoleContainsKeywordPredicate(keyword.toLowerCase());
 
                 return new FilterCommand(predicate);
 
@@ -65,8 +67,7 @@ public class FilterCommandParser implements JobParser<FilterCommand> {
 
                 try {
                     JobApplication.Status status = JobApplication.Status.valueOf(statusStr.toUpperCase());
-                    Predicate<JobApplication> predicate = app ->
-                            app.getStatus().equals(status);
+                    StatusMatchesKeywordPredicate predicate = new StatusMatchesKeywordPredicate(status);
 
                     return new FilterCommand(predicate);
 
@@ -79,8 +80,7 @@ public class FilterCommandParser implements JobParser<FilterCommand> {
 
                 try {
                     LocalDate date = LocalDate.parse(dateStr, DATE_FORMATTER);
-                    Predicate<JobApplication> predicate = app ->
-                            app.getDeadline().toLocalDate().equals(date);
+                    DeadlinePredicate predicate = new DeadlinePredicate(date);
 
                     return new FilterCommand(predicate);
 
