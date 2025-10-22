@@ -80,7 +80,7 @@ public class JobApplicationBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code JobApplication} 
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code JobApplication}
      * that we are building.
      */
     public JobApplicationBuilder withTags(String... tags) {

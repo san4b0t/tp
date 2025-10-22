@@ -1,18 +1,18 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.time.format.DateTimeFormatter;
-import java.util.Set;
+// import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.EditCommand.EditJobApplicationDescriptor;
+// import seedu.address.logic.commands.EditCommand.EditJobApplicationDescriptor;
 import seedu.address.model.jobapplication.JobApplication;
-import seedu.address.model.tag.Tag;
+// import seedu.address.model.tag.Tag;
 
 /**
  * A utility class for JobApplication.
@@ -43,27 +43,28 @@ public class JobApplicationUtil {
         return sb.toString();
     }
 
-    /**
-     * Returns the part of command string for the given {@code EditJobApplicationDescriptor}'s details.
-     */
-    public static String getEditJobApplicationDescriptorDetails(EditJobApplicationDescriptor descriptor) {
-        StringBuilder sb = new StringBuilder();
-        descriptor.getCompanyName().ifPresent(companyName -> 
-            sb.append(PREFIX_NAME).append(companyName).append(" "));
-        descriptor.getRole().ifPresent(role -> 
-            sb.append(PREFIX_ROLE).append(role).append(" "));
-        descriptor.getDeadline().ifPresent(deadline -> 
-            sb.append(PREFIX_DEADLINE).append(deadline.format(FORMATTER)).append(" "));
-        descriptor.getStatus().ifPresent(status -> 
-            sb.append(PREFIX_STATUS).append(status.toString()).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
-            } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
-            }
-        }
-        return sb.toString();
-    }
+    //    /**
+    //     * Returns the part of command string for the given {@code EditJobApplicationDescriptor}'s details.
+    //     */
+    //
+    //    public static String getEditJobApplicationDescriptorDetails(EditJobApplicationDescriptor descriptor) {
+    //        StringBuilder sb = new StringBuilder();
+    //        descriptor.getCompanyName().ifPresent(companyName ->
+    //            sb.append(PREFIX_NAME).append(companyName).append(" "));
+    //        descriptor.getRole().ifPresent(role ->
+    //            sb.append(PREFIX_ROLE).append(role).append(" "));
+    //        descriptor.getDeadline().ifPresent(deadline ->
+    //            sb.append(PREFIX_DEADLINE).append(deadline.format(FORMATTER)).append(" "));
+    //        descriptor.getStatus().ifPresent(status ->
+    //            sb.append(PREFIX_STATUS).append(status.toString()).append(" "));
+    //        if (descriptor.getTags().isPresent()) {
+    //            Set<Tag> tags = descriptor.getTags().get();
+    //            if (tags.isEmpty()) {
+    //                sb.append(PREFIX_TAG);
+    //            } else {
+    //                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+    //            }
+    //        }
+    //        return sb.toString();
+    //     }
 }
