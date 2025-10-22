@@ -3,12 +3,15 @@ package seedu.address.model.jobapplication;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.jobapplication.sort.SortField;
+import seedu.address.model.jobapplication.sort.SortOrder;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -86,8 +89,38 @@ public class UniqueApplicationList implements Iterable<JobApplication> {
     /**
      * Sorts the entire application list based on application deadline.
      */
-    public void sort() {
-        internalList.sort(Comparator.comparing((JobApplication j) -> j.getDeadline()));
+    public void sortApplication(SortField field, SortOrder order) {
+        Comparator<JobApplication> cmp = comparatorFor(field);
+        if (order == SortOrder.DESC) { cmp = cmp.reversed(); }
+        FXCollections.sort(internalList, cmp);
+    }
+
+    private static Comparator<JobApplication> comparatorFor(SortField field) {
+        Comparator<JobApplication> byDeadline = Comparator.comparing(
+            UniqueApplicationList::deadlineOrNull,
+            Comparator.nullsLast(Comparator.naturalOrder())
+        );
+        Comparator<JobApplication> byCompany = Comparator.comparing(
+            ja -> safe(ja.getCompanyName()), String.CASE_INSENSITIVE_ORDER
+        );
+        Comparator<JobApplication> byRole = Comparator.comparing(
+            ja -> safe(ja.getRole()), String.CASE_INSENSITIVE_ORDER
+        );
+
+        return switch (field) {
+        case DEADLINE -> byDeadline.thenComparing(byCompany).thenComparing(byRole);
+        case COMPANY -> byCompany.thenComparing(byRole).thenComparing(byDeadline);
+        case ROLE -> byRole.thenComparing(byCompany).thenComparing(byDeadline);
+        };
+    }
+
+    private static LocalDateTime deadlineOrNull(JobApplication a) {
+        // Adjust if your deadline type differs (e.g. String → LocalDate.parse).
+        return a.getDeadline();
+    }
+
+    private static String safe(String s) {
+        return s == null ? "" : s.trim();
     }
 
     public void setJobApplications(UniqueApplicationList replacement) {

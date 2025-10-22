@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.jobapplication.sort.SortField;
+import seedu.address.model.jobapplication.sort.SortOrder;
 
 
 /**
@@ -72,7 +74,7 @@ public interface Model {
     /**
      * Sorts the given JobApplication by the deadline.
      */
-    void sortJobApplication();
+    void sortJobApplication(SortField field, SortOrder order);
 
     /**
      * Replaces the given JobApplication {@code target} with {@code editedJobApplication}.
