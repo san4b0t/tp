@@ -43,8 +43,7 @@ public class UntagJobCommandTest {
 
     @Test
     public void constructor_nullTags_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-            () -> new UntagJobCommand(Index.fromOneBased(1), null));
+        assertThrows(NullPointerException.class, () -> new UntagJobCommand(Index.fromOneBased(1), null));
     }
 
     @Test
