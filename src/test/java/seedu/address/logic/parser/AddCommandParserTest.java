@@ -82,4 +82,10 @@ public class AddCommandParserTest {
         assertParseFailure(parser, " n/Google r/SoftwareEngineer s/INVALID_STATUS d/2025-12-31T23:59",
                 "Invalid status. Valid values are: APPLIED, INPROGRESS, REJECTED");
     }
+
+    @Test
+    public void parse_pastDeadline_throwsParseException() {
+        assertParseFailure(parser, " n/Google r/SoftwareEngineer s/APPLIED d/2020-01-01T00:00",
+                "Deadline cannot be in the past. Please provide a future date and time.");
+    }
 }

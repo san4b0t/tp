@@ -11,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.jobapplication.sort.SortField;
+import seedu.address.model.jobapplication.sort.SortOrder;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -100,6 +102,13 @@ public class ModelManager implements Model {
     @Override
     public void addJobApplication(JobApplication person) {
         jobBook.addApplication(person);
+        updateFilteredJobApplicationList(PREDICATE_SHOW_ALL_APPLICATIONS);
+    }
+
+    @Override
+    public void sortJobApplication(SortField field, SortOrder order) {
+        jobBook.sortApplication(field, order);
+        // keep filtered view consistent after sort
         updateFilteredJobApplicationList(PREDICATE_SHOW_ALL_APPLICATIONS);
     }
 
