@@ -12,9 +12,12 @@ import seedu.address.logic.jobcommands.Command;
 import seedu.address.logic.jobcommands.DeleteJobCommand;
 import seedu.address.logic.jobcommands.ExitCommand;
 import seedu.address.logic.jobcommands.FilterCommand;
+import seedu.address.logic.jobcommands.FindCommand;
 import seedu.address.logic.jobcommands.SaveCommand;
+import seedu.address.logic.jobcommands.SortCommand;
 import seedu.address.logic.jobcommands.TagJobCommand;
 import seedu.address.logic.jobcommands.UntagJobCommand;
+import seedu.address.logic.jobcommands.UpdateJobCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -60,19 +63,26 @@ public class JobBookCommandParser {
         case SaveCommand.COMMAND_WORD:
             return new SaveCommand();
 
+        case FindCommand.COMMAND_WORD:
+            return new FindCommandParser().parse(arguments);
+
         case TagJobCommand.COMMAND_WORD:
             return new TagCommandParser().parse(arguments);
 
         case UntagJobCommand.COMMAND_WORD:
             return new UntagCommandParser().parse(arguments);
-        case FilterCommand.COMMAND_WORD:
-            return new FilterCommandParser().parse(arguments);
 
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
+
+        case UpdateJobCommand.COMMAND_WORD:
+            return new UpdateCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

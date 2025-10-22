@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -120,5 +121,18 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Validates that the given {@code deadline} is not in the past.
+     *
+     * @param deadline The deadline to validate.
+     * @throws ParseException if the deadline is in the past.
+     */
+    public static void validateDeadlineNotInPast(LocalDateTime deadline) throws ParseException {
+        requireNonNull(deadline);
+        if (deadline.isBefore(LocalDateTime.now())) {
+            throw new ParseException("Deadline cannot be in the past. Please provide a future date and time.");
+        }
     }
 }
