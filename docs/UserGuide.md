@@ -26,13 +26,15 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all applications.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/Microsoft r/Cloud engineer s/INPROGRESS d/2025-10-31T23:59` : Adds a application for `Microsoft` to the Application Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd application shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `sort` : Sorts the applications by the deadline.
+
+   * `clear` : Deletes all applications.
 
    * `exit` : Exits the app.
 
@@ -64,6 +66,35 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Command summary
+
+### General Commands
+
+Command  | Description                                  | Example
+-------- |----------------------------------------------|------------------
+**Help** | Displays how to use all commands in a window |`help`
+**exit** | Exits the program                            |`exit`
+
+### Application Management
+Command  | Description                                  | Example
+-------- |----------------------------------------------|------------------
+**Add** | `add n/COMPANY_NAME r/ROLE s/STATUS d/DEADLINE [t/TAG]…​` <br> e.g., `add n/Microsoft r/Cloud engineer s/INPROGRESS d/2025-10-31T23:59`
+**Sort** | `sort`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Help** | `help`
+
+### Tag Management
+
+Command  | Description                                   | Example
+-------- |-----------------------------------------------|------------------
+**tag** | Adds new tags to a specified job application  |`tag JOB_APPLICATION_INDEX t/NEW_TAG`
+**untag** | Removes tags from a specified job application |`untag JOB_APPLICATION_INDEX t/NEW_TAG`
+---
+
+## General Commands
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -72,6 +103,30 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+Result for `help`:
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+### Saving data
+
+HustleHub data is automatically saved after any command that changes the data. There is no need to save manually.
+
+### Editing the data file
+
+HustleHub data is saved automatically as a JSON file `[JAR file location]/data/JobApplications.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, HustleHub will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the HustleHub to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</div>
+
+---
+
+## General Commands
 
 ### Adding a person: `add`
 
@@ -84,8 +139,8 @@ A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Microsoft r/Cloud engineer s/INPROGRESS d/2025-10-31T23:59`
+* `add n/Microsoft r/Cloud engineer s/INPROGRESS d/2025-10-31T23:59 t/Low-pay t/Good-boss`
 
 ### Listing all persons : `list`
 
@@ -112,35 +167,55 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds Job Applications whose company's name contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The search is not case-insensitive. e.g `tiktok` will match `TikTok`
+* The order of the keywords does not matter. e.g. `American Airlines` will match `Airlines American`
+* Only the company name is searched.
+* Only full words will be matched e.g. `Jan` will not match `Jane`
+* Joob Application copmanies matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Morgan` will return `J.P. Morgan`, `Morgan Stanley`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find morgan` returns `Morgan Stanley` and `J.P. Morgan Chase`
+* `find Tiger America` returns `Tiger Management`, `Bank of America`<br>
 
-### Deleting a person : `delete`
+![find command before ](images/find-command-before.png)
+![find command](images/find-command.png)
 
-Deletes the specified person from the address book.
+### Deleting a application : `delete`
+
+Deletes the specified application from the application book.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the application at the specified `INDEX`.
+* The index refers to the index number shown in the displayed application list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd application in the application book.
+* After filtering the list, `delete 1` deletes the 1st application in the currently displayed results
+
+### Sorting the applications : `sort`
+
+Sorts the specified application from the application book.
+
+Format: `sort`
+
+* No parameters.
+* Applies to the current application list (including any active filters).
+* The sorted order is shown immediately in the UI.
+
+Before:
+
+![sort_before.png](images/sort_before.png)
+
+After:
+![sort_after.png](images/sort_after.png)
+
 
 ### Clearing all entries : `clear`
 
@@ -148,33 +223,118 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+### Filtering Job Applications: `filter`
 
-Exits the program.
+Filters the list of job applications based on a single field: **Company Name**, **Role**, **Status**, or **Application Deadline**.
 
-Format: `exit`
+Format: `filter FLAG/KEYWORD
 
-### Saving the data: `save`
+or, to remove all filters: `filter none`
 
-Saves the current state of the program.
+---
 
-Format: `save`
+#### **Filtering Rules**
 
 
-### Editing the data file
+* **Company Name (`n/`)** and **Role (`r/`)**: Matches if the `KEYWORD` is **contained** in the respective field
+  (e.g., `n/backend` matches "Backend Engineer").
+    * The search is **case-insensitive**.
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
+* **Application Status (`s/`)**: Matches an exact, **case-insensitive** status.
+    * Valid keywords are: **APPLIED**, **INPROGRESS**, or **REJECTED**.
 
-### Archiving data files `[coming in v2.0]`
 
-_Details coming soon ..._
+* **Application Deadline (`d/`)**: Matches the exact date only, ignoring the time component.
+    * The date must be in the **`yyyy-MM-dd`** format (e.g., `2025-12-31`).
+
+---
+
+#### **Examples**
+
+* `filter n/Google`
+    * Returns applications where the company name contains "Google" (e.g., "Google LLC", "Googler Inc.").
+
+
+* `filter r/engineer`
+    * Returns applications for roles containing "engineer" (e.g., "Software Engineer", "Data Engineering Intern").
+
+
+* `filter s/applied`
+    * Returns applications with the status "APPLIED".
+
+
+* `filter d/2025-10-20`
+    * Returns applications with an application deadline on October 20, 2025.
+
+
+* `filter none`
+    * Removes all current filters and shows the complete list of job applications.
+
+
+* `filter s/inprogress` returns the 4 jobs that currently have status 'INPROGRESS'
+
+Enter command: `filter s/inprogress`
+
+![result for 'filter s/inprogress'](images/filterInProgressCommand.png)
+      
+Result of filtering by status: `INPROGRESS`
+
+![result for 'filter s/inprogress'](images/filterInProgressResult.png)
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Tag Management
+
+### Adding tags: `tag`
+
+Adds tags to a job application.
+
+Format: `tag JOB_APPLICATION_INDEX t/TAG...`
+
+Input restrictions:
+1. A `TAG` must be between 1 to 30 characters long, it cannot be blank.
+2. A `TAG` allows letters, numbers, and up to 2 hyphens, underscores, full-stops, at signs, plus signs, and minus signs.
+3. A `TAG` cannot have spaces.
+
+Examples:
+- `tag 1 t/C#`
+- `tag 2 t/6-Month t/C++ t/@HQ`
+- `tag 3 t/python_v3.12 t/BlockChain t/FinTech` 
+
+Before:
+
+![tag_before.png](images/tag_before.png)
+
+After:
+![tag_after.png](images/tag_after.png)
+
+### Removing tags: `untag`
+
+Removes tags to a job application.
+
+Format: `untag JOB_APPLICATION_INDEX t/TAG...`
+
+Input restrictions:
+1. A `TAG` must be between 1 to 30 characters long, it cannot be blank.
+2. A `TAG` allows letters, numbers, and up to 2 hyphens, underscores, full-stops, ampersands, plus signs, and minus signs.
+3. A `TAG` cannot have spaces.
+4. Inputted tags must already exist.
+
+Examples:
+- `untag 1 t/SQL`
+- `untag 2 t/6-Month t/C++`
+- `untag 3 t/python_v3.12 t/BlockChain t/Full-Stack`
+
+Before:
+
+![Untag_before.png](images/Untag_before.png)
+
+After:
+
+![Untag_after.png](images/Untag_after.png)
+
+---
 
 ## FAQ
 
@@ -187,17 +347,3 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
