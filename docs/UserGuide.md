@@ -32,7 +32,8 @@ HustleHub is a **desktop application** for computing students keeping track of m
 
    * `delete 3` : Deletes the 3rd application shown in the current list.
 
-   * `sort` : Sorts the applications by the deadline.
+   * `sort deadline` : Sorts the applications by **deadline** (ascending by default). You can also sort by `company` or `role`, and use `desc`. e.g. `sort company desc`
+
 
    * `clear` : Deletes all applications.
 
@@ -84,7 +85,7 @@ Command  | Description                                      | Format
 [**delete**](#deleting-a-application--delete) | Deletes a job application given its index number | `delete INDEX`
 [**find**](#finding-job-applications-find) | Finds job applications by company name           | `find KEYWORD [MORE_KEYWORDS]`
 [**filter**](#filtering-job-applications-filter) | Filters job applications by a property           | `filter FLAG/KEYWORD`
-[**sort**](#sorting-the-applications--sort) | Sorts the job applications in HustleHub          |`sort`
+[**sort**](#sorting-the-applications--sort) | Sorts the job applications in HustleHub          |`sort FIELD`
 
 ### Tag Management
 
@@ -159,6 +160,20 @@ Examples:
 
 ### Finding job applications: `find`
 
+Sorts the current list of applications by a chosen field, in ascending or descending order.
+
+**Format:** `sort FIELD [ORDER]`  
+- **FIELD**: `company` \| `role` \| `deadline`  
+- **ORDER** (optional): `asc` \| `desc` (default: `asc`)
+
+**Notes**
+- Sorting is **stable** and **case-insensitive** for text fields (`company`, `role`).
+- When sorting by **deadline**, missing/invalid deadlines appear **last** for `asc` (and **first** for `desc`).
+
+**Examples**
+- `sort deadline`  
+- `sort company desc`  
+- `sort role asc`
 Finds job applications whose company's name fully matches any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`

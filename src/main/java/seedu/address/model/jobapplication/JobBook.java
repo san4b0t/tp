@@ -5,6 +5,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.jobapplication.sort.SortField;
+import seedu.address.model.jobapplication.sort.SortOrder;
 
 /**
  * Wraps all data at the address-book level
@@ -90,6 +92,14 @@ public class JobBook implements ReadOnlyJobBook {
      */
     public void removeApplication(JobApplication key) {
         applications.remove(key);
+    }
+
+    /**
+     * Removes {@code key} from this {@code JobBook}.
+     * {@code key} must exist in the Job book.
+     */
+    public void sortApplication(SortField field, SortOrder order) {
+        applications.sortApplication(field, order);
     }
 
     //// util methods
