@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+HustleHub is a **desktop application** for computing students keeping track of multiple internship/job applications who prefer using CLI over GUI. The product will provide computing students an easy way to visualise, add and modify their job application details to multiple positions at multiple companies
 
 * Table of Contents
 {:toc}
@@ -72,25 +72,26 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### General Commands
 
-Command  | Description                                  | Example
+Command  | Description                                  | Format
 -------- |----------------------------------------------|------------------
-**Help** | Displays how to use all commands in a window |`help`
-**exit** | Exits the program                            |`exit`
+[**help**](#viewing-help--help) | Displays how to use all commands in a window |`help`
+[**exit** ](#exiting-the-program--exit-exit)| Exits the program                            |`exit`
 
 ### Application Management
-Command  | Description                                  | Example
--------- |----------------------------------------------|------------------
-**Add** | `add n/COMPANY_NAME r/ROLE s/STATUS d/DEADLINE [t/TAG]…​` <br> e.g., `add n/Microsoft r/Cloud engineer s/INPROGRESS d/2025-10-31T23:59`
-**Sort** | `sort`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Help** | `help`
+Command  | Description                                      | Format
+-------- |--------------------------------------------------|------------------
+[**add**](#adding-a-person-add) | Adds a job application to HustleHub              | `add n/COMPANY_NAME r/ROLE s/STATUS d/DEADLINE [t/TAG]…​` 
+[**delete**](#deleting-a-application--delete) | Deletes a job application given its index number | `delete INDEX`
+[**find**](#finding-job-applications-find) | Finds job applications by company name           | `find KEYWORD [MORE_KEYWORDS]`
+[**filter**](#filtering-job-applications-filter) | Filters job applications by a property           | `filter FLAG/KEYWORD`
+[**sort**](#sorting-the-applications--sort) | Sorts the job applications in HustleHub          |`sort`
 
 ### Tag Management
 
-Command  | Description                                   | Example
+Command  | Description                                   | Format
 -------- |-----------------------------------------------|------------------
-**tag** | Adds new tags to a specified job application  |`tag JOB_APPLICATION_INDEX t/NEW_TAG`
-**untag** | Removes tags from a specified job application |`untag JOB_APPLICATION_INDEX t/NEW_TAG`
+[**tag**](#adding-tags-tag) | Adds new tags to a specified job application  |`tag JOB_APPLICATION_INDEX t/NEW_TAG`
+[**untag**](#removing-tags-untag) | Removes tags from a specified job application |`untag JOB_APPLICATION_INDEX t/NEW_TAG`
 ---
 
 ## General Commands
@@ -142,49 +143,6 @@ Examples:
 * `add n/Microsoft r/Cloud engineer s/INPROGRESS d/2025-10-31T23:59`
 * `add n/Microsoft r/Cloud engineer s/INPROGRESS d/2025-10-31T23:59 t/Low-pay t/Good-boss`
 
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
-
-Format: `list`
-
-### Editing a person : `edit`
-
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-### Locating persons by name: `find`
-
-Finds Job Applications whose company's name contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is not case-insensitive. e.g `tiktok` will match `TikTok`
-* The order of the keywords does not matter. e.g. `American Airlines` will match `Airlines American`
-* Only the company name is searched.
-* Only full words will be matched e.g. `Jan` will not match `Jane`
-* Joob Application copmanies matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Morgan` will return `J.P. Morgan`, `Morgan Stanley`
-
-Examples:
-* `find morgan` returns `Morgan Stanley` and `J.P. Morgan Chase`
-* `find Tiger America` returns `Tiger Management`, `Bank of America`<br>
-
-![find command before ](images/find-command-before.png)
-![find command](images/find-command.png)
-
 ### Deleting a application : `delete`
 
 Deletes the specified application from the application book.
@@ -199,56 +157,65 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd application in the application book.
 * After filtering the list, `delete 1` deletes the 1st application in the currently displayed results
 
-### Sorting the applications : `sort`
+### Finding job applications: `find`
 
-Sorts the specified application from the application book.
+Finds job applications whose company's name fully matches any of the given keywords.
 
-Format: `sort`
+Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* No parameters.
-* Applies to the current application list (including any active filters).
-* The sorted order is shown immediately in the UI.
+#### Find Restrictions
+1. The search is not case-insensitive. e.g `tiktok` will match `TikTok`
 
+
+2. The order of the keywords does not matter. e.g. `American Airlines` will match `Airlines American`
+
+
+3. Only the company name is searched.
+
+
+4. Job Application copmanies matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Morgan` will return `J.P. Morgan`, `Morgan Stanley`
+
+Examples:
+
+* `find morgan` 
+  * Returns `Morgan Stanley` and `J.P. Morgan Chase`
+
+
+* `find Tiger America` 
+  * Returns `Tiger Management`, `Bank of America`<br>
+
+  
 Before:
-
-![sort_before.png](images/sort_before.png)
+![find command before ](images/find-command-before.png)
 
 After:
-![sort_after.png](images/sort_after.png)
-
-
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
+![find command](images/find-command.png)
 
 ### Filtering Job Applications: `filter`
 
 Filters the list of job applications based on a single field: **Company Name**, **Role**, **Status**, or **Application Deadline**.
 
-Format: `filter FLAG/KEYWORD
+Format: `filter FLAG/KEYWORD`
 
 or, to remove all filters: `filter none`
 
----
 
 #### **Filtering Rules**
 
 
-* **Company Name (`n/`)** and **Role (`r/`)**: Matches if the `KEYWORD` is **contained** in the respective field
-  (e.g., `n/backend` matches "Backend Engineer").
+1. **Company Name (`n/`)** and **Role (`r/`)**: Matches if the `KEYWORD` is **contained** in the respective field
+   (e.g., `n/backend` matches "Backend Engineer").
     * The search is **case-insensitive**.
 
 
-* **Application Status (`s/`)**: Matches an exact, **case-insensitive** status.
+2. **Application Status (`s/`)**: Matches an exact, **case-insensitive** status.
     * Valid keywords are: **APPLIED**, **INPROGRESS**, or **REJECTED**.
 
 
-* **Application Deadline (`d/`)**: Matches the exact date only, ignoring the time component.
+3. **Application Deadline (`d/`)**: Matches the exact date only, ignoring the time component.
     * The date must be in the **`yyyy-MM-dd`** format (e.g., `2025-12-31`).
 
----
 
 #### **Examples**
 
@@ -274,13 +241,30 @@ or, to remove all filters: `filter none`
 
 * `filter s/inprogress` returns the 4 jobs that currently have status 'INPROGRESS'
 
-Enter command: `filter s/inprogress`
+Before: `filter s/inprogress`
 
 ![result for 'filter s/inprogress'](images/filterInProgressCommand.png)
       
-Result of filtering by status: `INPROGRESS`
+After filtering: `INPROGRESS`
 
 ![result for 'filter s/inprogress'](images/filterInProgressResult.png)
+
+### Sorting the applications : `sort`
+
+Sorts the specified application from the application book.
+
+Format: `sort`
+
+* No parameters.
+* Applies to the current application list (including any active filters).
+* The sorted order is shown immediately in the UI.
+
+Before:
+
+![sort_before.png](images/sort_before.png)
+
+After:
+![sort_after.png](images/sort_after.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -306,7 +290,7 @@ Before:
 
 ![tag_before.png](images/tag_before.png)
 
-After:
+After tagging:
 ![tag_after.png](images/tag_after.png)
 
 ### Removing tags: `untag`
@@ -330,7 +314,7 @@ Before:
 
 ![Untag_before.png](images/Untag_before.png)
 
-After:
+After untagging:
 
 ![Untag_after.png](images/Untag_after.png)
 
