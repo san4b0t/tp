@@ -1,27 +1,24 @@
 /* Global Styles */
 .root-pane {
-    -fx-background-color: #FAFAFA;
+    -fx-background-color: #F5F5F5;
     -fx-font-family: "Roboto", sans-serif;
 }
 
 /* Container Styles */
 .card-container {
     -fx-background-color: #FFFFFF;
-    -fx-padding: 15px;
-    -fx-border-radius: 10px;
-    -fx-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    -fx-padding: 20px;
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 10, 0, 0, 2);
 }
 
 .pane-with-border {
     -fx-background-color: #FFFFFF;
-    -fx-border-color: #E0E0E0;
-    -fx-border-width: 1px;
-    -fx-border-radius: 6px;
 }
 
 /* Button Styles */
 .minimal-button {
-    -fx-background-color: transparent;
+    -fx-background-color: transparent;resuldispl
     -fx-border-color: #0078D4;
     -fx-border-radius: 6px;
     -fx-text-fill: #0078D4;
@@ -54,12 +51,53 @@
     -fx-font-size: 14px;
 }
 
+.text-area {
+    -fx-background-insets: 0;
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+.text-area .content {
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+.text-area:focused .content {
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+.text-area:focused {
+    -fx-highlight-fill: #7ecfff;
+}
+
+.text-area .content {
+    -fx-padding: 10px;
+    -fx-text-fill: gray;
+    -fx-highlight-fill: #7ecfff;
+}
+
+/* Result Display - Subtle styling */
+.result-display {
+    -fx-background-color: transparent;
+    -fx-text-fill: #9CA3AF;
+    -fx-font-size: 13px;
+    -fx-padding: 6px 8px;
+}
+
+.result-display-container {
+    -fx-background-color: transparent;
+}
+
 /* Label Styles */
 .company-name {
-    -fx-font-size: 18px;
-    -fx-font-weight: bold; /* Bold Company Name */
-    -fx-text-fill: #333333;
+    -fx-font-size: 19px;
+    -fx-font-weight: 900;
+    -fx-text-fill: #000000;
+    -fx-font-family: "Segoe UI Black", "Arial Black", sans-serif;
 }
+
+.company-name-container {
+    -fx-padding: 0 0 0 0;
+}
+
 
 .cell_big_label {
     -fx-font-size: 16px;
@@ -73,12 +111,12 @@
 
 /* Layout & Spacing */
 .stack-pane {
-    -fx-background-color: #FAFAFA;
+    -fx-background-color: #F5F5F5;
 }
 
 .status-bar {
     -fx-background-color: #F0F0F0;
-    -fx-padding: 10px;
+    -fx-padding: 4px 8px;
     -fx-font-size: 12px;
     -fx-text-fill: #333333;
 }
@@ -87,29 +125,62 @@
 .status-tag {
     -fx-background-color: #0078D4;
     -fx-text-fill: white;
-    -fx-padding: 6px 16px; /* Increased padding for breathable space */
-    -fx-border-radius: 20px; /* Ensure rounded corners */
+    -fx-padding: 6px 16px;
+    -fx-background-radius: 20px;
     -fx-font-weight: bold;
     -fx-font-size: 12px;
-    -fx-alignment: center; /* Ensures text is centered */
+    -fx-alignment: center;
 }
 
-/* Added Breathing Space Between Tag and Date */
-.status-tag + .cell_small_label {
-    -fx-margin-top: 10px; /* Increased margin between tag and date */
+.status-tag-container {
+    -fx-padding: 4 0 0 0;
 }
 
-/* Ensure other tags or containers also have rounded corners where necessary */
+/* Tag Selector */
 .tag-selector {
     -fx-border-width: 1;
-    -fx-border-radius: 12px; /* Rounded corners for tags */
-    -fx-background-radius: 12px; /* Rounded background */
-    -fx-padding: 5px 15px; /* Add some padding inside tags */
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-padding: 0px 5px;
 }
 
-/* If any containers (like FlowPane or VBox) are interfering, ensure their padding/margins allow for proper spacing */
 .flow-pane {
-    -fx-padding: 10px; /* Ensure enough space around the tags */
+    -fx-padding: 10px;
+}
+
+/* List View with Card Styling */
+.list-view {
+    -fx-background-color: #F5F5F5;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+/* Critical: List cells with card margins */
+.list-view .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 8px 0;
+    -fx-background-insets: 0;
+}
+
+.list-view .list-cell:filled {
+    -fx-background-color: transparent;
+}
+
+.list-view .list-cell:filled:hover {
+    -fx-background-color: transparent;
+}
+
+.list-view .list-cell:filled:selected {
+    -fx-background-color: transparent;
+}
+
+.list-view .list-cell:empty {
+    -fx-background-color: transparent;
+}
+
+/* Remove focus border */
+.list-view:focused .list-cell:filled:selected {
+    -fx-background-color: transparent;
 }
 
 /* Scrollbar Styles */
@@ -118,20 +189,16 @@
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: #0078D4;
+    -fx-background-color: #D0D0D0;
     -fx-background-radius: 8px;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #A0A0A0;
 }
 
 .scroll-bar .increment-button, .scroll-bar .decrement-button {
     -fx-background-color: transparent;
-}
-
-.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
-    -fx-padding: 1 8 1 8;
-}
-
-.scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
-    -fx-padding: 8 1 8 1;
 }
 
 /* Context Menu and MenuBar Styles */
@@ -145,12 +212,10 @@
 
 .menu-bar {
     -fx-background-color: #FFFFFF;
-    -fx-padding: 8px;
 }
 
 .menu-bar .label {
-    -fx-font-size: 16px;
+    -fx-font-size: 12px;
     -fx-font-family: "Roboto", sans-serif;
     -fx-text-fill: #333333;
 }
-
