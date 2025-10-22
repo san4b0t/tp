@@ -2,7 +2,6 @@ package seedu.address.logic.jobcommands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.jobcommands.exceptions.JobCommandException;
 import seedu.address.model.jobapplication.Model;
 import seedu.address.model.jobapplication.sort.SortField;
@@ -54,20 +53,19 @@ public class SortCommand extends Command {
         if (other == this) {
             return true;
         }
-
-        // instanceof handles nulls
         if (!(other instanceof SortCommand)) {
             return false;
         }
-
-        SortCommand otherDeleteCommand = (SortCommand) other;
-        return true; //maybe add sortBy later
+        SortCommand o = (SortCommand) other;
+        return field == o.field && order == o.order;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-            .toString();
+        return SortCommand.class.getCanonicalName()
+            + "{field=" + field
+            + ", order=" + order
+            + "}";
     }
 }
 
