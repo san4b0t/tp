@@ -13,6 +13,14 @@ import seedu.address.commons.util.ToStringBuilder;
 public class NameContainsKeywordsPredicate implements Predicate<JobApplication> {
     private final List<String> keywords;
 
+
+    /**
+     * Constructs a {@code NameContainsKeywordsPredicate} with the specified keywords.
+     * Empty strings in the keyword list are filtered out.
+     *
+     * @param keywords The list of keywords to match against job application names.
+     *                 Empty strings are automatically removed from this list.
+     */
     public NameContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords.stream()
                                 .filter(w -> !w.isEmpty())
