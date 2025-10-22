@@ -14,7 +14,9 @@ Given below are my contributions to the project.
 
 * **Code contributed**:
 
-1. [v1.2] Migrate Person UI components to Job Application context 
+1. [v1.2] Migrate Person UI components to Job Application context
+2. [v1.3] Integrate job application model
+3. [v1.4] Searching for job applications by company
 
 * **Project management**:
 * **Enhancements to existing features**:
