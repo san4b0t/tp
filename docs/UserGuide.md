@@ -32,7 +32,8 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `delete 3` : Deletes the 3rd application shown in the current list.
 
-   * `sort` : Sorts the applications by the deadline.
+   * `sort deadline` : Sorts the applications by **deadline** (ascending by default). You can also sort by `company` or `role`, and use `desc`. e.g. `sort company desc`
+
 
    * `clear` : Deletes all applications.
 
@@ -81,7 +82,7 @@ Command  | Description                                  | Example
 Command  | Description                                  | Example
 -------- |----------------------------------------------|------------------
 **Add** | `add n/COMPANY_NAME r/ROLE s/STATUS d/DEADLINE [t/TAG]…​` <br> e.g., `add n/Microsoft r/Cloud engineer s/INPROGRESS d/2025-10-31T23:59`
-**Sort** | `sort`
+**Sort** | `sort FIELD [ORDER]`<br> e.g., `sort deadline`, `sort company desc`, `sort role asc`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Help** | `help`
 
@@ -201,20 +202,29 @@ Examples:
 
 ### Sorting the applications : `sort`
 
-Sorts the specified application from the application book.
+Sorts the current list of applications by a chosen field, in ascending or descending order.
 
-Format: `sort`
+**Format:** `sort FIELD [ORDER]`  
+- **FIELD**: `company` \| `role` \| `deadline`  
+- **ORDER** (optional): `asc` \| `desc` (default: `asc`)
 
-* No parameters.
-* Applies to the current application list (including any active filters).
-* The sorted order is shown immediately in the UI.
+**Notes**
+- Sorting is **stable** and **case-insensitive** for text fields (`company`, `role`).
+- When sorting by **deadline**, missing/invalid deadlines appear **last** for `asc` (and **first** for `desc`).
+
+**Examples**
+- `sort deadline`  
+- `sort company desc`  
+- `sort role asc`
 
 Before:
 
 ![sort_before.png](images/sort_before.png)
 
 After:
+
 ![sort_after.png](images/sort_after.png)
+
 
 
 ### Clearing all entries : `clear`
