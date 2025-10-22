@@ -32,6 +32,8 @@ HustleHub is a **desktop application** for computing students keeping track of m
 
    * `delete 3` : Deletes the 3rd application shown in the current list.
 
+   * `update 1 s/INPROGRESS d/2027-01-15T17:00` : Updates the 1st application's status and deadline.
+
    * `sort deadline` : Sorts the applications by **deadline** (ascending by default). You can also sort by `company` or `role`, and use `desc`. e.g. `sort company desc`
 
 
@@ -81,7 +83,8 @@ Command  | Description                                  | Format
 ### Application Management
 Command  | Description                                      | Format
 -------- |--------------------------------------------------|------------------
-[**add**](#adding-a-person-add) | Adds a job application to HustleHub              | `add n/COMPANY_NAME r/ROLE s/STATUS d/DEADLINE [t/TAG]…​` 
+[**add**](#adding-a-person-add) | Adds a job application to HustleHub              | `add n/COMPANY_NAME r/ROLE s/STATUS d/DEADLINE [t/TAG]…​`
+[**update**](#updating-a-job-application-update) | Updates an existing job application's details    | `update INDEX [n/COMPANY_NAME] [r/ROLE] [s/STATUS] [d/DEADLINE] [t/TAG]…​`
 [**delete**](#deleting-a-application--delete) | Deletes a job application given its index number | `delete INDEX`
 [**find**](#finding-job-applications-find) | Finds job applications by company name           | `find KEYWORD [MORE_KEYWORDS]`
 [**filter**](#filtering-job-applications-filter) | Filters job applications by a property           | `filter FLAG/KEYWORD`
@@ -280,6 +283,43 @@ Before:
 
 After:
 ![sort_after.png](images/sort_after.png)
+
+### Updating a job application: `update`
+
+Updates the details of an existing job application in HustleHub.
+
+Format: `update INDEX [n/COMPANY_NAME] [r/ROLE] [s/STATUS] [d/DEADLINE] [t/TAG]…​`
+
+* Updates the job application at the specified `INDEX`.
+* The index refers to the index number shown in the displayed application list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be overwritten by the input values.
+* When updating tags with `t/TAG`, all existing tags will be replaced by the new tags specified.
+* You can remove all tags by typing `t/` without specifying any tags after it.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+
+* Deadline cannot be in the past. Please provide a future date and time in the format `yyyy-MM-ddTHH:mm`.
+* Updating company name and/or role may result in duplicate applications if the combination already exists.
+* Valid status values are: `APPLIED`, `INPROGRESS`, or `REJECTED` (case-insensitive).
+
+</div>
+
+**Examples:**
+
+* `update 1 s/INPROGRESS` - Updates the status of the 1st application to INPROGRESS.
+* `update 2 r/Senior Engineer d/2027-01-15T17:00` - Updates the role and deadline of the 2nd application.
+* `update 3 n/Apple r/iOS Developer s/APPLIED d/2026-06-30T23:59 t/remote t/urgent` - Updates all fields of the 3rd application.
+* `update 1 t/` - Removes all tags from the 1st application.
+
+Before:
+
+![update_before.png](images/update_before.png)
+
+After updating with `update 2 s/INPROGRESS d/2027-01-15T17:00 t/priority t/urgent`:
+
+![update_after.png](images/update_after.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
