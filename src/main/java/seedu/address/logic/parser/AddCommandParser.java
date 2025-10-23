@@ -54,6 +54,7 @@ public class AddCommandParser implements JobParser<AddJobCommand> {
             }
 
             LocalDateTime deadline = LocalDateTime.parse(deadlineStr, DATETIME_FORMATTER);
+            ParserUtil.validateDeadlineNotInPast(deadline);
             JobApplication.Status status = JobApplication.Status.valueOf(statusStr.toUpperCase());
 
             JobApplication application = new JobApplication(companyName, role, deadline, status, tags);
