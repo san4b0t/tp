@@ -10,7 +10,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import seedu.job.model.jobapplication.exceptions.DuplicateJobApplicationException;
 import seedu.job.model.jobapplication.exceptions.JobApplicationNotFoundException;
 import seedu.job.model.jobapplication.sort.SortField;
