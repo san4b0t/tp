@@ -3,7 +3,7 @@ package seedu.job.logic.jobcommands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.job.commons.util.ToStringBuilder;
-import seedu.job.logic.Messages;
+import seedu.job.logic.JobMessages;
 import seedu.job.model.jobapplication.Model;
 import seedu.job.model.jobapplication.NameContainsKeywordsPredicate;
 
@@ -32,7 +32,7 @@ public class FindCommand extends Command {
         model.updateFilteredJobApplicationList(predicate);
         return new CommandResult(
             String.format(
-                Messages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW,
+                JobMessages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW,
                 model.getFilteredApplicationList().size()
             )
         );

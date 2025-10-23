@@ -9,7 +9,7 @@ import static seedu.job.logic.parser.CliSyntax.PREFIX_TAG;
 import java.time.format.DateTimeFormatter;
 // import java.util.Set;
 
-import seedu.job.logic.commands.AddCommand;
+import seedu.job.logic.jobcommands.AddJobCommand;
 // import seedu.job.logic.commands.EditCommand.EditJobApplicationDescriptor;
 import seedu.job.model.jobapplication.JobApplication;
 // import seedu.job.model.tag.Tag;
@@ -25,7 +25,7 @@ public class JobApplicationUtil {
      * Returns an add command string for adding the {@code jobApplication}.
      */
     public static String getAddCommand(JobApplication jobApplication) {
-        return AddCommand.COMMAND_WORD + " " + getJobApplicationDetails(jobApplication);
+        return AddJobCommand.COMMAND_WORD + " " + getJobApplicationDetails(jobApplication);
     }
 
     /**

@@ -7,7 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import seedu.job.commons.util.ToStringBuilder;
-import seedu.job.logic.Messages;
+import seedu.job.logic.JobMessages;
 import seedu.job.model.jobapplication.JobApplication;
 import seedu.job.model.jobapplication.Model;
 
@@ -50,7 +50,7 @@ public class FilterCommand extends Command {
         model.updateFilteredJobApplicationList(predicate);
         logger.log(Level.INFO, "end of filtering, return command result");
         return new CommandResult(
-                String.format(Messages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW,
+                String.format(JobMessages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW,
                         model.getFilteredApplicationList().size()));
     }
 

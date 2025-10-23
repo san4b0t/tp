@@ -1,7 +1,7 @@
 package seedu.job.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.job.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.job.logic.JobMessages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.job.logic.jobcommands.SortCommand;
 import seedu.job.logic.parser.exceptions.ParseException;

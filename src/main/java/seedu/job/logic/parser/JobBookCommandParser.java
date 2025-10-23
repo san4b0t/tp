@@ -1,6 +1,6 @@
 package seedu.job.logic.parser;
 
-import static seedu.job.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.job.logic.JobMessages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
