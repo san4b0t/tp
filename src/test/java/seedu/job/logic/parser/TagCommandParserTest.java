@@ -1,6 +1,6 @@
 package seedu.job.logic.parser;
 
-import static seedu.job.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.job.logic.JobMessages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.job.logic.parser.JobCommandParserTestUtil.assertParseFailure;
 import static seedu.job.logic.parser.JobCommandParserTestUtil.assertParseSuccess;
 

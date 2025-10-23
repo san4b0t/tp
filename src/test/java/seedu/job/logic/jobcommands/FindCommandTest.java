@@ -10,7 +10,7 @@ import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.job.logic.Messages;
+import seedu.job.logic.JobMessages;
 import seedu.job.model.jobapplication.JobApplication;
 import seedu.job.model.jobapplication.JobBook;
 import seedu.job.model.jobapplication.Model;
