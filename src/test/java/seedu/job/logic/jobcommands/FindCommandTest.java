@@ -74,7 +74,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noJobApplicationFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(JobMessages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
 
@@ -88,7 +88,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_singleKeyword_multipleJobApplicationsFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(JobMessages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW, 1);
         NameContainsKeywordsPredicate predicate = preparePredicate("Street");
         FindCommand command = new FindCommand(predicate);
 
@@ -102,7 +102,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleJobApplicationsFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(JobMessages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("TikTok Jane HRT");
         FindCommand command = new FindCommand(predicate);
 
@@ -117,7 +117,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_singleKeywordExactMatch_oneJobApplicationFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(JobMessages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW, 1);
         NameContainsKeywordsPredicate predicate = preparePredicate("Google");
         FindCommand command = new FindCommand(predicate);
 
@@ -132,7 +132,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_keywordCaseInsensitive_jobApplicationsFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(JobMessages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW, 1);
         NameContainsKeywordsPredicate predicate = preparePredicate("google");
         FindCommand command = new FindCommand(predicate);
 
@@ -147,7 +147,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_partialKeyword_noJobApplicationFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(JobMessages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate("Goog");
         FindCommand command = new FindCommand(predicate);
 
@@ -161,7 +161,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_nonExistentKeyword_noJobApplicationFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(JobMessages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate("Netflix");
         FindCommand command = new FindCommand(predicate);
 
@@ -175,7 +175,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywordsSomeMatch_matchingJobApplicationsFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(JobMessages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW, 2);
         NameContainsKeywordsPredicate predicate = preparePredicate("Google Netflix Meta");
         FindCommand command = new FindCommand(predicate);
 
@@ -189,7 +189,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_duplicateKeywords_jobApplicationsFoundOnce() {
-        String expectedMessage = String.format(Messages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(JobMessages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW, 1);
         NameContainsKeywordsPredicate predicate = preparePredicate("Google Google");
         FindCommand command = new FindCommand(predicate);
 
