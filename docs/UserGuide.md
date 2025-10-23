@@ -75,27 +75,28 @@ HustleHub is a **desktop application** for computing students keeping track of m
 
 ### General Commands
 
-Command  | Description                                  | Format
--------- |----------------------------------------------|------------------
-[**help**](#viewing-help--help) | Displays how to use all commands in a window |`help`
-[**exit** ](#exiting-the-program--exit-exit)| Exits the program                            |`exit`
+| Command                                      | Description                                  | Format |
+|----------------------------------------------|----------------------------------------------|--------|
+| [**help**](#viewing-help--help)              | Displays how to use all commands in a window | `help` |
+| [**exit** ](#exiting-the-program--exit-exit) | Exits the program                            | `exit` |
 
 ### Application Management
-Command  | Description                                      | Format
--------- |--------------------------------------------------|------------------
-[**add**](#adding-a-person-add) | Adds a job application to HustleHub              | `add n/COMPANY_NAME r/ROLE s/STATUS d/DEADLINE [t/TAG]…​`
-[**delete**](#deleting-a-application--delete) | Deletes a job application given its index number | `delete INDEX`
-[**find**](#finding-job-applications-find) | Finds job applications by company name           | `find KEYWORD [MORE_KEYWORDS]`
-[**filter**](#filtering-job-applications-filter) | Filters job applications by a property           | `filter FLAG/KEYWORD`
-[**sort**](#sorting-the-applications--sort) | Sorts the job applications in HustleHub          |`sort FIELD`
-[**update**](#updating-a-job-application-update) | Updates an existing job application's details    | `update INDEX [n/COMPANY_NAME] [r/ROLE] [s/STATUS] [d/DEADLINE] [t/TAG]…​`
+| Command                                          | Description                                      | Format                                                                     |
+|--------------------------------------------------|--------------------------------------------------|----------------------------------------------------------------------------|
+| [**add**](#adding-a-person-add)                  | Adds a job application to HustleHub              | `add n/COMPANY_NAME r/ROLE s/STATUS d/DEADLINE [t/TAG]…​`                  |
+| [**delete**](#deleting-a-application--delete)    | Deletes a job application given its index number | `delete INDEX`                                                             |
+| [**find**](#finding-job-applications-find)       | Finds job applications by company name           | `find KEYWORD [MORE_KEYWORDS]`                                             |
+| [**filter**](#filtering-job-applications-filter) | Filters job applications by a property           | `filter FLAG/KEYWORD`                                                      |
+| [**sort**](#sorting-the-applications--sort)      | Sorts the job applications in HustleHub          | `sort FIELD`                                                               |
+| [**update**](#updating-a-job-application-update) | Updates an existing job application's details    | `update INDEX [n/COMPANY_NAME] [r/ROLE] [s/STATUS] [d/DEADLINE] [t/TAG]…​` |
 
 ### Tag Management
 
-Command  | Description                                   | Format
--------- |-----------------------------------------------|------------------
-[**tag**](#adding-tags-tag) | Adds new tags to a specified job application  |`tag JOB_APPLICATION_INDEX t/NEW_TAG`
-[**untag**](#removing-tags-untag) | Removes tags from a specified job application |`untag JOB_APPLICATION_INDEX t/NEW_TAG`
+| Command                           | Description                                   | Format                                  |
+|-----------------------------------|-----------------------------------------------|-----------------------------------------|
+| [**tag**](#adding-tags-tag)       | Adds new tags to a specified job application  | `tag JOB_APPLICATION_INDEX t/NEW_TAG`   |
+| [**untag**](#removing-tags-untag) | Removes tags from a specified job application | `untag JOB_APPLICATION_INDEX t/NEW_TAG` |
+
 ---
 
 ## General Commands
