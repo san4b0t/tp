@@ -84,11 +84,11 @@ Command  | Description                                  | Format
 Command  | Description                                      | Format
 -------- |--------------------------------------------------|------------------
 [**add**](#adding-a-person-add) | Adds a job application to HustleHub              | `add n/COMPANY_NAME r/ROLE s/STATUS d/DEADLINE [t/TAG]…​`
-[**update**](#updating-a-job-application-update) | Updates an existing job application's details    | `update INDEX [n/COMPANY_NAME] [r/ROLE] [s/STATUS] [d/DEADLINE] [t/TAG]…​`
 [**delete**](#deleting-a-application--delete) | Deletes a job application given its index number | `delete INDEX`
 [**find**](#finding-job-applications-find) | Finds job applications by company name           | `find KEYWORD [MORE_KEYWORDS]`
 [**filter**](#filtering-job-applications-filter) | Filters job applications by a property           | `filter FLAG/KEYWORD`
 [**sort**](#sorting-the-applications--sort) | Sorts the job applications in HustleHub          |`sort FIELD`
+[**update**](#updating-a-job-application-update) | Updates an existing job application's details    | `update INDEX [n/COMPANY_NAME] [r/ROLE] [s/STATUS] [d/DEADLINE] [t/TAG]…​`
 
 ### Tag Management
 
@@ -163,20 +163,6 @@ Examples:
 
 ### Finding job applications: `find`
 
-Sorts the current list of applications by a chosen field, in ascending or descending order.
-
-**Format:** `sort FIELD [ORDER]`  
-- **FIELD**: `company` \| `role` \| `deadline`  
-- **ORDER** (optional): `asc` \| `desc` (default: `asc`)
-
-**Notes**
-- Sorting is **stable** and **case-insensitive** for text fields (`company`, `role`).
-- When sorting by **deadline**, missing/invalid deadlines appear **last** for `asc` (and **first** for `desc`).
-
-**Examples**
-- `sort deadline`  
-- `sort company desc`  
-- `sort role asc`
 Finds job applications whose company's name fully matches any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -269,16 +255,22 @@ After filtering: `INPROGRESS`
 
 ### Sorting the applications : `sort`
 
-Sorts the specified application from the application book.
+Sorts the current list of applications by a chosen field, in ascending or descending order.
 
-Format: `sort`
+**Format:** `sort FIELD [ORDER]`
+- **FIELD**: `company` \| `role` \| `deadline`
+- **ORDER** (optional): `asc` \| `desc` (default: `asc`)
 
-* No parameters.
-* Applies to the current application list (including any active filters).
-* The sorted order is shown immediately in the UI.
+**Notes**
+- Sorting is **stable** and **case-insensitive** for text fields (`company`, `role`).
+- When sorting by **deadline**, missing/invalid deadlines appear **last** for `asc` (and **first** for `desc`).
+
+**Examples**
+- `sort deadline`
+- `sort company desc`
+- `sort role asc`
 
 Before:
-
 ![sort_before.png](images/sort_before.png)
 
 After:
