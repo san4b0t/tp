@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.job.logic.parser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import seedu.address.logic.Messages;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.job.logic.Messages;
+import seedu.job.logic.parser.exceptions.ParseException;
 
 /**
  * Stores mapping of prefixes to their respective arguments.

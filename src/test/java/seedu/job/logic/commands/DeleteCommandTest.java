@@ -1,23 +1,23 @@
-package seedu.address.logic.commands;
+package seedu.job.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.job.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.job.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.job.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.job.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.job.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.job.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.job.commons.core.index.Index;
+import seedu.job.logic.Messages;
+import seedu.job.model.Model;
+import seedu.job.model.ModelManager;
+import seedu.job.model.UserPrefs;
+import seedu.job.model.person.Person;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for

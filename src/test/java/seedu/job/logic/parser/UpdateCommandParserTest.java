@@ -1,26 +1,26 @@
-package seedu.address.logic.parser;
+package seedu.job.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.JobCommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.JobCommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_JOB;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_JOB;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_JOB;
+import static seedu.job.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.job.logic.parser.JobCommandParserTestUtil.assertParseFailure;
+import static seedu.job.logic.parser.JobCommandParserTestUtil.assertParseSuccess;
+import static seedu.job.testutil.TypicalIndexes.INDEX_FIRST_JOB;
+import static seedu.job.testutil.TypicalIndexes.INDEX_SECOND_JOB;
+import static seedu.job.testutil.TypicalIndexes.INDEX_THIRD_JOB;
 
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.jobcommands.UpdateJobCommand;
-import seedu.address.logic.jobcommands.UpdateJobCommand.UpdateJobDescriptor;
-import seedu.address.model.jobapplication.JobApplication;
-import seedu.address.testutil.UpdateJobDescriptorBuilder;
+import seedu.job.commons.core.index.Index;
+import seedu.job.logic.jobcommands.UpdateJobCommand;
+import seedu.job.logic.jobcommands.UpdateJobCommand.UpdateJobDescriptor;
+import seedu.job.model.jobapplication.JobApplication;
+import seedu.job.testutil.UpdateJobDescriptorBuilder;
 
 /**
  * Contains tests for UpdateCommandParser.

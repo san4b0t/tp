@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.job.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -9,9 +9,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.jobapplication.JobApplication;
+import seedu.job.commons.exceptions.IllegalValueException;
+import seedu.job.commons.util.JsonUtil;
+import seedu.job.model.jobapplication.JobApplication;
 
 public class JsonSerializableJobApplicationListTest {
 

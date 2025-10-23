@@ -1,13 +1,13 @@
-package seedu.address.testutil;
+package seedu.job.testutil;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.logic.jobcommands.UpdateJobCommand.UpdateJobDescriptor;
-import seedu.address.model.jobapplication.JobApplication;
-import seedu.address.model.tag.Tag;
+import seedu.job.logic.jobcommands.UpdateJobCommand.UpdateJobDescriptor;
+import seedu.job.model.jobapplication.JobApplication;
+import seedu.job.model.tag.Tag;
 
 /**
  * A utility class to help with building UpdateJobDescriptor objects.

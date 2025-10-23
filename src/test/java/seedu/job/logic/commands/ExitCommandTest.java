@@ -1,11 +1,11 @@
-package seedu.address.logic.commands;
+package seedu.job.logic.commands;
 
-import static seedu.address.logic.jobcommands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
+import static seedu.job.logic.jobcommands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.jobapplication.Model;
-import seedu.address.model.jobapplication.ModelManager;
+import seedu.job.model.jobapplication.Model;
+import seedu.job.model.jobapplication.ModelManager;
 
 public class ExitCommandTest {
     private Model model = new ModelManager();

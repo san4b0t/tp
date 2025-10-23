@@ -1,7 +1,7 @@
-package seedu.address.model.jobapplication;
+package seedu.job.model.jobapplication;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.job.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
@@ -10,10 +10,10 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.jobapplication.sort.SortField;
-import seedu.address.model.jobapplication.sort.SortOrder;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.job.model.jobapplication.sort.SortField;
+import seedu.job.model.jobapplication.sort.SortOrder;
+import seedu.job.model.person.exceptions.DuplicatePersonException;
+import seedu.job.model.person.exceptions.PersonNotFoundException;
 
 
 /**

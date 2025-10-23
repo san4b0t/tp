@@ -1,9 +1,9 @@
-package seedu.address.logic.parser;
+package seedu.job.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import seedu.address.logic.jobcommands.Command;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.job.logic.jobcommands.Command;
+import seedu.job.logic.parser.exceptions.ParseException;
 
 
 /**

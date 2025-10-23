@@ -1,14 +1,14 @@
-package seedu.address.logic;
+package seedu.job.logic;
 
 import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.jobcommands.CommandResult;
-import seedu.address.logic.jobcommands.exceptions.JobCommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.jobapplication.JobApplication;
-import seedu.address.model.jobapplication.ReadOnlyJobBook;
+import seedu.job.commons.core.GuiSettings;
+import seedu.job.logic.jobcommands.CommandResult;
+import seedu.job.logic.jobcommands.exceptions.JobCommandException;
+import seedu.job.logic.parser.exceptions.ParseException;
+import seedu.job.model.jobapplication.JobApplication;
+import seedu.job.model.jobapplication.ReadOnlyJobBook;
 
 /**
  * API of the Logic component
@@ -26,7 +26,7 @@ public interface Logic {
     /**
      * Returns the AddressBook.
      *
-     * @see seedu.address.model.Model#getAddressBook()
+     * @see seedu.job.model.Model#getAddressBook()
      */
     ReadOnlyJobBook getJobBook();
 

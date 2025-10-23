@@ -1,15 +1,15 @@
-package seedu.address.logic.parser;
+package seedu.job.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.job.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.jobcommands.UntagJobCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.tag.Tag;
+import seedu.job.commons.core.index.Index;
+import seedu.job.logic.jobcommands.UntagJobCommand;
+import seedu.job.logic.parser.exceptions.ParseException;
+import seedu.job.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new UntagJobCommand object

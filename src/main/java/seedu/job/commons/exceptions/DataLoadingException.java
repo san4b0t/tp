@@ -1,4 +1,4 @@
-package seedu.address.commons.exceptions;
+package seedu.job.commons.exceptions;
 
 /**
  * Represents an error during loading of data from a file.

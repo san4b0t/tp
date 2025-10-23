@@ -1,4 +1,4 @@
-package seedu.address.logic.jobcommands;
+package seedu.job.logic.jobcommands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -11,12 +11,12 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.jobapplication.JobApplication;
-import seedu.address.model.jobapplication.JobBook;
-import seedu.address.model.jobapplication.Model;
-import seedu.address.model.jobapplication.ModelManager;
-import seedu.address.model.jobapplication.UserPrefs;
-import seedu.address.model.tag.Tag;
+import seedu.job.model.jobapplication.JobApplication;
+import seedu.job.model.jobapplication.JobBook;
+import seedu.job.model.jobapplication.Model;
+import seedu.job.model.jobapplication.ModelManager;
+import seedu.job.model.jobapplication.UserPrefs;
+import seedu.job.model.tag.Tag;
 
 /**
  * Contains unit tests for FilterCommand.

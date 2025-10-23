@@ -1,5 +1,5 @@
 
-package seedu.address.logic.commands;
+package seedu.job.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

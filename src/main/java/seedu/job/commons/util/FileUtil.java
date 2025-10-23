@@ -1,4 +1,4 @@
-package seedu.address.commons.util;
+package seedu.job.commons.util;
 
 import java.io.IOException;
 import java.nio.file.Files;

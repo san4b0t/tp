@@ -1,23 +1,23 @@
-package seedu.address.logic.parser;
+package seedu.job.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.jobapplication.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
+import static seedu.job.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.job.model.jobapplication.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import seedu.address.logic.jobcommands.FilterCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.jobapplication.DeadlinePredicate;
-import seedu.address.model.jobapplication.JobApplication;
-import seedu.address.model.jobapplication.RoleContainsKeywordPredicate;
-import seedu.address.model.jobapplication.StatusMatchesKeywordPredicate;
-import seedu.address.model.jobapplication.TagsContainKeywordPredicate;
+import seedu.job.logic.jobcommands.FilterCommand;
+import seedu.job.logic.parser.exceptions.ParseException;
+import seedu.job.model.jobapplication.DeadlinePredicate;
+import seedu.job.model.jobapplication.JobApplication;
+import seedu.job.model.jobapplication.RoleContainsKeywordPredicate;
+import seedu.job.model.jobapplication.StatusMatchesKeywordPredicate;
+import seedu.job.model.jobapplication.TagsContainKeywordPredicate;
 
 
 /**

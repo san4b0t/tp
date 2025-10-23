@@ -1,4 +1,4 @@
-package seedu.address.logic;
+package seedu.job.logic;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -6,17 +6,17 @@ import java.nio.file.Path;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.jobcommands.Command;
-import seedu.address.logic.jobcommands.CommandResult;
-import seedu.address.logic.jobcommands.exceptions.JobCommandException;
-import seedu.address.logic.parser.JobBookCommandParser;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.jobapplication.JobApplication;
-import seedu.address.model.jobapplication.Model;
-import seedu.address.model.jobapplication.ReadOnlyJobBook;
-import seedu.address.storage.DataStorage;
+import seedu.job.commons.core.GuiSettings;
+import seedu.job.commons.core.LogsCenter;
+import seedu.job.logic.jobcommands.Command;
+import seedu.job.logic.jobcommands.CommandResult;
+import seedu.job.logic.jobcommands.exceptions.JobCommandException;
+import seedu.job.logic.parser.JobBookCommandParser;
+import seedu.job.logic.parser.exceptions.ParseException;
+import seedu.job.model.jobapplication.JobApplication;
+import seedu.job.model.jobapplication.Model;
+import seedu.job.model.jobapplication.ReadOnlyJobBook;
+import seedu.job.storage.DataStorage;
 
 /**
  * The main LogicManager of the app.

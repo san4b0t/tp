@@ -1,12 +1,12 @@
-package seedu.address.logic.parser;
+package seedu.job.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.job.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 
-import seedu.address.logic.jobcommands.FindCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.jobapplication.NameContainsKeywordsPredicate;
+import seedu.job.logic.jobcommands.FindCommand;
+import seedu.job.logic.parser.exceptions.ParseException;
+import seedu.job.model.jobapplication.NameContainsKeywordsPredicate;
 
 
 /**

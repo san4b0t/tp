@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.job.ui;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.jobapplication.JobApplication;
+import seedu.job.model.jobapplication.JobApplication;
 
 /**
  * An UI component that displays information of a {@code JobApplication}.

@@ -1,12 +1,12 @@
-package seedu.address.logic.jobcommands;
+package seedu.job.logic.jobcommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.jobapplication.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.job.model.jobapplication.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -15,14 +15,14 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.JobMessages;
-import seedu.address.logic.jobcommands.exceptions.JobCommandException;
-import seedu.address.model.jobapplication.JobApplication;
-import seedu.address.model.jobapplication.Model;
-import seedu.address.model.tag.Tag;
+import seedu.job.commons.core.index.Index;
+import seedu.job.commons.util.CollectionUtil;
+import seedu.job.commons.util.ToStringBuilder;
+import seedu.job.logic.JobMessages;
+import seedu.job.logic.jobcommands.exceptions.JobCommandException;
+import seedu.job.model.jobapplication.JobApplication;
+import seedu.job.model.jobapplication.Model;
+import seedu.job.model.tag.Tag;
 
 /**
  * Updates the details of an existing job application in the job book.

@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.job.storage;
 
 import static java.util.Objects.requireNonNull;
 
@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.FileUtil;
-import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.jobapplication.JobApplication;
+import seedu.job.commons.core.LogsCenter;
+import seedu.job.commons.exceptions.DataLoadingException;
+import seedu.job.commons.exceptions.IllegalValueException;
+import seedu.job.commons.util.FileUtil;
+import seedu.job.commons.util.JsonUtil;
+import seedu.job.model.jobapplication.JobApplication;
 
 /**
  * A class to access Job Application data stored as a csv file on the hard disk.

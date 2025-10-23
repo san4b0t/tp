@@ -1,16 +1,16 @@
-package seedu.address.logic.commands;
+package seedu.job.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.job.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.job.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.job.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.job.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
+import seedu.job.model.Model;
+import seedu.job.model.ModelManager;
+import seedu.job.model.UserPrefs;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.

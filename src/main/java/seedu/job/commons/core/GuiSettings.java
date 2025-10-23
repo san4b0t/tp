@@ -1,10 +1,10 @@
-package seedu.address.commons.core;
+package seedu.job.commons.core;
 
 import java.awt.Point;
 import java.io.Serializable;
 import java.util.Objects;
 
-import seedu.address.commons.util.ToStringBuilder;
+import seedu.job.commons.util.ToStringBuilder;
 
 /**
  * A Serializable class that contains the GUI settings.

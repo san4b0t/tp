@@ -1,4 +1,4 @@
-package seedu.address.commons.core;
+package seedu.job.commons.core;
 
 import static java.util.Objects.requireNonNull;
 

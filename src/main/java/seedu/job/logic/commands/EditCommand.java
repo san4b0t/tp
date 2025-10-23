@@ -1,12 +1,12 @@
-package seedu.address.logic.commands;
+package seedu.job.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.job.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -15,18 +15,18 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.job.commons.core.index.Index;
+import seedu.job.commons.util.CollectionUtil;
+import seedu.job.commons.util.ToStringBuilder;
+import seedu.job.logic.Messages;
+import seedu.job.logic.commands.exceptions.CommandException;
+import seedu.job.model.Model;
+import seedu.job.model.person.Address;
+import seedu.job.model.person.Email;
+import seedu.job.model.person.Name;
+import seedu.job.model.person.Person;
+import seedu.job.model.person.Phone;
+import seedu.job.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.

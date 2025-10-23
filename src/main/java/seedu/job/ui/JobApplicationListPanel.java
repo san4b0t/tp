@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.job.ui;
 
 import java.util.logging.Logger;
 
@@ -7,8 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.jobapplication.JobApplication;
+import seedu.job.commons.core.LogsCenter;
+import seedu.job.model.jobapplication.JobApplication;
 
 /**
  * Panel containing the list of job application.

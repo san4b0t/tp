@@ -1,4 +1,4 @@
-package seedu.address.logic.jobcommands;
+package seedu.job.logic.jobcommands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -14,19 +14,19 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.jobcommands.exceptions.JobCommandException;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.jobapplication.JobApplication;
-import seedu.address.model.jobapplication.JobBook;
-import seedu.address.model.jobapplication.Model;
-import seedu.address.model.jobapplication.ReadOnlyJobBook;
-import seedu.address.model.jobapplication.ReadOnlyUserPrefs;
-import seedu.address.model.jobapplication.sort.SortField;
-import seedu.address.model.jobapplication.sort.SortOrder;
-import seedu.address.model.tag.Tag;
+import seedu.job.commons.core.GuiSettings;
+import seedu.job.commons.core.index.Index;
+import seedu.job.logic.jobcommands.exceptions.JobCommandException;
+import seedu.job.logic.parser.ParserUtil;
+import seedu.job.logic.parser.exceptions.ParseException;
+import seedu.job.model.jobapplication.JobApplication;
+import seedu.job.model.jobapplication.JobBook;
+import seedu.job.model.jobapplication.Model;
+import seedu.job.model.jobapplication.ReadOnlyJobBook;
+import seedu.job.model.jobapplication.ReadOnlyUserPrefs;
+import seedu.job.model.jobapplication.sort.SortField;
+import seedu.job.model.jobapplication.sort.SortOrder;
+import seedu.job.model.tag.Tag;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for TagJobCommand.

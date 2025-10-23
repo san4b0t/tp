@@ -1,12 +1,12 @@
-package seedu.address.logic.jobcommands;
+package seedu.job.logic.jobcommands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.JobMessages;
-import seedu.address.logic.jobcommands.exceptions.JobCommandException;
-import seedu.address.model.jobapplication.JobApplication;
-import seedu.address.model.jobapplication.Model;
+import seedu.job.commons.util.ToStringBuilder;
+import seedu.job.logic.JobMessages;
+import seedu.job.logic.jobcommands.exceptions.JobCommandException;
+import seedu.job.model.jobapplication.JobApplication;
+import seedu.job.model.jobapplication.Model;
 
 /**
  * Adds a job application to the job book.

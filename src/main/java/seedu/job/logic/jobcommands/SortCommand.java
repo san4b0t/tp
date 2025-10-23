@@ -1,11 +1,11 @@
-package seedu.address.logic.jobcommands;
+package seedu.job.logic.jobcommands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.logic.jobcommands.exceptions.JobCommandException;
-import seedu.address.model.jobapplication.Model;
-import seedu.address.model.jobapplication.sort.SortField;
-import seedu.address.model.jobapplication.sort.SortOrder;
+import seedu.job.logic.jobcommands.exceptions.JobCommandException;
+import seedu.job.model.jobapplication.Model;
+import seedu.job.model.jobapplication.sort.SortField;
+import seedu.job.model.jobapplication.sort.SortOrder;
 
 /**
  * Represents a command that deletes a job identified by the index number of the job in the list.

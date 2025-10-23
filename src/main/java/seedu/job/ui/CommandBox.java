@@ -1,12 +1,12 @@
-package seedu.address.ui;
+package seedu.job.ui;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
-import seedu.address.logic.jobcommands.CommandResult;
-import seedu.address.logic.jobcommands.exceptions.JobCommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.job.logic.jobcommands.CommandResult;
+import seedu.job.logic.jobcommands.exceptions.JobCommandException;
+import seedu.job.logic.parser.exceptions.ParseException;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -77,7 +77,7 @@ public class CommandBox extends UiPart<Region> {
         /**
          * Executes the command and returns the result.
          *
-         * @see seedu.address.logic.Logic#execute(String)
+         * @see seedu.job.logic.Logic#execute(String)
          */
         CommandResult execute(String commandText) throws ParseException, JobCommandException;
     }

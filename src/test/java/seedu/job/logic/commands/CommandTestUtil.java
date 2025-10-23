@@ -1,25 +1,25 @@
-package seedu.address.logic.commands;
+package seedu.job.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.job.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.job.commons.core.index.Index;
+import seedu.job.logic.commands.exceptions.CommandException;
+import seedu.job.model.AddressBook;
+import seedu.job.model.Model;
+import seedu.job.model.person.NameContainsKeywordsPredicate;
+import seedu.job.model.person.Person;
+import seedu.job.testutil.EditPersonDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.

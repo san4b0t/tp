@@ -1,13 +1,13 @@
-package seedu.address.logic.jobcommands;
+package seedu.job.logic.jobcommands;
 
 import static java.util.Objects.requireNonNull;
 
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
-import seedu.address.model.jobapplication.JobApplication;
-import seedu.address.model.jobapplication.Model;
+import seedu.job.commons.util.ToStringBuilder;
+import seedu.job.logic.Messages;
+import seedu.job.model.jobapplication.JobApplication;
+import seedu.job.model.jobapplication.Model;
 
 /**
  * Represents a command that filters and lists all job applications

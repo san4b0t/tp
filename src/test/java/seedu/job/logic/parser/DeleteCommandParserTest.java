@@ -1,13 +1,13 @@
-package seedu.address.logic.parser;
+package seedu.job.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.JobCommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.JobCommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_APPLICATION;
+import static seedu.job.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.job.logic.parser.JobCommandParserTestUtil.assertParseFailure;
+import static seedu.job.logic.parser.JobCommandParserTestUtil.assertParseSuccess;
+import static seedu.job.testutil.TypicalIndexes.INDEX_FIRST_APPLICATION;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.jobcommands.DeleteJobCommand;
+import seedu.job.logic.jobcommands.DeleteJobCommand;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations

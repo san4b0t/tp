@@ -1,8 +1,8 @@
-package seedu.address.storage;
+package seedu.job.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.storage.SerializableJobApplication.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.job.storage.SerializableJobApplication.MISSING_FIELD_MESSAGE_FORMAT;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,9 +11,9 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.jobapplication.JobApplication;
-import seedu.address.model.tag.Tag;
+import seedu.job.commons.exceptions.IllegalValueException;
+import seedu.job.model.jobapplication.JobApplication;
+import seedu.job.model.tag.Tag;
 
 public class SerializableJobApplicationTest {
 

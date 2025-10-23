@@ -1,4 +1,4 @@
-package seedu.address.model.jobapplication.sort;
+package seedu.job.model.jobapplication.sort;
 
 
 /**

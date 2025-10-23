@@ -1,18 +1,18 @@
-package seedu.address.testutil;
+package seedu.job.testutil;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.job.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.time.format.DateTimeFormatter;
 // import java.util.Set;
 
-import seedu.address.logic.commands.AddCommand;
-// import seedu.address.logic.commands.EditCommand.EditJobApplicationDescriptor;
-import seedu.address.model.jobapplication.JobApplication;
-// import seedu.address.model.tag.Tag;
+import seedu.job.logic.commands.AddCommand;
+// import seedu.job.logic.commands.EditCommand.EditJobApplicationDescriptor;
+import seedu.job.model.jobapplication.JobApplication;
+// import seedu.job.model.tag.Tag;
 
 /**
  * A utility class for JobApplication.

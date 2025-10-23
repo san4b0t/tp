@@ -1,7 +1,7 @@
-package seedu.address.model.tag;
+package seedu.job.model.tag;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.job.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Tag in JobApplication.

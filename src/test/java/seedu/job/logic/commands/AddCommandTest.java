@@ -1,11 +1,11 @@
-package seedu.address.logic.commands;
+package seedu.job.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.job.testutil.Assert.assertThrows;
+import static seedu.job.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -15,15 +15,15 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.job.commons.core.GuiSettings;
+import seedu.job.logic.Messages;
+import seedu.job.logic.commands.exceptions.CommandException;
+import seedu.job.model.AddressBook;
+import seedu.job.model.Model;
+import seedu.job.model.ReadOnlyAddressBook;
+import seedu.job.model.ReadOnlyUserPrefs;
+import seedu.job.model.person.Person;
+import seedu.job.testutil.PersonBuilder;
 
 public class AddCommandTest {
 

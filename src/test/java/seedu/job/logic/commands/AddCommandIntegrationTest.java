@@ -1,18 +1,18 @@
-package seedu.address.logic.commands;
+package seedu.job.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.job.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.job.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.job.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.job.logic.Messages;
+import seedu.job.model.Model;
+import seedu.job.model.ModelManager;
+import seedu.job.model.UserPrefs;
+import seedu.job.model.person.Person;
+import seedu.job.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.

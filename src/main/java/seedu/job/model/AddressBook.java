@@ -1,13 +1,13 @@
-package seedu.address.model;
+package seedu.job.model;
 
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
+import seedu.job.commons.util.ToStringBuilder;
+import seedu.job.model.person.Person;
+import seedu.job.model.person.UniquePersonList;
 
 /**
  * Wraps all data at the address-book level

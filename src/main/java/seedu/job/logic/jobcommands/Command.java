@@ -1,7 +1,7 @@
-package seedu.address.logic.jobcommands;
+package seedu.job.logic.jobcommands;
 
-import seedu.address.logic.jobcommands.exceptions.JobCommandException;
-import seedu.address.model.jobapplication.Model;
+import seedu.job.logic.jobcommands.exceptions.JobCommandException;
+import seedu.job.model.jobapplication.Model;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.

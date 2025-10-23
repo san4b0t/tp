@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.job.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -13,9 +13,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.jobapplication.JobApplication;
-import seedu.address.model.jobapplication.UserPrefs;
+import seedu.job.commons.core.GuiSettings;
+import seedu.job.model.jobapplication.JobApplication;
+import seedu.job.model.jobapplication.UserPrefs;
 
 public class DataStorageManagerTest {
 

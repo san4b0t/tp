@@ -1,14 +1,14 @@
-package seedu.address.model.jobapplication;
+package seedu.job.model.jobapplication;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.job.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import seedu.job.commons.util.ToStringBuilder;
+import seedu.job.model.tag.Tag;
 
 /**
  * Represents a Job Application.

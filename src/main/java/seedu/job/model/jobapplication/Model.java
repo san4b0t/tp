@@ -1,12 +1,12 @@
-package seedu.address.model.jobapplication;
+package seedu.job.model.jobapplication;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.jobapplication.sort.SortField;
-import seedu.address.model.jobapplication.sort.SortOrder;
+import seedu.job.commons.core.GuiSettings;
+import seedu.job.model.jobapplication.sort.SortField;
+import seedu.job.model.jobapplication.sort.SortOrder;
 
 
 /**

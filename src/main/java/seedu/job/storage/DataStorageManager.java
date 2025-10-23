@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.job.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.jobapplication.JobApplication;
-import seedu.address.model.jobapplication.ReadOnlyUserPrefs;
-import seedu.address.model.jobapplication.UserPrefs;
+import seedu.job.commons.core.LogsCenter;
+import seedu.job.commons.exceptions.DataLoadingException;
+import seedu.job.model.jobapplication.JobApplication;
+import seedu.job.model.jobapplication.ReadOnlyUserPrefs;
+import seedu.job.model.jobapplication.UserPrefs;
 
 /**
  * Manages storage of Job Application data in local storage.

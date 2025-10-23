@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.job.storage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.jobapplication.JobApplication;
+import seedu.job.commons.exceptions.IllegalValueException;
+import seedu.job.model.jobapplication.JobApplication;
 
 /**
  * Represents a list of job applications that can be serialized to JSON format.

@@ -1,8 +1,8 @@
-package seedu.address.storage;
+package seedu.job.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.job.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -12,9 +12,9 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.jobapplication.UserPrefs;
+import seedu.job.commons.core.GuiSettings;
+import seedu.job.commons.exceptions.DataLoadingException;
+import seedu.job.model.jobapplication.UserPrefs;
 
 public class JsonUserPrefsStorageTest {
 

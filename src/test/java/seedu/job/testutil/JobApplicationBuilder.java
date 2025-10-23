@@ -1,13 +1,13 @@
-package seedu.address.testutil;
+package seedu.job.testutil;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.jobapplication.JobApplication;
-import seedu.address.model.jobapplication.JobApplication.Status;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
+import seedu.job.model.jobapplication.JobApplication;
+import seedu.job.model.jobapplication.JobApplication.Status;
+import seedu.job.model.tag.Tag;
+import seedu.job.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building JobApplication objects.

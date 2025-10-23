@@ -1,16 +1,16 @@
-package seedu.address.logic.parser;
+package seedu.job.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_APPLICATION;
+import static seedu.job.testutil.TypicalIndexes.INDEX_FIRST_APPLICATION;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.jobcommands.AddJobCommand;
-import seedu.address.logic.jobcommands.DeleteJobCommand;
-import seedu.address.model.jobapplication.JobApplication;
+import seedu.job.logic.jobcommands.AddJobCommand;
+import seedu.job.logic.jobcommands.DeleteJobCommand;
+import seedu.job.model.jobapplication.JobApplication;
 
 public class JobBookCommandParserTest {
     private final JobBookCommandParser parser = new JobBookCommandParser();

@@ -1,6 +1,6 @@
-package seedu.address.logic.jobcommands;
+package seedu.job.logic.jobcommands;
 
-import seedu.address.model.jobapplication.Model;
+import seedu.job.model.jobapplication.Model;
 
 /**
  * Saves the current state of data in HustleHub

@@ -1,11 +1,11 @@
-package seedu.address.logic.jobcommands;
+package seedu.job.logic.jobcommands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_JOB;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_JOB;
+import static seedu.job.testutil.TypicalIndexes.INDEX_FIRST_JOB;
+import static seedu.job.testutil.TypicalIndexes.INDEX_SECOND_JOB;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -13,13 +13,13 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.jobcommands.UpdateJobCommand.UpdateJobDescriptor;
-import seedu.address.logic.jobcommands.exceptions.JobCommandException;
-import seedu.address.model.jobapplication.JobApplication;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.JobApplicationBuilder;
-import seedu.address.testutil.UpdateJobDescriptorBuilder;
+import seedu.job.commons.core.index.Index;
+import seedu.job.logic.jobcommands.UpdateJobCommand.UpdateJobDescriptor;
+import seedu.job.logic.jobcommands.exceptions.JobCommandException;
+import seedu.job.model.jobapplication.JobApplication;
+import seedu.job.model.tag.Tag;
+import seedu.job.testutil.JobApplicationBuilder;
+import seedu.job.testutil.UpdateJobDescriptorBuilder;
 
 /**
  * Contains integration tests and unit tests for UpdateJobCommand.
@@ -45,7 +45,7 @@ public class UpdateJobCommandTest {
         CommandResult commandResult = updateJobCommand.execute(modelStub);
 
         assertEquals(String.format(UpdateJobCommand.MESSAGE_UPDATE_JOB_SUCCESS,
-                seedu.address.logic.JobMessages.format(updatedJob)), commandResult.getFeedbackToUser());
+                seedu.job.logic.JobMessages.format(updatedJob)), commandResult.getFeedbackToUser());
     }
 
     @Test
@@ -186,24 +186,24 @@ public class UpdateJobCommandTest {
     /**
      * A default model stub that has all of the methods failing.
      */
-    private class ModelStub implements seedu.address.model.jobapplication.Model {
+    private class ModelStub implements seedu.job.model.jobapplication.Model {
         @Override
-        public void setUserPrefs(seedu.address.model.jobapplication.ReadOnlyUserPrefs userPrefs) {
+        public void setUserPrefs(seedu.job.model.jobapplication.ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public seedu.address.model.jobapplication.ReadOnlyUserPrefs getUserPrefs() {
+        public seedu.job.model.jobapplication.ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public seedu.address.commons.core.GuiSettings getGuiSettings() {
+        public seedu.job.commons.core.GuiSettings getGuiSettings() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setGuiSettings(seedu.address.commons.core.GuiSettings guiSettings) {
+        public void setGuiSettings(seedu.job.commons.core.GuiSettings guiSettings) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -218,12 +218,12 @@ public class UpdateJobCommandTest {
         }
 
         @Override
-        public void setJobBook(seedu.address.model.jobapplication.ReadOnlyJobBook jobBook) {
+        public void setJobBook(seedu.job.model.jobapplication.ReadOnlyJobBook jobBook) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public seedu.address.model.jobapplication.ReadOnlyJobBook getJobBook() {
+        public seedu.job.model.jobapplication.ReadOnlyJobBook getJobBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -238,8 +238,8 @@ public class UpdateJobCommandTest {
         }
 
         @Override
-        public void sortJobApplication(seedu.address.model.jobapplication.sort.SortField field,
-                                        seedu.address.model.jobapplication.sort.SortOrder order) {
+        public void sortJobApplication(seedu.job.model.jobapplication.sort.SortField field,
+                                        seedu.job.model.jobapplication.sort.SortOrder order) {
             throw new AssertionError("This method should not be called.");
         }
 

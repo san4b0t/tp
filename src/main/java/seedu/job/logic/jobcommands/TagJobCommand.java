@@ -1,19 +1,19 @@
-package seedu.address.logic.jobcommands;
+package seedu.job.logic.jobcommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.jobapplication.JobApplication.MAX_TAGS;
-import static seedu.address.model.jobapplication.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
+import static seedu.job.model.jobapplication.JobApplication.MAX_TAGS;
+import static seedu.job.model.jobapplication.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
 
 import java.util.List;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.JobMessages;
-import seedu.address.logic.jobcommands.exceptions.JobCommandException;
-import seedu.address.model.jobapplication.JobApplication;
-import seedu.address.model.jobapplication.Model;
-import seedu.address.model.tag.Tag;
+import seedu.job.commons.core.index.Index;
+import seedu.job.commons.util.ToStringBuilder;
+import seedu.job.logic.JobMessages;
+import seedu.job.logic.jobcommands.exceptions.JobCommandException;
+import seedu.job.model.jobapplication.JobApplication;
+import seedu.job.model.jobapplication.Model;
+import seedu.job.model.tag.Tag;
 
 /**
  * Tags a job application with a number of short tags.

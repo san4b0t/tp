@@ -1,12 +1,12 @@
-package seedu.address.logic.parser;
+package seedu.job.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.job.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.address.logic.jobcommands.SortCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.jobapplication.sort.SortField;
-import seedu.address.model.jobapplication.sort.SortOrder;
+import seedu.job.logic.jobcommands.SortCommand;
+import seedu.job.logic.parser.exceptions.ParseException;
+import seedu.job.model.jobapplication.sort.SortField;
+import seedu.job.model.jobapplication.sort.SortOrder;
 
 /**
  * Parses input arguments and creates a new {@link SortCommand} object.

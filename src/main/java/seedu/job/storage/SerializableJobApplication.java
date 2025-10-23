@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.job.storage;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.jobapplication.JobApplication;
-import seedu.address.model.tag.Tag;
+import seedu.job.commons.exceptions.IllegalValueException;
+import seedu.job.model.jobapplication.JobApplication;
+import seedu.job.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link JobApplication}.

@@ -1,11 +1,11 @@
-package seedu.address.logic;
+package seedu.job.logic;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.logic.parser.Prefix;
-import seedu.address.model.jobapplication.JobApplication;
+import seedu.job.logic.parser.Prefix;
+import seedu.job.model.jobapplication.JobApplication;
 
 
 /**

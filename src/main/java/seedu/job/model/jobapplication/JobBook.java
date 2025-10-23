@@ -1,12 +1,12 @@
-package seedu.address.model.jobapplication;
+package seedu.job.model.jobapplication;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.jobapplication.sort.SortField;
-import seedu.address.model.jobapplication.sort.SortOrder;
+import seedu.job.commons.util.ToStringBuilder;
+import seedu.job.model.jobapplication.sort.SortField;
+import seedu.job.model.jobapplication.sort.SortOrder;
 
 /**
  * Wraps all data at the address-book level

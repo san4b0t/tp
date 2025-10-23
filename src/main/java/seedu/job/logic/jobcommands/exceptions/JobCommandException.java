@@ -1,4 +1,4 @@
-package seedu.address.logic.jobcommands.exceptions;
+package seedu.job.logic.jobcommands.exceptions;
 
 /**
  * Represents an error which occurs during execution of a {@link jobCommand}.

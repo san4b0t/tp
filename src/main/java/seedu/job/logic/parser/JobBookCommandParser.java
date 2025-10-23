@@ -1,24 +1,24 @@
-package seedu.address.logic.parser;
+package seedu.job.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.job.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.jobcommands.AddJobCommand;
-import seedu.address.logic.jobcommands.Command;
-import seedu.address.logic.jobcommands.DeleteJobCommand;
-import seedu.address.logic.jobcommands.ExitCommand;
-import seedu.address.logic.jobcommands.FilterCommand;
-import seedu.address.logic.jobcommands.FindCommand;
-import seedu.address.logic.jobcommands.SaveCommand;
-import seedu.address.logic.jobcommands.SortCommand;
-import seedu.address.logic.jobcommands.TagJobCommand;
-import seedu.address.logic.jobcommands.UntagJobCommand;
-import seedu.address.logic.jobcommands.UpdateJobCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.job.commons.core.LogsCenter;
+import seedu.job.logic.jobcommands.AddJobCommand;
+import seedu.job.logic.jobcommands.Command;
+import seedu.job.logic.jobcommands.DeleteJobCommand;
+import seedu.job.logic.jobcommands.ExitCommand;
+import seedu.job.logic.jobcommands.FilterCommand;
+import seedu.job.logic.jobcommands.FindCommand;
+import seedu.job.logic.jobcommands.SaveCommand;
+import seedu.job.logic.jobcommands.SortCommand;
+import seedu.job.logic.jobcommands.TagJobCommand;
+import seedu.job.logic.jobcommands.UntagJobCommand;
+import seedu.job.logic.jobcommands.UpdateJobCommand;
+import seedu.job.logic.parser.exceptions.ParseException;
 
 /**
  * Parses user input.

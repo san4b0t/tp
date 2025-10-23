@@ -1,4 +1,4 @@
-package seedu.address.commons.util;
+package seedu.job.commons.util;
 
 /**
  * Builds a string representation of an object that is suitable as the return value of {@link Object#toString()}.

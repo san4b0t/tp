@@ -1,4 +1,4 @@
-package seedu.address;
+package seedu.job;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -8,29 +8,29 @@ import java.util.logging.Logger;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import seedu.address.commons.core.Config;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.core.Version;
-import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.commons.util.ConfigUtil;
-import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.Logic;
-import seedu.address.logic.LogicManager;
-import seedu.address.model.jobapplication.JobApplication;
-import seedu.address.model.jobapplication.JobBook;
-import seedu.address.model.jobapplication.Model;
-import seedu.address.model.jobapplication.ModelManager;
-import seedu.address.model.jobapplication.ReadOnlyJobBook;
-import seedu.address.model.jobapplication.ReadOnlyUserPrefs;
-import seedu.address.model.jobapplication.UserPrefs;
-import seedu.address.storage.DataStorage;
-import seedu.address.storage.DataStorageManager;
-import seedu.address.storage.JobApplicationStorage;
-import seedu.address.storage.JsonJobApplicationStorage;
-import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.UserPrefsStorage;
-import seedu.address.ui.Ui;
-import seedu.address.ui.UiManager;
+import seedu.job.commons.core.Config;
+import seedu.job.commons.core.LogsCenter;
+import seedu.job.commons.core.Version;
+import seedu.job.commons.exceptions.DataLoadingException;
+import seedu.job.commons.util.ConfigUtil;
+import seedu.job.commons.util.StringUtil;
+import seedu.job.logic.Logic;
+import seedu.job.logic.LogicManager;
+import seedu.job.model.jobapplication.JobApplication;
+import seedu.job.model.jobapplication.JobBook;
+import seedu.job.model.jobapplication.Model;
+import seedu.job.model.jobapplication.ModelManager;
+import seedu.job.model.jobapplication.ReadOnlyJobBook;
+import seedu.job.model.jobapplication.ReadOnlyUserPrefs;
+import seedu.job.model.jobapplication.UserPrefs;
+import seedu.job.storage.DataStorage;
+import seedu.job.storage.DataStorageManager;
+import seedu.job.storage.JobApplicationStorage;
+import seedu.job.storage.JsonJobApplicationStorage;
+import seedu.job.storage.JsonUserPrefsStorage;
+import seedu.job.storage.UserPrefsStorage;
+import seedu.job.ui.Ui;
+import seedu.job.ui.UiManager;
 
 /**
  * Runs the application.

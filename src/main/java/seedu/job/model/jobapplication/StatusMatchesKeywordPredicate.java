@@ -1,8 +1,8 @@
-package seedu.address.model.jobapplication;
+package seedu.job.model.jobapplication;
 
 import java.util.function.Predicate;
 
-import seedu.address.model.jobapplication.JobApplication.Status;
+import seedu.job.model.jobapplication.JobApplication.Status;
 
 /**
  * A predicate that tests whether a JobApplication's status matches a specified status.

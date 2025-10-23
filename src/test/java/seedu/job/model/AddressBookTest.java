@@ -1,13 +1,13 @@
-package seedu.address.model;
+package seedu.job.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.job.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.job.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.job.testutil.Assert.assertThrows;
+import static seedu.job.testutil.TypicalPersons.ALICE;
+import static seedu.job.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,9 +18,9 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.job.model.person.Person;
+import seedu.job.model.person.exceptions.DuplicatePersonException;
+import seedu.job.testutil.PersonBuilder;
 
 public class AddressBookTest {
 

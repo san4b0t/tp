@@ -1,4 +1,4 @@
-package seedu.address.logic;
+package seedu.job.logic;
 
 import java.nio.file.Path;
 
@@ -6,12 +6,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.model.jobapplication.Model;
-import seedu.address.model.jobapplication.ModelManager;
-import seedu.address.storage.DataStorageManager;
-import seedu.address.storage.JsonJobApplicationStorage;
-import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.job.logic.commands.ListCommand;
+import seedu.job.model.jobapplication.Model;
+import seedu.job.model.jobapplication.ModelManager;
+import seedu.job.storage.DataStorageManager;
+import seedu.job.storage.JsonJobApplicationStorage;
+import seedu.job.storage.JsonUserPrefsStorage;
 
 public class LogicManagerTest {
 

@@ -1,9 +1,9 @@
-package seedu.address.logic.commands;
+package seedu.job.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
+import seedu.job.model.AddressBook;
+import seedu.job.model.Model;
 
 /**
  * Clears the address book.

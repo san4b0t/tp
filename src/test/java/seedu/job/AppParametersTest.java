@@ -1,4 +1,4 @@
-package seedu.address;
+package seedu.job;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
