@@ -10,10 +10,10 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.jobapplication.sort.SortField;
-import seedu.address.model.jobapplication.sort.SortOrder;
 import seedu.address.model.jobapplication.exceptions.DuplicateJobApplicationException;
 import seedu.address.model.jobapplication.exceptions.JobApplicationNotFoundException;
+import seedu.address.model.jobapplication.sort.SortField;
+import seedu.address.model.jobapplication.sort.SortOrder;
 
 
 /**
