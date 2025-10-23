@@ -24,6 +24,8 @@ import seedu.address.model.jobapplication.JobBook;
 import seedu.address.model.jobapplication.Model;
 import seedu.address.model.jobapplication.ReadOnlyJobBook;
 import seedu.address.model.jobapplication.ReadOnlyUserPrefs;
+import seedu.address.model.jobapplication.sort.SortField;
+import seedu.address.model.jobapplication.sort.SortOrder;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -192,6 +194,11 @@ public class TagJobCommandTest {
 
         @Override
         public void deleteJobApplication(JobApplication target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortJobApplication(SortField field, SortOrder order) {
             throw new AssertionError("This method should not be called.");
         }
 
