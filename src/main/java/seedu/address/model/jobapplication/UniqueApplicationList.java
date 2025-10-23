@@ -10,10 +10,10 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.jobapplication.exceptions.DuplicateJobApplicationException;
+import seedu.address.model.jobapplication.exceptions.JobApplicationNotFoundException;
 import seedu.address.model.jobapplication.sort.SortField;
 import seedu.address.model.jobapplication.sort.SortOrder;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 
 /**
@@ -49,7 +49,7 @@ public class UniqueApplicationList implements Iterable<JobApplication> {
     public void add(JobApplication toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateJobApplicationException();
         }
         internalList.add(toAdd);
     }
@@ -65,11 +65,11 @@ public class UniqueApplicationList implements Iterable<JobApplication> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new JobApplicationNotFoundException();
         }
 
         if (!target.isSameJobApplication(editedApplication) && contains(editedApplication)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateJobApplicationException();
         }
 
         internalList.set(index, editedApplication);
@@ -82,7 +82,7 @@ public class UniqueApplicationList implements Iterable<JobApplication> {
     public void remove(JobApplication toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new JobApplicationNotFoundException();
         }
     }
 
@@ -137,7 +137,7 @@ public class UniqueApplicationList implements Iterable<JobApplication> {
     public void setJobApplications(List<JobApplication> applications) {
         requireAllNonNull(applications);
         if (!applicationsAreUnique(applications)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateJobApplicationException();
         }
 
         internalList.setAll(applications);
