@@ -1,43 +1,42 @@
-@startuml
-!include style.puml
-skinparam arrowThickness 1.1
-skinparam arrowColor STORAGE_COLOR
-skinparam classBackgroundColor STORAGE_COLOR
+@startuml Storage Component
 
-package Storage as StoragePackage {
+' Interfaces
+interface JobApplicationStorage
+interface UserPrefsStorage
+interface DataStorage
 
-package "UserPrefs Storage" #F4F6F6{
-Class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage
-Class JsonUserPrefsStorage
-}
+' Interface Relationships (Inheritance/Generalization)
+DataStorage <|-- JobApplicationStorage
+DataStorage <|-- UserPrefsStorage
 
-Class "<<interface>>\nStorage" as Storage
-Class StorageManager
+' Classes
+class JsonJobApplicationStorage
+class JsonUserPrefsStorage
+class DataStorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
-Class JsonAdaptedTag
-}
+class JsonSerializableJobApplicationList
+class SerializableJobApplication
+class JobApplication
 
-}
+' Inheritance/Realization Relationships (Dashed lines with hollow triangles)
+JobApplicationStorage <|.. JsonJobApplicationStorage
+UserPrefsStorage <|.. JsonUserPrefsStorage
+DataStorage <|-- DataStorageManager
 
-Class HiddenOutside #FFFFFF
-HiddenOutside ..> Storage
+' Dependencies/Associations
+DataStorageManager --> "1" JobApplicationStorage
+DataStorageManager --> "1" UserPrefsStorage
 
-StorageManager .up.|> Storage
-StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+' JsonJobApplicationStorage uses the serializable list
+JsonJobApplicationStorage -- JsonSerializableJobApplicationList
 
-Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+JsonSerializableJobApplicationList --- "*" SerializableJobApplication
 
-JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+' Dependency/Association (Dashed arrow) for conversion/mapping
+SerializableJobApplication .> JobApplication : deserializes >
+JsonSerializableJobApplicationList .> JobApplication : contains
+
+' Title
+footer Storage Component
 
 @enduml
