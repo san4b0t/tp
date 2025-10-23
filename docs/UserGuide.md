@@ -81,6 +81,7 @@ HustleHub is a **desktop application** for computing students keeping track of m
 | [**exit** ](#exiting-the-program--exit-exit) | Exits the program                            | `exit` |
 
 ### Application Management
+
 | Command                                          | Description                                      | Format                                                                     |
 |--------------------------------------------------|--------------------------------------------------|----------------------------------------------------------------------------|
 | [**add**](#adding-a-person-add)                  | Adds a job application to HustleHub              | `add n/COMPANY_NAME r/ROLE s/STATUS d/DEADLINE [t/TAG]…​`                  |
