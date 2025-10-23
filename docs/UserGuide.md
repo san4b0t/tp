@@ -106,11 +106,10 @@ HustleHub is a **desktop application** for computing students keeping track of m
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
 
 Result for `help`:
+![help message](images/helpMessage.png)
 
 ### Exiting the program : `exit`
 
