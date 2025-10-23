@@ -1,4 +1,4 @@
-package seedu.address.model.jobapplication.exceptions;
+package seedu.job.model.jobapplication.exceptions;
 
 /**
  * Signals that the operation will result in duplicate JobApplications (JobApplications are

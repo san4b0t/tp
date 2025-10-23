@@ -1,4 +1,4 @@
-package seedu.address.logic.jobcommands;
+package seedu.job.logic.jobcommands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -7,10 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.jobapplication.JobBook;
-import seedu.address.model.jobapplication.Model;
-import seedu.address.model.jobapplication.ModelManager;
-import seedu.address.model.jobapplication.UserPrefs;
+import seedu.job.model.jobapplication.JobBook;
+import seedu.job.model.jobapplication.Model;
+import seedu.job.model.jobapplication.ModelManager;
+import seedu.job.model.jobapplication.UserPrefs;
 
 /**
  * Contains unit tests for ExitCommand.

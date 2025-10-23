@@ -1,4 +1,4 @@
-package seedu.address.logic.jobcommands;
+package seedu.job.logic.jobcommands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -10,14 +10,14 @@ import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
-import seedu.address.model.jobapplication.JobApplication;
-import seedu.address.model.jobapplication.JobBook;
-import seedu.address.model.jobapplication.Model;
-import seedu.address.model.jobapplication.ModelManager;
-import seedu.address.model.jobapplication.NameContainsKeywordsPredicate;
-import seedu.address.model.jobapplication.UserPrefs;
-import seedu.address.testutil.JobApplicationBuilder;
+import seedu.job.logic.Messages;
+import seedu.job.model.jobapplication.JobApplication;
+import seedu.job.model.jobapplication.JobBook;
+import seedu.job.model.jobapplication.Model;
+import seedu.job.model.jobapplication.ModelManager;
+import seedu.job.model.jobapplication.NameContainsKeywordsPredicate;
+import seedu.job.model.jobapplication.UserPrefs;
+import seedu.job.testutil.JobApplicationBuilder;
 
 /**
  * Contains unit tests for FindCommand.
