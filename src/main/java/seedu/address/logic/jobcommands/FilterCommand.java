@@ -3,6 +3,8 @@ package seedu.address.logic.jobcommands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.function.Predicate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -28,6 +30,8 @@ public class FilterCommand extends Command {
             + "Parameters: FLAG [KEYWORD]... OR none\n"
             + "Example: " + COMMAND_WORD + " t/engineer, " + COMMAND_WORD + " d/2025-12-31";
 
+    private static Logger logger = Logger.getLogger("Filter");
+
     private final Predicate<JobApplication> predicate;
 
     /**
@@ -42,7 +46,9 @@ public class FilterCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        logger.log(Level.INFO, "using predicate to filter from saved job applications");
         model.updateFilteredJobApplicationList(predicate);
+        logger.log(Level.INFO, "end of filtering, return command result");
         return new CommandResult(
                 String.format(Messages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW,
                         model.getFilteredApplicationList().size()));
