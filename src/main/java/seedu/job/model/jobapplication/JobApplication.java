@@ -101,7 +101,7 @@ public class JobApplication {
     }
 
     /**
-     * Returns the a unique key for job application comparison
+     * Returns a unique key for job application comparison
      *
      * @return Job application unique key
      */
