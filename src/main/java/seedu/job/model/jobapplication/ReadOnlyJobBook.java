@@ -9,7 +9,7 @@ public interface ReadOnlyJobBook {
 
     /**
      * Returns an unmodifiable view of the JobApplication list.
-     * This list will not contain any duplicate persons.
+     * This list will not contain any duplicate job applications.
      */
     ObservableList<JobApplication> getApplicationList();
 
