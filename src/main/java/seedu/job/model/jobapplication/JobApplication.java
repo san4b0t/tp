@@ -106,7 +106,7 @@ public class JobApplication {
      * @return Job application unique key
      */
     public final String getUniqueKey() {
-        return this.companyName + this.role;
+        return this.companyName + "|" + this.role;
     }
 
     /**
