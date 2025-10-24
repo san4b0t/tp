@@ -6,7 +6,7 @@
 
 /* Container Styles */
 .card-container {
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: linear-gradient(to bottom right, #FFFFFF, #c0c0c0);
     -fx-padding: 20px;
     -fx-background-radius: 12px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 10, 0, 0, 2);
@@ -123,7 +123,6 @@
 
 /* Status Tag Styles */
 .status-tag {
-    -fx-background-color: #0078D4;
     -fx-text-fill: white;
     -fx-padding: 6px 16px;
     -fx-background-radius: 20px;
@@ -132,16 +131,37 @@
     -fx-alignment: center;
 }
 
+/* Status-specific colors */
+.status-applied {
+    -fx-background-color: #b0e794; /* Blue - newly applied */
+}
+
+.status-inprogress {
+    -fx-background-color: #F5A623; /* Orange - in progress */
+}
+
+.status-rejected {
+    -fx-background-color: #D0021B; /* Red - rejected */
+}
+
 .status-tag-container {
     -fx-padding: 4 0 0 0;
 }
 
 /* Tag Selector */
 .tag-selector {
-    -fx-border-width: 1;
-    -fx-border-radius: 12px;
+    -fx-hgap: 5px;
+    -fx-vgap: 5px;
+    -fx-padding: 5px 0px;
+}
+
+.tag-label {
+    -fx-background-color: #3e7b91;
+    -fx-text-fill: white;
+    -fx-padding: 3px 8px;
     -fx-background-radius: 12px;
-    -fx-padding: 0px 5px;
+    -fx-font-size: 11px;
+    -fx-font-weight: normal;
 }
 
 .flow-pane {
