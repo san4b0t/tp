@@ -101,6 +101,15 @@ public class JobApplication {
     }
 
     /**
+     * Returns the a unique key for job application comparison
+     *
+     * @return Job application unique key
+     */
+    public final String getUniqueKey() {
+        return this.companyName + this.role;
+    }
+
+    /**
      * Validates if we can add to the set of tags
      *
      * @return True if we can add all tags
@@ -149,8 +158,7 @@ public class JobApplication {
         }
 
         return otherJobApplication != null
-                && otherJobApplication.companyName.equals(this.companyName)
-                && otherJobApplication.role.equals(this.role);
+            && otherJobApplication.getUniqueKey().equals(this.getUniqueKey());
     }
 
     /**
