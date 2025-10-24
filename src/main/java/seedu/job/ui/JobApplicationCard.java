@@ -52,12 +52,12 @@ public class JobApplicationCard extends UiPart<Region> {
         companyName.setText(jobApplication.getCompanyName());
         role.setText(jobApplication.getRole());
         deadline.setText(jobApplication.getDeadline().format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm")));
-        
+
         // Set status text and add status-specific style class
         JobApplication.Status statusValue = jobApplication.getStatus();
         status.setText(statusValue.toString());
         status.getStyleClass().add("status-" + statusValue.toString().toLowerCase());
-        
+
         jobApplication.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> {
