@@ -79,7 +79,15 @@
     -fx-background-color: transparent;
     -fx-text-fill: #9CA3AF;
     -fx-font-size: 13px;
-    -fx-padding: 6px 8px;
+    -fx-font-family: Verdana, Arial, sans-serif;
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+}
+
+.result-display.error {
+    -fx-text-fill: #D0021B;
+    -fx-font-family: Verdana, Arial, sans-serif;
+    -fx-font-style: italic;
 }
 
 .result-display-container {
