@@ -15,11 +15,11 @@ HustleHub is a **desktop application** for computing students keeping track of m
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from this repository's [Releases](https://github.com/AY2526S1-CS2103T-T11-1/tp/releases) page.
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for HustleHub.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and run `java -jar <downloaded-jar-name>.jar` to start the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -28,7 +28,7 @@ HustleHub is a **desktop application** for computing students keeping track of m
 
    * `list` : Lists all applications.
 
-   * `add n/Microsoft r/Cloud engineer s/INPROGRESS d/2025-10-31T23:59` : Adds a application for `Microsoft` to the Application Book.
+  * `add n/Microsoft r/Cloud engineer s/INPROGRESS d/2025-10-31T23:59` : Adds an application for `Microsoft` to HustleHub.
 
    * `delete 3` : Deletes the 3rd application shown in the current list.
 
@@ -84,7 +84,7 @@ HustleHub is a **desktop application** for computing students keeping track of m
 
 | Command                                          | Description                                      | Format                                                                     |
 |--------------------------------------------------|--------------------------------------------------|----------------------------------------------------------------------------|
-| [**add**](#adding-a-person-add)                  | Adds a job application to HustleHub              | `add n/COMPANY_NAME r/ROLE s/STATUS d/DEADLINE [t/TAG]…​`                  |
+| [**add**](#adding-a-job-application-add)         | Adds a job application to HustleHub              | `add n/COMPANY_NAME r/ROLE s/STATUS d/DEADLINE [t/TAG]…​`                  |
 | [**delete**](#deleting-a-application--delete)    | Deletes a job application given its index number | `delete INDEX`                                                             |
 | [**find**](#finding-job-applications-find)       | Finds job applications by company name           | `find KEYWORD [MORE_KEYWORDS]`                                             |
 | [**filter**](#filtering-job-applications-filter) | Filters job applications by a property           | `filter FLAG/KEYWORD`                                                      |
@@ -127,29 +127,29 @@ HustleHub data is automatically saved after any command that changes the data. T
 HustleHub data is saved automatically as a JSON file `[JAR file location]/data/JobApplications.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, HustleHub will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the HustleHub to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file make its format invalid, HustleHub will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause HustleHub to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ---
 
-## General Commands
+## Application Management
 
-### Adding a person: `add`
+### Adding a job application: `add`
 
-Adds a person to the address book.
+Adds a job application to HustleHub.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/COMPANY_NAME r/ROLE s/STATUS d/DEADLINE [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+An application can have up to 3 tags.
 </div>
 
 Examples:
 * `add n/Microsoft r/Cloud engineer s/INPROGRESS d/2025-10-31T23:59`
 * `add n/Microsoft r/Cloud engineer s/INPROGRESS d/2025-10-31T23:59 t/Low-pay t/Good-boss`
 
-### Deleting a application : `delete`
+### Deleting an application : `delete`
 
 Deletes the specified application from the application book.
 
@@ -165,12 +165,12 @@ Examples:
 
 ### Finding job applications: `find`
 
-Finds job applications whose company's name fully matches any of the given keywords.
+Finds job applications whose company name matches any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 #### Find Restrictions
-1. The search is not case-insensitive. e.g `tiktok` will match `TikTok`
+1. The search is case-insensitive. e.g., `tiktok` will match `TikTok`.
 
 
 2. The order of the keywords does not matter. e.g. `American Airlines` will match `Airlines American`
@@ -179,7 +179,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 3. Only the company name is searched.
 
 
-4. Job Application copmanies matching at least one keyword will be returned (i.e. `OR` search).
+4. Job application companies matching at least one keyword will be returned (i.e., `OR` search).
   e.g. `Morgan` will return `J.P. Morgan`, `Morgan Stanley`
 
 Examples:
@@ -326,9 +326,9 @@ Adds tags to a job application.
 Format: `tag JOB_APPLICATION_INDEX t/TAG...`
 
 Input restrictions:
-1. A `TAG` must be between 1 to 30 characters long, it cannot be blank.
-2. A `TAG` allows letters, numbers, and up to 2 hyphens, underscores, full-stops, at signs, plus signs, and minus signs.
-3. A `TAG` cannot have spaces.
+1. A `TAG` must be 1 to 30 characters long (cannot be blank).
+2. A `TAG` is a single word (no spaces).
+3. Allowed characters: letters, digits, and at most 2 of the following special characters: `-`, `_`, `.`, `@`, `#`, `+`.
 
 Examples:
 - `tag 1 t/C#`
@@ -344,14 +344,14 @@ After tagging:
 
 ### Removing tags: `untag`
 
-Removes tags to a job application.
+Removes tags from a job application.
 
 Format: `untag JOB_APPLICATION_INDEX t/TAG...`
 
 Input restrictions:
-1. A `TAG` must be between 1 to 30 characters long, it cannot be blank.
-2. A `TAG` allows letters, numbers, and up to 2 hyphens, underscores, full-stops, ampersands, plus signs, and minus signs.
-3. A `TAG` cannot have spaces.
+1. A `TAG` must be 1 to 30 characters long (cannot be blank).
+2. A `TAG` is a single word (no spaces).
+3. Allowed characters: letters, digits, and at most 2 of the following special characters: `-`, `_`, `.`, `@`, `#`, `+`.
 4. Inputted tags must already exist.
 
 Examples:
@@ -371,8 +371,8 @@ After untagging:
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install the app on the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HustleHub home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
