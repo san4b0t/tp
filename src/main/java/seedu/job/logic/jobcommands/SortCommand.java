@@ -44,6 +44,7 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) throws JobCommandException {
         requireNonNull(model);
         model.sortJobApplication(this.field, this.order);
+        model.setRecentlyModifiedApplication(null);
         return new CommandResult(String.format(MESSAGE_SORT_APPLICATION_SUCCESS, field.name().toLowerCase(),
             order.name().toLowerCase()));
     }

@@ -45,7 +45,7 @@ public class JobApplicationCard extends UiPart<Region> {
     /**
      * Creates a {@code JobApplicationCard} with the given {@code JobApplication} and index to display.
      */
-    public JobApplicationCard(JobApplication jobApplication, int displayedIndex) {
+    public JobApplicationCard(JobApplication jobApplication, int displayedIndex, boolean isRecentlyModified) {
         super(FXML);
         this.jobApplication = jobApplication;
         id.setText(displayedIndex + ". ");
@@ -57,6 +57,11 @@ public class JobApplicationCard extends UiPart<Region> {
         JobApplication.Status statusValue = jobApplication.getStatus();
         status.setText(statusValue.toString());
         status.getStyleClass().add("status-" + statusValue.toString().toLowerCase());
+
+        // Apply recently modified highlighting if applicable
+        if (isRecentlyModified) {
+            cardPane.getStyleClass().add("recently-modified");
+        }
 
         jobApplication.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

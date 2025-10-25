@@ -61,6 +61,7 @@ public class TagJobCommand extends Command {
 
         // Update the viewed job applications
         model.updateFilteredJobApplicationList(PREDICATE_SHOW_ALL_APPLICATIONS);
+        model.setRecentlyModifiedApplication(jobToTag);
 
         return new CommandResult(String.format(MESSAGE_TAG_APPLICATION_SUCCESS, JobMessages.format(jobToTag)));
     }

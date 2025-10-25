@@ -85,6 +85,7 @@ public class UpdateJobCommand extends Command {
 
         model.setJobApplication(jobToUpdate, updatedJob);
         model.updateFilteredJobApplicationList(PREDICATE_SHOW_ALL_APPLICATIONS);
+        model.setRecentlyModifiedApplication(updatedJob);
         return new CommandResult(String.format(MESSAGE_UPDATE_JOB_SUCCESS, JobMessages.format(updatedJob)));
     }
 

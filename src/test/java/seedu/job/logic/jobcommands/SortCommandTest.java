@@ -150,6 +150,14 @@ public class SortCommandTest {
         @Override public void updateFilteredJobApplicationList(Predicate<JobApplication> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public void setRecentlyModifiedApplication(JobApplication application) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public JobApplication getRecentlyModifiedApplication() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -179,7 +187,10 @@ public class SortCommandTest {
 
         @Override
         public void updateFilteredJobApplicationList(Predicate<JobApplication> predicate) {
-            // allow silently
+        }
+
+        @Override
+        public void setRecentlyModifiedApplication(JobApplication application) {
         }
     }
 }

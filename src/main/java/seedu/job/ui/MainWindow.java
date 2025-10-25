@@ -178,6 +178,9 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            // Update the recently modified application for highlighting
+            jobApplicationListPanel.setRecentlyModifiedApplication(logic.getRecentlyModifiedApplication());
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }

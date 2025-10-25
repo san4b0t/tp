@@ -59,6 +59,7 @@ public class UntagJobCommand extends Command {
         jobToUntag.removeTags(tagsToRemove);
 
         model.updateFilteredJobApplicationList(PREDICATE_SHOW_ALL_APPLICATIONS);
+        model.setRecentlyModifiedApplication(jobToUntag);
 
         return new CommandResult(String.format(MESSAGE_TAG_REMOVAL_SUCCESS, JobMessages.format(jobToUntag)));
     }
