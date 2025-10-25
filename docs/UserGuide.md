@@ -331,6 +331,10 @@ Input restrictions:
 3. Each job application can have up to 3 tags.
 4. Allowed characters: letters, digits, and at most 2 of the following special characters: `-`, `_`, `.`, `@`, `#`, `+`.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+If you add a mix of duplicate and new tags, the new tags will be added whilst duplicates will be ignored.
+</div>
+
 **Example Tagging Strategies:**
 
 **By priority:**
@@ -349,13 +353,16 @@ Input restrictions:
 - `tag 1 t/fast-response t/rolling`
 - `tag 6 t/late-deadline t/backup-plan`
 
-
-Before:
-
-![tag_before.png](images/tag_before.png)
-
-After tagging:
-![tag_after.png](images/tag_after.png)
+<div style="display: flex; gap: 20px;">
+  <div style="flex: 1;">
+    <strong>Before:</strong><br>
+    <img src="images/tag_before.png" alt="tag_before.png">
+  </div>
+  <div style="flex: 1;">
+    <strong>After tagging:</strong><br>
+    <img src="images/tag_after.png" alt="tag_after.png">
+  </div>
+</div>
 
 ### Removing tags: `untag`
 
