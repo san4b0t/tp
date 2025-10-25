@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-HustleHub is a **desktop application** for computing students keeping track of multiple internship/job applications who prefer using CLI over GUI. The product will provide computing students an easy way to visualise, add and modify their job application details to multiple positions at multiple companies
+HustleHub is a **desktop application** for computing students keeping track of multiple internship/job applications who prefer using CLI over GUI. The product will provide computing students an easy way to visualise, add and modify their job application details to multiple positions at multiple companies.
 
 * Table of Contents
 {:toc}
@@ -12,7 +12,7 @@ HustleHub is a **desktop application** for computing students keeping track of m
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
+1. Ensure you have Java `17` or above installed in your computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 1. Download the latest `.jar` file from this repository's [Releases](https://github.com/AY2526S1-CS2103T-T11-1/tp/releases) page.
@@ -28,7 +28,7 @@ HustleHub is a **desktop application** for computing students keeping track of m
 
    * `list` : Lists all applications.
 
-  * `add n/Microsoft r/Cloud engineer s/INPROGRESS d/2025-10-31T23:59` : Adds an application for `Microsoft` to HustleHub.
+   * `add n/Microsoft r/Cloud engineer s/INPROGRESS d/2025-10-31T23:59` : Adds an application for `Microsoft` to HustleHub.
 
    * `delete 3` : Deletes the 3rd application shown in the current list.
 
@@ -85,7 +85,7 @@ HustleHub is a **desktop application** for computing students keeping track of m
 | Command                                          | Description                                      | Format                                                                     |
 |--------------------------------------------------|--------------------------------------------------|----------------------------------------------------------------------------|
 | [**add**](#adding-a-job-application-add)         | Adds a job application to HustleHub              | `add n/COMPANY_NAME r/ROLE s/STATUS d/DEADLINE [t/TAG]…​`                  |
-| [**delete**](#deleting-a-application--delete)    | Deletes a job application given its index number | `delete INDEX`                                                             |
+| [**delete**](#deleting-an-application--delete)   | Deletes a job application given its index number | `delete INDEX`                                                             |
 | [**find**](#finding-job-applications-find)       | Finds job applications by company name           | `find KEYWORD [MORE_KEYWORDS]`                                             |
 | [**filter**](#filtering-job-applications-filter) | Filters job applications by a property           | `filter FLAG/KEYWORD`                                                      |
 | [**sort**](#sorting-the-applications--sort)      | Sorts the job applications in HustleHub          | `sort FIELD`                                                               |
@@ -161,7 +161,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd application in the application book.
-* After filtering the list, `delete 1` deletes the 1st application in the currently displayed results
+* After filtering the list, `delete 1` deletes the 1st application in the currently displayed results.
 
 ### Finding job applications: `find`
 
@@ -173,14 +173,14 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 1. The search is case-insensitive. e.g., `tiktok` will match `TikTok`.
 
 
-2. The order of the keywords does not matter. e.g. `American Airlines` will match `Airlines American`
+2. The order of the keywords does not matter. e.g., `American Airlines` will match `Airlines American`.
 
 
 3. Only the company name is searched.
 
 
 4. Job application companies matching at least one keyword will be returned (i.e., `OR` search).
-  e.g. `Morgan` will return `J.P. Morgan`, `Morgan Stanley`
+   e.g., `Morgan` will return `J.P. Morgan`, `Morgan Stanley`.
 
 Examples:
 
@@ -189,9 +189,9 @@ Examples:
 
 
 * `find Tiger America` 
-  * Returns `Tiger Management`, `Bank of America`<br>
+  * Returns `Tiger Management`, `Bank of America`.
 
-  
+
 Before:
 ![find command before ](images/find-command-before.png)
 
@@ -244,9 +244,6 @@ or, to remove all filters: `filter none`
 * `filter none`
     * Removes all current filters and shows the complete list of job applications.
 
-
-* `filter s/inprogress` returns the 4 jobs that currently have status 'INPROGRESS'
-
 Before: `filter s/inprogress`
 
 ![result for 'filter s/inprogress'](images/filterInProgressCommand.png)
@@ -263,11 +260,11 @@ Sorts the current list of applications by a chosen field, in ascending or descen
 - **FIELD**: `company` \| `role` \| `deadline`
 - **ORDER** (optional): `asc` \| `desc` (default: `asc`)
 
-**Notes**
+**Notes:**
 - Sorting is **stable** and **case-insensitive** for text fields (`company`, `role`).
 - When sorting by **deadline**, missing/invalid deadlines appear **last** for `asc` (and **first** for `desc`).
 
-**Examples**
+**Examples:**
 - `sort deadline`
 - `sort company desc`
 - `sort role asc`
