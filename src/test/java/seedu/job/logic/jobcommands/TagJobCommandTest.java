@@ -241,5 +241,8 @@ public class TagJobCommandTest {
         @Override
         public void updateFilteredJobApplicationList(Predicate<JobApplication> predicate) {
         }
+        @Override
+        public void setJobApplication(JobApplication target, JobApplication editedJobApplication) {
+        }
     }
 }
