@@ -452,220 +452,265 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 ### Use cases
-_For all use cases below:_
 
-**System**: `HustleHub` 
-<br>
-**Actor**: `user`
+_For all use cases below, the **System** is `HustleHub` and the **Actor** is the `user`, unless specified otherwise._
 
 ![UseCases.png](images/UseCases.png)
 
-<details>
-    <summary><b>UC01 - View job applications</b></summary>
+### UC01 - View all job applications
 
 **MSS**
-1. User opens HustleHub
-2. System retrieves saved job applications
-3. System shows a list of job applications to user
+1. User requests to list all job applications.
+2. System displays all job applications.
+3. System displays a success message.
 
+   Use case ends.
+
+### UC02 - Add a job application
+
+**Preconditions**
+* User has viewed the list of applications (UC01).
+
+**MSS**
+1. User inputs job application details.
+2. System adds the job application.
+3. System displays the newly added application.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System detects invalid details.
+  * 1a1. System shows an error message.
+    
     Use case ends.
 
-**Extensions**
-* 2a. System fails to retrieve saved job applications.
-  * 2a1. System shows user an error message
+* 1b. System detects a duplicate job application.
+  * 1b1. System shows an error message.
 
-  Use case resumes at step 3.
----
-</details>
+  Use case ends.
 
-<details>
-    <summary><b>UC02 - Add job applications</b></summary>
+**Guarantees**
+* System state remains unchanged if addition fails.
+
+### UC03 - Delete a job application
 
 **Preconditions**
-* User already opened the system
+* User has viewed the list of applications (UC01).
 
 **MSS**
-1. User enters job application details
-2. User submits job application details
-3. System informs user upon successful completion
-4. System displays new job application
+1. User requests to delete a specific application.
+2. System deletes the application.
+3. System displays confirmation message.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. User submits invalid job application details
-  * 2a1. System shows user an error message 
+* 1a. System detects an invalid index.
+  * 1a1. System shows an error message.
+    
+    Use case ends.
 
-   Use case ends.
----
-</details>
-
-<details>
-    <summary><b>UC03 - Delete a job applications</b></summary>
-
-**Preconditions**
-* User already opened the system
-
-**MSS**
-1. User enters job application details
-2. User submits job application details
-3. System informs user upon successful deletion
-4. System no longer displays that job application
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. User submits invalid job application details
-    * 2a1. System shows user an error message
+* 1b. The specified application does not exist.
+  * 1b1. System shows an error message.
 
   Use case ends.
----
-</details>
 
-<details>
-    <summary><b>UC04 - Save job applications</b></summary>
+**Guarantees**
+* System state remains unchanged if deletion fails.
+
+### UC04 - Update a job application
 
 **Preconditions**
-* User already opened the system
-* There is at least 1 job application in the system
-* 
+* User has viewed the list of applications (UC01).
+
 **MSS**
-1. User requests to save job application data
-2. System saves job applications
-3. System informs user upon completion of saving data
+1. User requests to update specific fields of an application.
+3. System updates the application.
+4. System displays the updated application.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. System fails to save job applications
-    * 2a1. System shows user an error message
+* 1a. The specified application does not exist.
+  * 1a1. System shows an error message.
 
   Use case ends.
----
-</details>
 
-<details>
-    <summary><b>UC05 - Update job application</b></summary>
+* 1b. No fields provided to update.
+  * 1b1. System shows an error message.
+
+  Use case ends.
+
+* 1c. Updated details would create a duplicate.
+  * 1c1. System shows duplicate application error message.
+
+  Use case ends.
+
+* 1d. Invalid field format provided.
+  * 1d1. System shows an error message.
+
+  Use case ends.
+
+**Guarantees**
+* Original application data is preserved if update fails.
+
+### UC05 - Adding tags
 
 **Preconditions**
-* User already opened the system
-* There is at least 1 job application in the system
+* User has viewed the list of applications (UC01).
+* There is minimally one job application in HustleHub.
 
 **MSS**
-1. User enters updated job application details
-2. User submits updated job application details
-3. System informs user upon successful update
-4. System displays the updated job application
+1. User requests to add tags to a specific job application.
+2. System adds the tags to the job application.
+3. System displays the updated application.
+4. System displays a success message.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. User submits invalid job application details
-    * 2a1. System shows user an error message
+* 1a. System detects an invalid tag.
+  * 1a1. System shows an error message.
+    
+    Use case ends.
 
-  Use case ends.
----
-</details>
+**Guarantees**
+* Original tags are preserved if addition fails.
 
-<details>
-    <summary><b>UC06 - Tagging a job application</b></summary>
+### UC06 - Removing tags
 
 **Preconditions**
-* User already opened the system
-* There is at least 1 job application in the system
+* User has viewed the list of applications (UC01).
+* There is minimally one job application in HustleHub.
 
 **MSS**
-1. User enters a tag for a job application
-2. User submits tag details
-3. System informs user upon successful tagging
-4. System displays the tag in the job application
+1. User requests to delete tags.
+2. System deletes the tags.
+3. System displays the updated application.
+4. System displays a success message.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. User submits invalid tagging details
-    * 2a1. System shows user an error message
+* 1a. One or more specified tags do not exist.
+  * 1a1. System shows an error message.
 
   Use case ends.
----
-</details>
 
-<details>
-    <summary><b>UC07 - Sorting job applications</b></summary>
+**Guarantees**
+* Original tags are preserved if removal fails.
+
+### UC07 - Sort job applications
 
 **Preconditions**
-* User already opened the system
-* There is at least 1 job application in the system
+* User has viewed the list of applications (UC01).
+* There is minimally one job application in HustleHub.
 
 **MSS**
-1. User enters a criteria for sorting
-2. User submits sorting criteria
-3. System informs user upon successful sorting
-4. System displays newly sorted list of applications
+1. User requests to sort applications by a specific criterion.
+2. System sorts the applications.
+3. System displays the sorted list.
 
-Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. User submits invalid sorting criteria
-    * 2a1. System shows user an error message
+* 1a. Invalid sort criterion provided.
+  * 1a1. System shows an error message.
 
   Use case ends.
----
-</details>
 
-<details>
-    <summary><b>UC08 - Filtering job applications</b></summary>
+### UC08 - Filter job applications
 
 **Preconditions**
-* User already opened the system
+* User has viewed the list of applications (UC01).
+* There is minimally one job application in HustleHub.
 
 **MSS**
-1. User enters a criteria to filter job application
-2. User submits filtering criteria
-3. System informs user upon successful filtering
-4. System displays a list of filtered job applications
+1. User requests to filter applications by specific criteria.
+2. System filters the applications matching the criteria.
+3. System displays the filtered list.
+4. System displays a success message.
 
-Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. User submits invalid filtering criteria
-    * 2a1. System shows user an error message
+* 1a. Invalid filter criteria provided.
+  * 1a1. System shows an error message.
 
   Use case ends.
----
-</details>
 
-<details>
-    <summary><b>UC09 - Archiving a job application</b></summary>
+* 2a. No applications match the filter criteria.
+  * 2a1. System displays empty list.
 
-**Preconditions**
-* User already opened the system
-* There is at least 1 job application in the system
+  Use case continues from step 3.
+
+**Guarantees**
+* Only applications matching the criteria are displayed.
+* Original application data remains unchanged.
+
+### UC09 - Search for job applications
+
+Similar to UC08 but we are searching via keywords instead.
 
 **MSS**
-1. User enters a require to archive a particular job application
-2. User submits job application details
-3. System informs user upon successful archival
-4. System displays an indicator that the application is archived 
+1. User provides search keywords.
+2. System searches for matching applications.
+3. System displays all matching applications.
+4. System displays a success message.
 
-Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. User submits invalid job application details
-    * 2a1. System shows user an error message
+* 1a. System detects no keywords.
+  * 1a1. System displays an error message.
 
   Use case ends.
----
-</details>
 
+* 2a. No applications match the search keywords.
+  * 2a1. System displays empty list.
+
+  Use case continues from step 3.
+
+**Guarantees**
+* Only applications fully matching the keywords are displayed.
+* Original application data remains unchanged.
+
+### UC10 - Clear all job applications
+
+Similar to UC03 but it deletes all job applications.
+
+**MSS**
+1. User requests to clear all applications.
+2. System removes all applications.
+3. System displays confirmation.
+
+   Use case ends.
+
+**Guarantees**
+* All applications are permanently removed.
+* Application list becomes empty.
+
+### UC11 - View help information
+
+**MSS**
+1. User requests help information.
+2. System displays usage instructions.
+
+   Use case ends.
+
+**Guarantees**
+* Help information is always available.
+* System state remains unchanged.
+
+---
 
 
 ### Non-Functional Requirements
