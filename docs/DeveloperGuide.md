@@ -715,14 +715,14 @@ Similar to UC03 but it deletes all job applications.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 job applications without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  All of HustleHub's commands should complete within 2 seconds for typical operations.
-5.  The system should enforce data integrity whereby no two job applications share the same combination of company name and role.
-6.  The user interface should be intuitive enough for computing students familiar with CLI tools to use without extensive training.
-7.  The application should persist data reliably, ensuring no data loss between sessions under normal operation.
-8.  Error messages should be clear and actionable, guiding users to correct their input.
+1. **Platform Compatibility**: Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. **Performance - Capacity**: Should be able to hold up to 1000 job applications without noticeable sluggishness in performance for typical usage.
+3. **Performance - Responsiveness**: A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most tasks faster using commands than using the mouse.
+4. **Performance - Response Time**: All commands should complete within 2 seconds for typical operations.
+5. **Data Integrity**: The system should enforce data integrity whereby no two job applications share the same combination of company name and role.
+6. **Usability**: The user interface should be intuitive enough for computing students familiar with CLI tools to use without extensive training.
+7. **Reliability - Data Persistence**: All modifications to job application data should be automatically saved to prevent data loss in the event of an application crash or closure.
+8. **Usability - Error Handling**: Error messages should be clear and actionable, guiding users to correct their input.
 
 ### Glossary
 
