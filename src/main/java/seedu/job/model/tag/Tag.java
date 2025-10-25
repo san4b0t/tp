@@ -12,8 +12,9 @@ public class Tag {
     // Maximum tag length based on UI constraints and usability requirements
     public static final int MAX_TAG_LENGTH = 30;
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags should be a single word with at most 2 special characters"
-            + "(-, ., @, #, _) and cannot exceed " + MAX_TAG_LENGTH + " characters";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Tags must be a single word (no spaces) with up to " + MAX_TAG_LENGTH + " characters. "
+            + "Allowed: letters, numbers, and at most 2 special characters from: - . @ # _ +";
     public static final String VALIDATION_REGEX =
             "^[a-zA-Z0-9]*[\\-.@#_+]?[a-zA-Z0-9]*[\\-.@#_+]?[a-zA-Z0-9]*$";
 
