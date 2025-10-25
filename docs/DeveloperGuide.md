@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -36,7 +37,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2526S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/job/Main.java) and [`MainApp`](https://github.com/AY2526S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/job/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -68,24 +69,24 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2526S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/job/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `JobApplicationListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2526S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/job/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2526S1-CS2103T-T11-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `JobApplication` objects residing in the `Model`.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2526S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/job/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -100,9 +101,9 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. When `Logic` is called upon to execute a command, it is passed to a `JobBookCommandParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteJobCommand`) which is executed by the `LogicManager`.
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a job application).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -111,23 +112,24 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `JobBookCommandParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddJobCommand`) which the `JobBookCommandParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `JobParser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2526S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/job/model/jobapplication/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores the job book data i.e., all `JobApplication` objects (which are contained in a `UniqueJobApplicationList` object).
+* stores the currently 'selected' `JobApplication` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<JobApplication>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores a `UserPrefs` object that represents the user's preferences. This is exposed to the outside as a `ReadOnlyUserPrefs` objects.
+* stores a reference to the recently modified `JobApplication` for UI highlighting purposes.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `JobBook`, which `JobApplication` references. This allows `JobBook` to only require one `Tag` object per unique tag, instead of each `JobApplication` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -165,6 +167,128 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Card Highlighting Feature
+
+#### Implementation
+
+The card highlighting mechanism provides visual feedback to users by highlighting recently modified job application cards with an elegant white-to-blue gradient. This feature is implemented across the Model, Logic, and UI layers.
+
+**Architecture Components:**
+
+The implementation involves:
+* `Model` & `ModelManager`: Stores the recently modified `JobApplication`
+* `Logic` & `LogicManager`: Exposes the recently modified application to the UI
+* Command classes: Set or clear the recently modified application based on operation type
+* `JobApplicationListPanel`: Tracks and refreshes the view when highlighting changes
+* `JobApplicationCard`: Conditionally applies CSS highlighting class
+* `MainWindow`: Synchronizes highlight state after each command execution
+
+**Key Operations:**
+
+* `Model#setRecentlyModifiedApplication(JobApplication)` — Sets the application to be highlighted
+* `Model#getRecentlyModifiedApplication()` — Returns the currently highlighted application
+* `JobApplicationListPanel#setRecentlyModifiedApplication(JobApplication)` — Updates the panel and refreshes the view
+
+**Command Behavior:**
+
+Commands are categorized into two groups:
+
+1. **Modifying Commands** (set highlight):
+   - `AddJobCommand` - Highlights the newly added application
+   - `UpdateJobCommand` - Highlights the updated application  
+   - `TagJobCommand` - Highlights the tagged application
+   - `UntagJobCommand` - Highlights the untagged application
+
+2. **Non-Modifying Commands** (clear highlight):
+   - `DeleteJobCommand` - Clears all highlights
+   - `FilterCommand` - Clears all highlights
+   - `SortCommand` - Clears all highlights
+   - `FindCommand` - Clears all highlights
+
+**UI Implementation:**
+
+The `JobApplicationCard` constructor accepts an `isRecentlyModified` boolean parameter. When `true`, it adds the CSS class `"recently-modified"` to the card pane, which applies:
+* White-to-blue gradient background (left to right)
+* Enhanced blue-tinted shadow for subtle emphasis
+* Maintains consistent padding and border radius
+
+**Example Usage Scenario:**
+
+Step 1. User executes `tag 1 t/urgent`. The `TagJobCommand` calls `model.setRecentlyModifiedApplication(taggedJob)`.
+
+Step 2. `MainWindow#executeCommand()` calls `jobApplicationListPanel.setRecentlyModifiedApplication(logic.getRecentlyModifiedApplication())`.
+
+Step 3. The panel refreshes, and the card at index 1 is rendered with the highlight gradient.
+
+Step 4. User executes `filter s/APPLIED`. The `FilterCommand` calls `model.setRecentlyModifiedApplication(null)`.
+
+Step 5. The panel refreshes, and all cards are rendered without highlighting.
+
+#### Design Considerations:
+
+**Aspect: Where to store the recently modified application:**
+
+* **Alternative 1 (current choice):** Store in Model layer
+  * Pros: Centralized state management, accessible to all components
+  * Cons: Adds additional state to Model
+
+* **Alternative 2:** Store in UI layer only
+  * Pros: Simpler model, UI-specific concern stays in UI
+  * Cons: Difficult to synchronize across command executions, loss of state on view refresh
+
+**Aspect: How to identify recently modified applications:**
+
+* **Alternative 1 (current choice):** Use object equality comparison
+  * Pros: Simple, works with immutable command pattern
+  * Cons: Requires exact object reference match
+
+* **Alternative 2:** Use unique identifier (e.g., company + role)
+  * Pros: More robust to object recreation
+  * Cons: More complex logic, potential edge cases with duplicates
+
+### Tag Management Feature
+
+#### Implementation
+
+The tag management feature allows users to add and remove tags from job applications. Tags are implemented as immutable `Tag` objects with validation constraints.
+
+**Tag Constraints:**
+* Must be a single word (no spaces)
+* Maximum 30 characters
+* Can contain letters, numbers, and up to 2 special characters from: `-`, `.`, `@`, `#`, `_`, `+`
+* Each application can have up to 3 tags
+
+**Key Classes:**
+* `Tag`: Represents an immutable tag with validation
+* `TagJobCommand`: Adds tags to a job application
+* `UntagJobCommand`: Removes tags from a job application
+
+**Tag Command Implementation:**
+
+The `TagJobCommand` creates a new `JobApplication` instance with the updated tag set, following the immutable pattern:
+
+1. Retrieves the target application from the filtered list
+2. Validates tag capacity (max 3 tags)
+3. Creates new application with `createTaggedJob()` method
+4. Calls `model.setJobApplication()` to replace the old application
+5. Sets the newly tagged application as recently modified
+
+**Untag Command Implementation:**
+
+Similar to tag command but removes tags:
+
+1. Retrieves the target application
+2. Validates that all tags to remove exist
+3. Creates new application with `createUntaggedJob()` method
+4. Replaces and highlights the application
+
+**Error Handling:**
+
+The feature provides clear, actionable error messages:
+* **Tag capacity exceeded**: Explains the limit and suggests using `untag` first
+* **Tag doesn't exist**: Clarifies which tags don't exist and suggests checking current tags
+* **Invalid tag format**: Explains the validation rules with examples
 
 ### \[Proposed\] Undo/redo feature
 
@@ -239,13 +363,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire job book.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the job application being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -273,31 +397,59 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* is a **university student, entrepreneur, or early-career professional** managing multiple side projects, collaborations, or commitments  
-* values **speed and organisation** in managing tasks, contacts, and project updates  
-* prefers **desktop or web-based productivity tools** over mobile-only solutions  
-* is **comfortable with command-driven or keyboard-first interfaces** (CLI or quick command palette)  
-* seeks **a single, streamlined hub** for tracking collaborations, project progress, and key contacts  
-* is **tech-savvy** and appreciates integrations with platforms like Notion, GitHub, or Google Calendar  
+* is a **computing student** actively applying for internships or full-time positions
+* needs to **manage multiple job applications** simultaneously across different companies
+* values **speed and organization** in tracking application statuses, deadlines, and details
+* prefers **desktop applications** over mobile or web-based solutions
+* is **comfortable with command-driven interfaces** (CLI) for faster interaction 
+* seeks **a streamlined tool** for tracking applications, deadlines, and interview stages
+* is **tech-savvy** and appreciates keyboard-optimized workflows like Notion, GitHub, or Google Calendar  
 
 **Value proposition**:  
-HustleHub empowers driven individuals to **manage projects, people, and productivity from one place** — combining contact management, task tracking, and collaboration features in a fast, keyboard-optimised interface.
+HustleHub empowers computing students to **efficiently manage their job application process** — providing a fast, keyboard-optimized interface to track applications, deadlines, statuses, and tags all in one place, helping students stay organized during their job search.
 
 
 ### User stories
 
-Priorities: High (must have) - * * *, Medium (nice to have) - * *, Low (unlikely to have) - *
+Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| * * *  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| * * *  | user                                       | add a new person               |                                                                        |
-| * * *  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| * * *  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| * *    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| *      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                    | I want to …​                                                                                              | So that I can…​                                                           |
+|----------|----------------------------|-----------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| `* * *`  | student                    | view the list of all my job applications                                                                  | see everything I'm tracking in one place                                  |
+| `* * *`  | student                    | add job application details (company name, role, application status, deadline)                            | track multiple applications efficiently                                   |
+| `* * *`  | student                    | delete a job application                                                                                  | remove entries I no longer want to track                                  |
+| `* * *`  | student                    | view details of a specific job application                                                                | review all the information I've saved about that application              |
+| `* *`    | student                    | update job application details                                                                            | keep my records current as my applications progress                       |
+| `* *`    | student                    | sort applications by deadline                                                                             | prioritize applications that need attention first                         |
+| `* *`    | student                    | sort applications by company name                                                                         | organize my applications alphabetically                                   |
+| `* *`    | student                    | sort applications by status                                                                               | group applications by their current stage                                 |
+| `* *`    | student                    | search for job applications by keyword                                                                    | quickly find a specific application                                       |
+| `* *`    | student                    | filter applications by company name                                                                       | focus on applications from a particular employer                          |
+| `* *`    | student                    | filter applications by status                                                                             | view only applications at a specific stage                                |
+| `* *`    | student                    | add custom tags to job applications                                                                       | categorize them by priority, location, or other criteria                  |
+| `* *`    | student                    | remove tags from applications                                                                             | update categorization as my needs change                                  |
+| `* *`    | student                    | see recently modified applications highlighted                                                            | quickly identify which applications I just updated                        |
+| `* *`    | student                    | set and view application deadlines with date and time                                                     | manage my time effectively and submit applications on time                |
+| `* *`    | student                    | track application status (applied, in progress, rejected)                                                 | know the current stage of each application                                |
+| `* *`    | student with many applications | clear the application list                                                                             | start fresh when needed                                                   |
+| `* *`      | new user                   | see usage instructions                                                                                    | learn how to use the app when I forget commands                           |
+| `* *`      | student                    | have data automatically persisted                                                                         | recover my application data after closing the app                         |
+| `*`      | student                    | export my job application data                                                                            | back up my data or share it with career counselors                        |
+| `*`      | student                    | archive old or rejected applications                                                                      | keep my active list clean without losing historical data                  |
+| `*`      | student                    | add notes to applications                                                                                 | remember specific details about each position or company                  |
+| `*`      | student                    | track interview rounds completed                                                                          | assess my application progress at a detailed level                        |
+| `*`      | student                    | store recruiter contact information                                                                       | easily reach out for follow-up questions or updates                       |
+| `*`      | student                    | track application sources (LinkedIn, company website, referral)                                           | know where my opportunities are coming from                               |
+| `*`      | student                    | store links to job postings                                                                               | quickly access the original application details                           |
+| `*`      | student                    | categorize applications by job type (software engineering, data science)                                  | focus on specific career paths                                            |
+| `*`      | student                    | see how many days remain until each deadline                                                              | prioritize urgent applications                                            |
+| `*`      | student                    | track when I applied to each position                                                                     | know when to follow up with companies                                     |
+| `*`      | student                    | set priority levels for applications                                                                      | focus my efforts on high-priority opportunities                           |
+| `*`      | student                    | view application status history                                                                           | track how my applications have progressed over time                       |
+| `*`      | student                    | track rejection reasons                                                                                   | learn from each experience and improve future applications                |
+| `*`      | student                    | track multiple interview stages for each application                                                      | easily identify where I am in the hiring process                          |
+| `*`      | student                    | track the number of applications submitted per time period                                                | measure my job search activity and adjust my strategy                     |
 
-*{More to be added}*
 
 ### Use cases
 _For all use cases below:_
@@ -519,17 +671,23 @@ Use case ends.
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 job applications without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  All of HustleHub's commands should complete within 3 seconds.
-5.  The system should enforce data integrity whereby no two job applications share a combination of company name, role name, and deadline.
+4.  All of HustleHub's commands should complete within 2 seconds for typical operations.
+5.  The system should enforce data integrity whereby no two job applications share the same combination of company name and role.
+6.  The user interface should be intuitive enough for computing students familiar with CLI tools to use without extensive training.
+7.  The application should persist data reliably, ensuring no data loss between sessions under normal operation.
+8.  Error messages should be clear and actionable, guiding users to correct their input.
 
 ### Glossary
 
-* **Job Application**: A document with at least these 4 details: a company name, role name, a deadline and an application status
+* **Job Application**: A record containing company name, role, application status (APPLIED, INPROGRESS, REJECTED), deadline (date and time), and optional tags
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Serialization**: The process to convert complex objects into a simpler form for various purposes like storage, computation, or encryption.
+* **Tag**: A short label (1-30 characters) used to categorize job applications, containing letters, numbers, and optionally special characters
+* **Recently Modified Application**: The job application that was last modified by an add, update, tag, or untag operation, visually highlighted in the UI
+* **Serialization**: The process to convert complex objects (like JobApplication) into JSON format for storage
+* **Filtered List**: A subset of job applications displayed based on search, filter, or sort criteria
+* **Immutable Pattern**: A design pattern where objects cannot be modified after creation; modifications create new objects instead
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -548,7 +706,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file or run `java -jar hustlehub.jar` from the terminal<br>
+      Expected: Shows the GUI with sample job applications. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -557,29 +716,103 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a job application
 
-### Deleting a person
+1. Adding a job application with all required fields
 
-1. Deleting a person while all persons are being shown
+   1. Test case: `add n/Google r/Software Engineer s/APPLIED d/2025-12-31T23:59`<br>
+      Expected: New application is added to the list. The card is highlighted with a white-to-blue gradient. Details of the added application shown in the result display.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Test case: `add n/Google r/Software Engineer s/APPLIED d/2025-12-31T23:59 t/urgent t/remote`<br>
+      Expected: Similar to previous, but with tags displayed on the card.
+
+   1. Test case: `add n/Google r/Software Engineer s/INVALID d/2025-12-31T23:59`<br>
+      Expected: No application is added. Error message about invalid status shown.
+
+   1. Test case: `add n/Google r/Software Engineer`<br>
+      Expected: No application is added. Error message about missing required fields shown.
+
+### Deleting a job application
+
+1. Deleting a job application while all applications are shown
+
+   1. Prerequisites: List all applications using the `list` command. Multiple applications in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First application is deleted from the list. Details of the deleted application shown in the result display. Any highlighting is cleared.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No application is deleted. Error message about invalid index shown.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Updating a job application
+
+1. Updating one or more fields of a job application
+
+   1. Prerequisites: At least one application in the list.
+
+   1. Test case: `update 1 s/INPROGRESS`<br>
+      Expected: Status of first application updated to INPROGRESS. Card is highlighted. Updated details shown.
+
+   1. Test case: `update 1 n/Facebook r/Data Scientist d/2026-01-15T12:00`<br>
+      Expected: Company name, role, and deadline of first application updated. Card is highlighted.
+
+   1. Test case: `update 1 t/priority t/urgent`<br>
+      Expected: Tags of first application replaced with "priority" and "urgent". Card is highlighted.
+
+   1. Test case: `update 1`<br>
+      Expected: No update occurs. Error message about needing at least one field shown.
+
+### Tagging a job application
+
+1. Adding tags to a job application
+
+   1. Prerequisites: At least one application in the list with fewer than 3 tags.
+
+   1. Test case: `tag 1 t/urgent`<br>
+      Expected: Tag "urgent" added to first application. Card is highlighted. Success message shown.
+
+   1. Test case: `tag 1 t/priority t/remote`<br>
+      Expected: Both tags added if total doesn't exceed 3. Card is highlighted.
+
+   1. Test case: `tag 1 t/invalid tag` (with space)<br>
+      Expected: No tag added. Error message about tag format shown.
+
+   1. Test case: Tag an application that already has 3 tags<br>
+      Expected: No tag added. Error message about maximum tags shown.
+
+### Filtering and Sorting
+
+1. Filtering applications
+
+   1. Test case: `filter s/APPLIED`<br>
+      Expected: Only applications with APPLIED status shown. Highlighting cleared.
+
+   1. Test case: `filter n/Google`<br>
+      Expected: Only applications with "Google" in company name shown.
+
+   1. Test case: `filter none`<br>
+      Expected: All applications shown again.
+
+2. Sorting applications
+
+   1. Test case: `sort deadline`<br>
+      Expected: Applications sorted by deadline ascending. Highlighting cleared.
+
+   1. Test case: `sort company desc`<br>
+      Expected: Applications sorted by company name descending.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Simulate missing file: Delete `data/JobApplications.json` before launching<br>
+      Expected: App launches with sample data.
 
-1. _{ more test cases …​ }_
+   1. Simulate corrupted file: Edit `data/JobApplications.json` with invalid JSON<br>
+      Expected: App launches with empty data or sample data, depending on implementation.
+
+   1. Test automatic saving: Add an application, close app, relaunch<br>
+      Expected: Added application persists across sessions.
