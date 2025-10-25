@@ -91,7 +91,7 @@ public class UniqueApplicationList implements Iterable<JobApplication> {
      */
     public void sortApplication(SortField field, SortOrder order) {
         Comparator<JobApplication> cmp = comparatorFor(field);
-        if (order == SortOrder.DESC) {
+        if (order == SortOrder.DESCENDING) {
             cmp = cmp.reversed();
         }
         FXCollections.sort(internalList, cmp);

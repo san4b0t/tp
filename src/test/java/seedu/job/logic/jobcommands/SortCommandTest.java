@@ -28,7 +28,7 @@ public class SortCommandTest {
 
     @Test
     public void constructor_nullField_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new SortCommand(null, SortOrder.ASC));
+        assertThrows(NullPointerException.class, () -> new SortCommand(null, SortOrder.ASCENDING));
     }
 
     @Test
@@ -40,7 +40,7 @@ public class SortCommandTest {
     public void execute_callsModelAndReturnsMessage() throws JobCommandException {
         // Arrange
         SortField field = SortField.COMPANY;
-        SortOrder order = SortOrder.DESC;
+        SortOrder order = SortOrder.DESCENDING;
         SortCommand cmd = new SortCommand(field, order);
         ModelStubRecordingSort model = new ModelStubRecordingSort();
 
@@ -59,10 +59,10 @@ public class SortCommandTest {
 
     @Test
     public void equals() {
-        SortCommand a = new SortCommand(SortField.DEADLINE, SortOrder.ASC);
-        SortCommand b = new SortCommand(SortField.DEADLINE, SortOrder.ASC);
-        SortCommand c = new SortCommand(SortField.COMPANY, SortOrder.ASC);
-        SortCommand d = new SortCommand(SortField.DEADLINE, SortOrder.DESC);
+        SortCommand a = new SortCommand(SortField.DEADLINE, SortOrder.ASCENDING);
+        SortCommand b = new SortCommand(SortField.DEADLINE, SortOrder.ASCENDING);
+        SortCommand c = new SortCommand(SortField.COMPANY, SortOrder.ASCENDING);
+        SortCommand d = new SortCommand(SortField.DEADLINE, SortOrder.DESCENDING);
 
         // Same values -> true
         assertEquals(a, b);
@@ -86,7 +86,7 @@ public class SortCommandTest {
     @Test
     public void toStringMethod() {
         SortField field = SortField.ROLE;
-        SortOrder order = SortOrder.ASC;
+        SortOrder order = SortOrder.ASCENDING;
         SortCommand cmd = new SortCommand(field, order);
 
         String expected = SortCommand.class.getCanonicalName()
