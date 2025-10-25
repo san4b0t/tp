@@ -5,8 +5,10 @@ import static seedu.job.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,16 +36,38 @@ public class UniqueApplicationList implements Iterable<JobApplication> {
     private final ObservableList<JobApplication> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+
+    private final Set<String> uniqueHash = new HashSet<>();
+
+    /**
+     * Adds an Application to the list. WITHOUT CHECKS
+     */
+    private void addUnsafe(JobApplication toAdd) {
+        internalList.add(toAdd);
+        uniqueHash.add(toAdd.getUniqueKey());
+    }
+
+    /**
+     * Replaces the contents of this list with {@code Applications}. WITHOUT CHECKS
+     */
+    private void setAllUnsafe(List<JobApplication> applications) {
+        internalList.setAll(applications);
+        uniqueHash.clear();
+        for (var app: applications) {
+            uniqueHash.add(app.getUniqueKey());
+        }
+    }
+
     /**
      * Returns true if the list contains an equivalent Application as the given argument.
      */
     public boolean contains(JobApplication toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameJobApplication);
+        return uniqueHash.contains(toCheck.getUniqueKey());
     }
 
     /**
-     * Adds a Application to the list.
+     * Adds an Application to the list.
      * The Application must not already exist in the list.
      */
     public void add(JobApplication toAdd) {
@@ -51,7 +75,7 @@ public class UniqueApplicationList implements Iterable<JobApplication> {
         if (contains(toAdd)) {
             throw new DuplicateJobApplicationException();
         }
-        internalList.add(toAdd);
+        addUnsafe(toAdd);
     }
 
     /**
@@ -73,6 +97,8 @@ public class UniqueApplicationList implements Iterable<JobApplication> {
         }
 
         internalList.set(index, editedApplication);
+        uniqueHash.remove(target.getUniqueKey());
+        uniqueHash.add(editedApplication.getUniqueKey());
     }
 
     /**
@@ -84,6 +110,7 @@ public class UniqueApplicationList implements Iterable<JobApplication> {
         if (!internalList.remove(toRemove)) {
             throw new JobApplicationNotFoundException();
         }
+        uniqueHash.remove(toRemove.getUniqueKey());
     }
 
     /**
@@ -127,7 +154,7 @@ public class UniqueApplicationList implements Iterable<JobApplication> {
 
     public void setJobApplications(UniqueApplicationList replacement) {
         requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
+        setAllUnsafe(replacement.internalList);
     }
 
     /**
@@ -140,7 +167,7 @@ public class UniqueApplicationList implements Iterable<JobApplication> {
             throw new DuplicateJobApplicationException();
         }
 
-        internalList.setAll(applications);
+        setAllUnsafe(applications);
     }
 
     /**
@@ -184,12 +211,13 @@ public class UniqueApplicationList implements Iterable<JobApplication> {
      * Returns true if {@code Applications} contains only unique Applications.
      */
     private boolean applicationsAreUnique(List<JobApplication> applications) {
-        for (int i = 0; i < applications.size() - 1; i++) {
-            for (int j = i + 1; j < applications.size(); j++) {
-                if (applications.get(i).isSameJobApplication(applications.get(j))) {
-                    return false;
-                }
+        Set<String> uniqueKeys = new HashSet<>();
+        for (int i = 0; i < applications.size(); i++) {
+            String uk = applications.get(i).getUniqueKey();
+            if (uniqueKeys.contains(uk)) {
+                return false;
             }
+            uniqueKeys.add(uk);
         }
         return true;
     }
