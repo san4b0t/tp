@@ -1,70 +1,84 @@
 @startuml
 !include style.puml
 skinparam ArrowFontStyle plain
+skinparam arrowThickness 1.2
 
+title Sequence Diagram for DeleteJobCommand Execution
+
+' =======================
+' Logic Layer
+' =======================
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":JobBookCommandParser" as JobBookCommandParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant "d:DeleteJobCommand" as DeleteJobCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
+' =======================
+' Model Layer
+' =======================
 box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
+
+' =======================
+' Sequence Flow
+' =======================
 [-> LogicManager : execute("delete 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
-activate AddressBookParser
+LogicManager -> JobBookCommandParser : parseCommand("delete 1")
+activate JobBookCommandParser
 
 create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
+JobBookCommandParser -> DeleteCommandParser
 activate DeleteCommandParser
 
-DeleteCommandParser --> AddressBookParser
+DeleteCommandParser --> JobBookCommandParser
 deactivate DeleteCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
+JobBookCommandParser -> DeleteCommandParser : parse("1")
 activate DeleteCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create DeleteJobCommand
+DeleteCommandParser -> DeleteJobCommand : new DeleteJobCommand(index)
+activate DeleteJobCommand
 
-DeleteCommand --> DeleteCommandParser :
-deactivate DeleteCommand
+DeleteJobCommand --> DeleteCommandParser
+deactivate DeleteJobCommand
 
-DeleteCommandParser --> AddressBookParser : d
+DeleteCommandParser --> JobBookCommandParser : d
 deactivate DeleteCommandParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
-destroy DeleteCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+JobBookCommandParser --> LogicManager : d
+deactivate JobBookCommandParser
 
-LogicManager -> DeleteCommand : execute(m)
-activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
+' =======================
+' Command execution
+' =======================
+LogicManager -> DeleteJobCommand : execute(m)
+activate DeleteJobCommand
+
+DeleteJobCommand -> Model : deleteJobApplication(jobToDelete)
 activate Model
 
-Model --> DeleteCommand
+Model --> DeleteJobCommand
 deactivate Model
 
 create CommandResult
-DeleteCommand -> CommandResult
+DeleteJobCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> DeleteJobCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : r
-deactivate DeleteCommand
+DeleteJobCommand --> LogicManager : r
+deactivate DeleteJobCommand
 
-[<--LogicManager
+[<-- LogicManager
 deactivate LogicManager
 @enduml
