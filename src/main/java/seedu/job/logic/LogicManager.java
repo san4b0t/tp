@@ -53,15 +53,12 @@ public class LogicManager implements Logic {
         Command command = jobBookCommandParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
-        // Only save if the command indicates it should trigger a save operation
-        if (commandResult.shouldSave()) {
-            try {
-                dataStorage.saveJobApplicationData(model.getJobBook().getApplicationList());
-            } catch (AccessDeniedException e) {
-                throw new JobCommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
-            } catch (IOException ioe) {
-                throw new JobCommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
-            }
+        try {
+            dataStorage.saveJobApplicationData(model.getJobBook().getApplicationList());
+        } catch (AccessDeniedException e) {
+            throw new JobCommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
+        } catch (IOException ioe) {
+            throw new JobCommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
         }
 
         return commandResult;

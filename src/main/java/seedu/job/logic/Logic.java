@@ -30,10 +30,10 @@ public interface Logic {
      */
     ReadOnlyJobBook getJobBook();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
+    /** Returns an unmodifiable view of the filtered list of job applications */
     ObservableList<JobApplication> getFilteredApplicationList();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
+    /** Returns an unmodifiable view of the filtered list of job applications */
     ObservableList<JobApplication> getFilteredApplicationsList();
 
     /**

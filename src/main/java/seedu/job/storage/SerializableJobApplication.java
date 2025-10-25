@@ -58,9 +58,9 @@ public class SerializableJobApplication {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code JobApplication} object.
+     * Converts this Jackson-friendly adapted job application object into the model's {@code JobApplication} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted job application.
      */
     public JobApplication toModelType() throws IllegalValueException {
 

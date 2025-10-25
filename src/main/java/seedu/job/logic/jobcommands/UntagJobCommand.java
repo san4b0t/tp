@@ -1,8 +1,8 @@
 package seedu.job.logic.jobcommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.job.model.jobapplication.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -56,12 +56,31 @@ public class UntagJobCommand extends Command {
             throw new JobCommandException(MESSAGE_MISSING_TAG);
         }
 
-        jobToUntag.removeTags(tagsToRemove);
+        JobApplication untaggedJob = createUntaggedJob(jobToUntag, tagsToRemove);
 
-        model.updateFilteredJobApplicationList(PREDICATE_SHOW_ALL_APPLICATIONS);
         model.setRecentlyModifiedApplication(jobToUntag);
+        model.setJobApplication(jobToUntag, untaggedJob);
 
-        return new CommandResult(String.format(MESSAGE_TAG_REMOVAL_SUCCESS, JobMessages.format(jobToUntag)));
+        return new CommandResult(String.format(MESSAGE_TAG_REMOVAL_SUCCESS, JobMessages.format(untaggedJob)));
+    }
+
+    /**
+     * Creates and returns a {@code JobApplication} with the details of {@code jobToUntag}
+     * with specified {@code tagsToRemove} removed.
+     */
+    private static JobApplication createUntaggedJob(JobApplication jobToUntag, Set<Tag> tagsToRemove) {
+        assert jobToUntag != null;
+
+        Set<Tag> updatedTags = new HashSet<>(jobToUntag.getTags());
+        updatedTags.removeAll(tagsToRemove);
+
+        return new JobApplication(
+            jobToUntag.getCompanyName(),
+            jobToUntag.getRole(),
+            jobToUntag.getDeadline(),
+            jobToUntag.getStatus(),
+            updatedTags
+        );
     }
 
     @Override
