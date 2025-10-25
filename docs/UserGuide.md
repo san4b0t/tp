@@ -328,7 +328,8 @@ Format: `tag JOB_APPLICATION_INDEX t/TAG...`
 Input restrictions:
 1. A `TAG` must be 1 to 30 characters long (cannot be blank).
 2. A `TAG` is a single word (no spaces).
-3. Allowed characters: letters, digits, and at most 2 of the following special characters: `-`, `_`, `.`, `@`, `#`, `+`.
+3. Each job application can have up to 3 tags.
+4. Allowed characters: letters, digits, and at most 2 of the following special characters: `-`, `_`, `.`, `@`, `#`, `+`.
 
 Examples:
 - `tag 1 t/C#`
