@@ -331,10 +331,24 @@ Input restrictions:
 3. Each job application can have up to 3 tags.
 4. Allowed characters: letters, digits, and at most 2 of the following special characters: `-`, `_`, `.`, `@`, `#`, `+`.
 
-Examples:
-- `tag 1 t/C#`
-- `tag 2 t/6-Month t/C++ t/@HQ`
-- `tag 3 t/python_v3.12 t/BlockChain t/FinTech` 
+**Example Tagging Strategies:**
+
+**By priority:**
+- `tag 1 t/first-choice t/dream-job`
+- `tag 5 t/backup t/safe-option`
+
+**By work arrangement:**
+- `tag 2 t/remote t/flexible-hours`
+- `tag 7 t/onsite t/relocation-required`
+
+**By preparation needs:**
+- `tag 3 t/leetcode-heavy t/system-design`
+- `tag 4 t/C# t/Full-stack`
+
+**By timeline:**
+- `tag 1 t/fast-response t/rolling`
+- `tag 6 t/late-deadline t/backup-plan`
+
 
 Before:
 
