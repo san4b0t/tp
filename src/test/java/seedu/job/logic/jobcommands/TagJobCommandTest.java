@@ -255,7 +255,7 @@ public class TagJobCommandTest {
         @Override
         public void setRecentlyModifiedApplication(JobApplication application) {
         }
-      
+
         @Override
         public void setJobApplication(JobApplication target, JobApplication editedJobApplication) {
         }
