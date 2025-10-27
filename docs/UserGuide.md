@@ -228,6 +228,7 @@ After:
 ### Filtering Job Applications: `filter`
 
 Filters the list of job applications based on a single field: **Tags**, **Status**, or **Application Deadline**.
+* Filter command accepts only one filter flag at a time.
 
 Format: `filter FLAG/KEYWORD`
 

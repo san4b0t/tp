@@ -42,6 +42,24 @@ public class FilterCommandParser implements JobParser<FilterCommand> {
         }
 
         if (preamble.isEmpty()) {
+            // Count the number of filter flags are present
+            int flagCount = 0;
+            if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+                flagCount++;
+            }
+            if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
+                flagCount++;
+            }
+            if (argMultimap.getValue(PREFIX_DEADLINE).isPresent()) {
+                flagCount++;
+            }
+
+            // Reject if multiple flags are provided
+            if (flagCount > 1) {
+                throw new ParseException("Filter command accepts only one filter flag at a time. "
+                        + "Please use only one of: t/, s/, or d/");
+            }
+
             // Identify the flag to filter by the correct field
             if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
                 argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TAG);
