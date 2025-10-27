@@ -66,19 +66,35 @@ HustleHub is a **desktop application** for computing students keeping track of m
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* HustleHub uses three fixed status values to track your progress:
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+**HustleHub uses three fixed status values to track your progress**
 
 | Status | Meaning | When to use |
 |--------|---------|-------------|
 | `APPLIED` | Application submitted | After you click "Apply" |
 | `INPROGRESS` | Active process | During interviews, assessments, or waiting for response |
 | `REJECTED` | Closed unsuccessfully | After receiving rejection |
-**Important notes:**
+*Important notes:*
 - Status values are **case-insensitive** in commands: `applied` = `APPLIED`
 - These are the ONLY valid values; custom statuses are not supported
 - Use tags for more granular tracking (e.g., `t/phone-screen`, `t/final-round`)
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+**Date & Time Formats in HustleHub**
+
+*When adding/updating applications:*
+- Format: `yyyy-MM-ddTHH:mm` (time required)
+- Example: `2025-12-31T23:59`
+
+*When filtering by deadline:*
+- Format: `yyyy-MM-dd` (time not needed)
+- Example: `2025-12-31`
+- Matches all applications due on that date regardless of time
+
+*Rules:*
+- Must be future date (no past deadlines)
+- Uses 24-hour format
+- Minutes required even if `:00`
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -232,6 +248,7 @@ or, to remove all filters: `filter none`
 
 3. **Application Deadline (`d/`)**: Matches the exact date only, ignoring the time component.
     * The date must be in the **`yyyy-MM-dd`** format (e.g., `2025-12-31`).
+    * Matches all applications due on that date regardless of time
 
 #### **Examples**
 
