@@ -13,12 +13,12 @@ import seedu.job.logic.jobcommands.DeleteJobCommand;
 import seedu.job.logic.jobcommands.ExitCommand;
 import seedu.job.logic.jobcommands.FilterCommand;
 import seedu.job.logic.jobcommands.FindCommand;
+import seedu.job.logic.jobcommands.HelpCommand;
 import seedu.job.logic.jobcommands.ListCommand;
 import seedu.job.logic.jobcommands.SortCommand;
 import seedu.job.logic.jobcommands.TagJobCommand;
 import seedu.job.logic.jobcommands.UntagJobCommand;
 import seedu.job.logic.jobcommands.UpdateJobCommand;
-import seedu.job.logic.jobcommands.HelpCommand;
 import seedu.job.logic.parser.exceptions.ParseException;
 
 /**
