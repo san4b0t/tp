@@ -7,17 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.job.commons.core.LogsCenter;
-import seedu.job.logic.jobcommands.AddJobCommand;
-import seedu.job.logic.jobcommands.Command;
-import seedu.job.logic.jobcommands.DeleteJobCommand;
-import seedu.job.logic.jobcommands.ExitCommand;
-import seedu.job.logic.jobcommands.FilterCommand;
-import seedu.job.logic.jobcommands.FindCommand;
-import seedu.job.logic.jobcommands.ListCommand;
-import seedu.job.logic.jobcommands.SortCommand;
-import seedu.job.logic.jobcommands.TagJobCommand;
-import seedu.job.logic.jobcommands.UntagJobCommand;
-import seedu.job.logic.jobcommands.UpdateJobCommand;
+import seedu.job.logic.jobcommands.*;
 import seedu.job.logic.parser.exceptions.ParseException;
 
 /**
@@ -83,6 +73,9 @@ public class JobBookCommandParser {
 
         case UpdateJobCommand.COMMAND_WORD:
             return new UpdateCommandParser().parse(arguments);
+
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
