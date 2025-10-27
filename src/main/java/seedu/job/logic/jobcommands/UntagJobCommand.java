@@ -58,6 +58,7 @@ public class UntagJobCommand extends Command {
 
         JobApplication untaggedJob = createUntaggedJob(jobToUntag, tagsToRemove);
 
+        model.setRecentlyModifiedApplication(jobToUntag);
         model.setJobApplication(jobToUntag, untaggedJob);
 
         return new CommandResult(String.format(MESSAGE_TAG_REMOVAL_SUCCESS, JobMessages.format(untaggedJob)));

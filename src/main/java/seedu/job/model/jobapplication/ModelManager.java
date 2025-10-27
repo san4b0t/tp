@@ -23,6 +23,7 @@ public class ModelManager implements Model {
     private final JobBook jobBook;
     private final UserPrefs userPrefs;
     private final FilteredList<JobApplication> filteredApplications;
+    private JobApplication recentlyModifiedApplication;
 
     /**
      * Initializes a ModelManager with the given JobBook and userPrefs.
@@ -134,6 +135,16 @@ public class ModelManager implements Model {
     public void updateFilteredJobApplicationList(Predicate<JobApplication> predicate) {
         requireNonNull(predicate);
         filteredApplications.setPredicate(predicate);
+    }
+
+    @Override
+    public void setRecentlyModifiedApplication(JobApplication application) {
+        this.recentlyModifiedApplication = application;
+    }
+
+    @Override
+    public JobApplication getRecentlyModifiedApplication() {
+        return recentlyModifiedApplication;
     }
 
     @Override

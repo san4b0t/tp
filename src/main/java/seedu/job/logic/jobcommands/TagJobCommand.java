@@ -59,6 +59,8 @@ public class TagJobCommand extends Command {
 
         JobApplication taggedJob = createTaggedJob(jobToTag, tags);
 
+        // Update the viewed job applications
+        model.setRecentlyModifiedApplication(jobToTag);
         model.setJobApplication(jobToTag, taggedJob);
 
         return new CommandResult(String.format(MESSAGE_TAG_APPLICATION_SUCCESS, JobMessages.format(taggedJob)));

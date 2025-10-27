@@ -48,6 +48,7 @@ public class FilterCommand extends Command {
         requireNonNull(model);
         logger.log(Level.INFO, "using predicate to filter from saved job applications");
         model.updateFilteredJobApplicationList(predicate);
+        model.setRecentlyModifiedApplication(null);
         logger.log(Level.INFO, "end of filtering, return command result");
         return new CommandResult(
                 String.format(JobMessages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW,
