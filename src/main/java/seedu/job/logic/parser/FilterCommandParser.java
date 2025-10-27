@@ -2,7 +2,6 @@ package seedu.job.logic.parser;
 
 import static seedu.job.logic.JobMessages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.job.logic.parser.CliSyntax.PREFIX_DEADLINE;
-import static seedu.job.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.job.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.job.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.job.model.jobapplication.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
@@ -15,7 +14,6 @@ import seedu.job.logic.jobcommands.FilterCommand;
 import seedu.job.logic.parser.exceptions.ParseException;
 import seedu.job.model.jobapplication.DeadlinePredicate;
 import seedu.job.model.jobapplication.JobApplication;
-import seedu.job.model.jobapplication.RoleContainsKeywordPredicate;
 import seedu.job.model.jobapplication.StatusMatchesKeywordPredicate;
 import seedu.job.model.jobapplication.TagsContainKeywordPredicate;
 
@@ -34,7 +32,7 @@ public class FilterCommandParser implements JobParser<FilterCommand> {
      */
     public FilterCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TAG, PREFIX_ROLE, PREFIX_STATUS, PREFIX_DEADLINE);
+                ArgumentTokenizer.tokenize(args, PREFIX_TAG, PREFIX_STATUS, PREFIX_DEADLINE);
 
         String preamble = argMultimap.getPreamble().trim();
 
@@ -50,14 +48,6 @@ public class FilterCommandParser implements JobParser<FilterCommand> {
                 String keyword = argMultimap.getValue(PREFIX_TAG).get();
 
                 TagsContainKeywordPredicate predicate = new TagsContainKeywordPredicate(keyword.toLowerCase());
-
-                return new FilterCommand(predicate);
-
-            } else if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
-                argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROLE);
-                String keyword = argMultimap.getValue(PREFIX_ROLE).get();
-
-                RoleContainsKeywordPredicate predicate = new RoleContainsKeywordPredicate(keyword.toLowerCase());
 
                 return new FilterCommand(predicate);
 

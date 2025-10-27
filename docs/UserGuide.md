@@ -66,6 +66,18 @@ HustleHub is a **desktop application** for computing students keeping track of m
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* HustleHub uses three fixed status values to track your progress:
+
+| Status | Meaning | When to use |
+|--------|---------|-------------|
+| `APPLIED` | Application submitted | After you click "Apply" |
+| `INPROGRESS` | Active process | During interviews, assessments, or waiting for response |
+| `REJECTED` | Closed unsuccessfully | After receiving rejection |
+**Important notes:**
+- Status values are **case-insensitive** in commands: `applied` = `APPLIED`
+- These are the ONLY valid values; custom statuses are not supported
+- Use tags for more granular tracking (e.g., `t/phone-screen`, `t/final-round`)
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
@@ -199,7 +211,7 @@ After:
 
 ### Filtering Job Applications: `filter`
 
-Filters the list of job applications based on a single field: **Company Name**, **Role**, **Status**, or **Application Deadline**.
+Filters the list of job applications based on a single field: **Tags**, **Status**, or **Application Deadline**.
 
 Format: `filter FLAG/KEYWORD`
 
@@ -209,8 +221,8 @@ or, to remove all filters: `filter none`
 #### **Filtering Rules**
 
 
-1. **Company Name (`n/`)** and **Role (`r/`)**: Matches if the `KEYWORD` is **contained** in the respective field
-   (e.g., `n/backend` matches "Backend Engineer").
+1. **Tags (`t/`)**: Matches if the `KEYWORD` is **contained** in any tag
+   (e.g., `t/backend` matches a tag named "backend engineer").
     * The search is **case-insensitive**.
 
 
@@ -220,7 +232,6 @@ or, to remove all filters: `filter none`
 
 3. **Application Deadline (`d/`)**: Matches the exact date only, ignoring the time component.
     * The date must be in the **`yyyy-MM-dd`** format (e.g., `2025-12-31`).
-
 
 #### **Examples**
 
