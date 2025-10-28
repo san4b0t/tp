@@ -164,7 +164,8 @@ Examples:
 
 ### Finding job applications: `find`
 
-Finds job applications whose company's name fully matches any of the given keywords.
+Finds job applications where the company name contains any of the given
+keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
