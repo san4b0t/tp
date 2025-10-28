@@ -13,6 +13,7 @@ import seedu.job.logic.jobcommands.DeleteJobCommand;
 import seedu.job.logic.jobcommands.ExitCommand;
 import seedu.job.logic.jobcommands.FilterCommand;
 import seedu.job.logic.jobcommands.FindCommand;
+import seedu.job.logic.jobcommands.HelpCommand;
 import seedu.job.logic.jobcommands.ListCommand;
 import seedu.job.logic.jobcommands.SortCommand;
 import seedu.job.logic.jobcommands.TagJobCommand;
@@ -83,6 +84,9 @@ public class JobBookCommandParser {
 
         case UpdateJobCommand.COMMAND_WORD:
             return new UpdateCommandParser().parse(arguments);
+
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
