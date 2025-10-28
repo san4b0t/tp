@@ -12,8 +12,8 @@ HustleHub is a **desktop application** for computing students keeping track of m
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+1. Ensure you have Java `17` or above installed in your Computer.<br>
+   **Mac users:** Ensure you have Java `17` JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 1. Download the latest `.jar` file from this repository's [Releases](https://github.com/AY2526S1-CS2103T-T11-1/tp/releases) page.
 
@@ -35,9 +35,6 @@ HustleHub is a **desktop application** for computing students keeping track of m
    * `update 1 s/INPROGRESS d/2027-01-15T17:00` : Updates the 1st application's status and deadline.
 
    * `sort deadline` : Sorts the applications by **deadline** (ascending by default). You can also sort by `company` or `role`, and use `desc`. e.g. `sort company desc`
-
-
-   * `clear` : Deletes all applications.
 
    * `exit` : Exits the app.
 
@@ -63,7 +60,7 @@ HustleHub is a **desktop application** for computing students keeping track of m
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
