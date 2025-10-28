@@ -170,7 +170,7 @@ keywords.
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 #### Find Restrictions
-1. The search is not case-insensitive. e.g `tiktok` will match `TikTok`
+1. The search is case-insensitive. e.g `tiktok` will match `TikTok`
 
 
 2. The order of the keywords does not matter. e.g. `American Airlines` will match `Airlines American`
