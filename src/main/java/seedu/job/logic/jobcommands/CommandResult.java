@@ -19,9 +19,6 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    /** The data should be saved to storage. */
-    private final boolean shouldSave;
-
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -29,7 +26,6 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.shouldSave = shouldSave;
     }
 
     /**
@@ -59,9 +55,6 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean shouldSave() {
-        return shouldSave;
-    }
 
     @Override
     public boolean equals(Object other) {
@@ -77,13 +70,12 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit
-                && shouldSave == otherCommandResult.shouldSave;
+                && exit == otherCommandResult.exit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, shouldSave);
+        return Objects.hash(feedbackToUser, showHelp, exit);
     }
 
     @Override
@@ -92,7 +84,6 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
-                .add("shouldSave", shouldSave)
                 .toString();
     }
 

@@ -221,6 +221,16 @@ public class TagJobCommandTest {
         public void updateFilteredJobApplicationList(Predicate<JobApplication> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void setRecentlyModifiedApplication(JobApplication application) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public JobApplication getRecentlyModifiedApplication() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     private static class ModelStubWithJobApplication extends ModelStub {
@@ -240,6 +250,14 @@ public class TagJobCommandTest {
 
         @Override
         public void updateFilteredJobApplicationList(Predicate<JobApplication> predicate) {
+        }
+
+        @Override
+        public void setRecentlyModifiedApplication(JobApplication application) {
+        }
+
+        @Override
+        public void setJobApplication(JobApplication target, JobApplication editedJobApplication) {
         }
     }
 }

@@ -18,11 +18,11 @@ public class SortCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts applications by a field.\n"
         + "Parameters: FIELD [ORDER]\n"
         + "  FIELD: deadline | company | role\n"
-        + "  ORDER (optional): asc | desc (default: asc)\n"
+        + "  ORDER (optional): asc | ascending | desc | descending (default: asc)\n"
         + "Examples:\n"
         + "  sort deadline\n"
         + "  sort company desc\n"
-        + "  sort role asc";
+        + "  sort role ascending";
 
     public static final String MESSAGE_SORT_APPLICATION_SUCCESS = "Sorted Application by %s (%s).";
 
@@ -44,6 +44,7 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) throws JobCommandException {
         requireNonNull(model);
         model.sortJobApplication(this.field, this.order);
+        model.setRecentlyModifiedApplication(null);
         return new CommandResult(String.format(MESSAGE_SORT_APPLICATION_SUCCESS, field.name().toLowerCase(),
             order.name().toLowerCase()));
     }

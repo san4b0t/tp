@@ -13,7 +13,7 @@ import seedu.job.model.jobapplication.Model;
 
 /**
  * Represents a command that filters and lists all job applications
- * whose role, status, deadline or tags matches the keyword.
+ * whose status, deadline or tags matches the keyword.
  * Keyword matching is case-insensitive.
  */
 public class FilterCommand extends Command {
@@ -21,10 +21,10 @@ public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Filters all job applications by tags, role, status or application deadline "
-            + "that is input as keyword with the appropriate t/, r/, s/ or d/ flag respectively (case-insensitive) "
+            + ": Filters all job applications by tags, status or application deadline "
+            + "that is input as keyword with the appropriate t/, s/ or d/ flag respectively (case-insensitive) "
             + "and displays them as a list with index numbers.\n"
-            + "Tag and role filters match if the keyword is contained in the field.\n"
+            + "Tag filters match if the keyword is contained in the field.\n"
             + "Deadline filter matches by date only (format: yyyy-MM-dd), ignoring time.\n"
             + "To remove filters and show all job applications, use: " + COMMAND_WORD + " none\n"
             + "Parameters: FLAG [KEYWORD]... OR none\n"
@@ -48,6 +48,7 @@ public class FilterCommand extends Command {
         requireNonNull(model);
         logger.log(Level.INFO, "using predicate to filter from saved job applications");
         model.updateFilteredJobApplicationList(predicate);
+        model.setRecentlyModifiedApplication(null);
         logger.log(Level.INFO, "end of filtering, return command result");
         return new CommandResult(
                 String.format(JobMessages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW,

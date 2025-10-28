@@ -13,7 +13,8 @@ import seedu.job.logic.jobcommands.DeleteJobCommand;
 import seedu.job.logic.jobcommands.ExitCommand;
 import seedu.job.logic.jobcommands.FilterCommand;
 import seedu.job.logic.jobcommands.FindCommand;
-import seedu.job.logic.jobcommands.SaveCommand;
+import seedu.job.logic.jobcommands.HelpCommand;
+import seedu.job.logic.jobcommands.ListCommand;
 import seedu.job.logic.jobcommands.SortCommand;
 import seedu.job.logic.jobcommands.TagJobCommand;
 import seedu.job.logic.jobcommands.UntagJobCommand;
@@ -60,9 +61,6 @@ public class JobBookCommandParser {
         case DeleteJobCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case SaveCommand.COMMAND_WORD:
-            return new SaveCommand();
-
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
@@ -78,11 +76,17 @@ public class JobBookCommandParser {
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
+
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
 
         case UpdateJobCommand.COMMAND_WORD:
             return new UpdateCommandParser().parse(arguments);
+
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

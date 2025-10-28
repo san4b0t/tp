@@ -2,7 +2,6 @@ package seedu.job.logic.parser;
 
 import static seedu.job.logic.JobMessages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.job.logic.parser.CliSyntax.PREFIX_DEADLINE;
-import static seedu.job.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.job.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.job.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.job.model.jobapplication.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
@@ -15,7 +14,6 @@ import seedu.job.logic.jobcommands.FilterCommand;
 import seedu.job.logic.parser.exceptions.ParseException;
 import seedu.job.model.jobapplication.DeadlinePredicate;
 import seedu.job.model.jobapplication.JobApplication;
-import seedu.job.model.jobapplication.RoleContainsKeywordPredicate;
 import seedu.job.model.jobapplication.StatusMatchesKeywordPredicate;
 import seedu.job.model.jobapplication.TagsContainKeywordPredicate;
 
@@ -34,7 +32,7 @@ public class FilterCommandParser implements JobParser<FilterCommand> {
      */
     public FilterCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TAG, PREFIX_ROLE, PREFIX_STATUS, PREFIX_DEADLINE);
+                ArgumentTokenizer.tokenize(args, PREFIX_TAG, PREFIX_STATUS, PREFIX_DEADLINE);
 
         String preamble = argMultimap.getPreamble().trim();
 
@@ -44,52 +42,99 @@ public class FilterCommandParser implements JobParser<FilterCommand> {
         }
 
         if (preamble.isEmpty()) {
+            // Count how many filter flags are present
+            int flagCount = countPresentFlags(argMultimap);
+
+            // Reject if multiple flags are provided
+            if (flagCount > 1) {
+                throw new ParseException("Filter command accepts only one filter flag at a time. "
+                        + "Please use only one of: t/, s/, or d/");
+            }
+
             // Identify the flag to filter by the correct field
             if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
-                argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TAG);
-                String keyword = argMultimap.getValue(PREFIX_TAG).get();
-
-                TagsContainKeywordPredicate predicate = new TagsContainKeywordPredicate(keyword.toLowerCase());
-
-                return new FilterCommand(predicate);
-
-            } else if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
-                argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROLE);
-                String keyword = argMultimap.getValue(PREFIX_ROLE).get();
-
-                RoleContainsKeywordPredicate predicate = new RoleContainsKeywordPredicate(keyword.toLowerCase());
-
-                return new FilterCommand(predicate);
-
+                return createTagFilter(argMultimap);
             } else if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
-                argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STATUS);
-                String statusStr = argMultimap.getValue(PREFIX_STATUS).get();
-
-                try {
-                    JobApplication.Status status = JobApplication.Status.valueOf(statusStr.toUpperCase());
-                    StatusMatchesKeywordPredicate predicate = new StatusMatchesKeywordPredicate(status);
-
-                    return new FilterCommand(predicate);
-
-                } catch (IllegalArgumentException e) {
-                    throw new ParseException("Invalid status. Valid values are: APPLIED, INPROGRESS, REJECTED", e);
-                }
+                return createStatusFilter(argMultimap);
             } else if (argMultimap.getValue(PREFIX_DEADLINE).isPresent()) {
-                argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DEADLINE);
-                String dateStr = argMultimap.getValue(PREFIX_DEADLINE).get();
-
-                try {
-                    LocalDate date = LocalDate.parse(dateStr, DATE_FORMATTER);
-                    DeadlinePredicate predicate = new DeadlinePredicate(date);
-
-                    return new FilterCommand(predicate);
-
-                } catch (DateTimeParseException e) {
-                    throw new ParseException("Invalid date format. Expected format: yyyy-MM-dd", e);
-                }
+                return createDeadlineFilter(argMultimap);
             }
         }
 
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+    }
+
+    /**
+     * Counts how many filter flags are present in the argument map.
+     *
+     * @param argMultimap The argument map to check
+     * @return The number of filter flags present
+     */
+    private int countPresentFlags(ArgumentMultimap argMultimap) {
+        int flagCount = 0;
+        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            flagCount++;
+        }
+        if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
+            flagCount++;
+        }
+        if (argMultimap.getValue(PREFIX_DEADLINE).isPresent()) {
+            flagCount++;
+        }
+        return flagCount;
+    }
+
+    /**
+     * Creates a FilterCommand that filters by tags.
+     *
+     * @param argMultimap The argument map containing the tag keyword
+     * @return A FilterCommand with a TagsContainKeywordPredicate
+     * @throws ParseException If duplicate prefixes are found
+     */
+    private FilterCommand createTagFilter(ArgumentMultimap argMultimap) throws ParseException {
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TAG);
+        String keyword = argMultimap.getValue(PREFIX_TAG).get();
+        TagsContainKeywordPredicate predicate = new TagsContainKeywordPredicate(keyword.toLowerCase());
+        return new FilterCommand(predicate);
+    }
+
+    /**
+     * Creates a FilterCommand that filters by status.
+     *
+     * @param argMultimap The argument map containing the status keyword
+     * @return A FilterCommand with a StatusMatchesKeywordPredicate
+     * @throws ParseException If duplicate prefixes are found or status is invalid
+     */
+    private FilterCommand createStatusFilter(ArgumentMultimap argMultimap) throws ParseException {
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STATUS);
+        String statusStr = argMultimap.getValue(PREFIX_STATUS).get();
+
+        try {
+            JobApplication.Status status = JobApplication.Status.valueOf(statusStr.toUpperCase());
+            StatusMatchesKeywordPredicate predicate = new StatusMatchesKeywordPredicate(status);
+            return new FilterCommand(predicate);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException("Invalid status. Valid values are: APPLIED, INPROGRESS, REJECTED", e);
+        }
+    }
+
+    /**
+     * Creates a FilterCommand that filters by deadline.
+     *
+     * @param argMultimap The argument map containing the deadline date
+     * @return A FilterCommand with a DeadlinePredicate
+     * @throws ParseException If duplicate prefixes are found or date format is invalid
+     */
+    private FilterCommand createDeadlineFilter(ArgumentMultimap argMultimap) throws ParseException {
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DEADLINE);
+        String dateStr = argMultimap.getValue(PREFIX_DEADLINE).get();
+
+        try {
+            LocalDate date = LocalDate.parse(dateStr, DATE_FORMATTER);
+            DeadlinePredicate predicate = new DeadlinePredicate(date);
+            return new FilterCommand(predicate);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Invalid date format. Expected format: yyyy-MM-dd", e);
+        }
     }
 }

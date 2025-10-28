@@ -94,4 +94,16 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredJobApplicationList(Predicate<JobApplication> predicate);
+
+    /**
+     * Sets the recently modified job application for UI highlighting.
+     * @param application The recently modified application, or null to clear highlighting.
+     */
+    void setRecentlyModifiedApplication(JobApplication application);
+
+    /**
+     * Returns the recently modified job application.
+     * @return The recently modified application, or null if none.
+     */
+    JobApplication getRecentlyModifiedApplication();
 }

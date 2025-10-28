@@ -30,10 +30,10 @@ public interface Logic {
      */
     ReadOnlyJobBook getJobBook();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
+    /** Returns an unmodifiable view of the filtered list of job applications */
     ObservableList<JobApplication> getFilteredApplicationList();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
+    /** Returns an unmodifiable view of the filtered list of job applications */
     ObservableList<JobApplication> getFilteredApplicationsList();
 
     /**
@@ -50,4 +50,10 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Returns the recently modified job application for UI highlighting.
+     * @return The recently modified application, or null if none.
+     */
+    JobApplication getRecentlyModifiedApplication();
 }
