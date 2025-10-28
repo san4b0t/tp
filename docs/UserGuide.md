@@ -58,7 +58,7 @@ HustleHub is a **desktop application** for computing students keeping track of m
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -114,7 +114,7 @@ HustleHub is a **desktop application** for computing students keeping track of m
 |--------------------------------------------------|--------------------------------------------------|----------------------------------------------------------------------------|
 | [**add**](#adding-a-job-application-add)         | Adds a job application to HustleHub              | `add n/COMPANY_NAME r/ROLE s/STATUS d/DEADLINE [t/TAG]…​`                  |
 | [**delete**](#deleting-an-application--delete)   | Deletes a job application given its index number | `delete INDEX`                                                             |
-| [**find**](#finding-job-applications-find)       | Finds job applications by company name           | `find KEYWORD [MORE_KEYWORDS]`                                             |
+| [**find**](#finding-job-applications-find)       | Finds job applications by company name or role   | `find KEYWORD [MORE_KEYWORDS]`                                             |
 | [**filter**](#filtering-job-applications-filter) | Filters job applications by a property           | `filter FLAG/KEYWORD`                                                      |
 | [**sort**](#sorting-the-applications--sort)      | Sorts the job applications in HustleHub          | `sort FIELD`                                                               |
 | [**update**](#updating-a-job-application-update) | Updates an existing job application's details    | `update INDEX [n/COMPANY_NAME] [r/ROLE] [s/STATUS] [d/DEADLINE] [t/TAG]…​` |
@@ -192,37 +192,53 @@ Examples:
 
 ### Finding job applications: `find`
 
-Finds job applications whose company name matches any of the given keywords.
+Finds job applications whose **Company Name** or **Role** matches any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-#### Find Restrictions
-1. The search is case-insensitive and supports partial matching. e.g. `tiktok` will match `TikTok`, `TikTok Inc`, or `BigTikTok`
+#### **Find Rules**
 
+1. **Search Scope**: Searches both **Company Name** and **Role** fields.
+   * An application is returned if either field contains at least one keyword.
 
-2. The order of the keywords does not matter. e.g., `American Airlines` will match `Airlines American`.
+2. **Case-Insensitive**: The search is case-insensitive.
+   * `tiktok` matches "TikTok", "TikTok Inc", or "BigTikTok".
 
+3. **Partial Matching**: Keywords match partial words.
+   * `engineer` matches "Software Engineer", "Engineering Manager".
 
-3. Only the company name is searched.
+4. **Keyword Order**: The order of keywords does not matter.
+   * `American Airlines` matches "Airlines American".
 
+5. **OR Search**: Applications matching **at least one keyword** in **either field** are returned.
+   * `find Morgan engineer` returns applications where:
+     * Company contains "Morgan" (e.g., "J.P. Morgan"), OR
+     * Role contains "engineer" (e.g., "Software Engineer"), OR
+     * Both
 
-4. Job application companies matching at least one keyword will be returned (i.e., `OR` search).
-   e.g., `Morgan` will return `J.P. Morgan`, `Morgan Stanley`.
+#### **Examples**
 
-Examples:
+* `find morgan`
+  * Returns applications with company "Morgan Stanley" or "J.P. Morgan Chase".
 
-* `find morgan` 
-  * Returns `Morgan Stanley` and `J.P. Morgan Chase`
+* `find engineer`
+  * Returns applications with roles like "Software Engineer", "Data Engineer", "Engineering Intern".
 
+* `find Tiger America`
+  * Returns "Tiger Management" (company), "Bank of America" (company), or any role containing "Tiger" or "America".
 
-* `find Tiger America` 
-  * Returns `Tiger Management`, `Bank of America`.
+* `find backend google`
+  * Returns applications where:
+    * Company contains "Google", OR
+    * Role contains "backend" (e.g., "Backend Developer"), OR
+    * Both
 
+Before: `find morgan engineer`
 
-Before:
-![find command before ](images/find-command-before.png)
+![find command before](images/find-command-before.png)
 
-After:
+After: Returns all applications where company contains "morgan" OR role contains "engineer"
+
 ![find command](images/find-command.png)
 
 ### Filtering Job Applications: `filter`
