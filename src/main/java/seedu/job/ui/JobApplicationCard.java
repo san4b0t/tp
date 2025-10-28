@@ -45,16 +45,30 @@ public class JobApplicationCard extends UiPart<Region> {
     /**
      * Creates a {@code JobApplicationCard} with the given {@code JobApplication} and index to display.
      */
-    public JobApplicationCard(JobApplication jobApplication, int displayedIndex) {
+    public JobApplicationCard(JobApplication jobApplication, int displayedIndex, boolean isRecentlyModified) {
         super(FXML);
         this.jobApplication = jobApplication;
         id.setText(displayedIndex + ". ");
         companyName.setText(jobApplication.getCompanyName());
         role.setText(jobApplication.getRole());
         deadline.setText(jobApplication.getDeadline().format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm")));
-        status.setText(jobApplication.getStatus().toString());
+
+        // Set status text and add status-specific style class
+        JobApplication.Status statusValue = jobApplication.getStatus();
+        status.setText(statusValue.toString());
+        status.getStyleClass().add("status-" + statusValue.toString().toLowerCase());
+
+        // Apply recently modified highlighting if applicable
+        if (isRecentlyModified) {
+            cardPane.getStyleClass().add("recently-modified");
+        }
+
         jobApplication.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    Label tagLabel = new Label(tag.tagName);
+                    tagLabel.getStyleClass().add("tag-label");
+                    tags.getChildren().add(tagLabel);
+                });
     }
 }

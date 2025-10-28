@@ -32,7 +32,7 @@ public class SortCommandParser implements JobParser<SortCommand> {
         // field [order]
         try {
             SortField field = SortField.from(parts[0]);
-            SortOrder order = (parts.length >= 2) ? SortOrder.from(parts[1]) : SortOrder.ASC;
+            SortOrder order = (parts.length >= 2) ? SortOrder.from(parts[1]) : SortOrder.ASCENDING;
             return new SortCommand(field, order);
         } catch (IllegalArgumentException ex) {
             throw new ParseException(ex.getMessage());

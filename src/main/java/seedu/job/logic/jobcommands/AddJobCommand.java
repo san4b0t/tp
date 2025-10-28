@@ -42,6 +42,7 @@ public class AddJobCommand extends Command {
         }
 
         model.addJobApplication(toAdd);
+        model.setRecentlyModifiedApplication(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, JobMessages.format(toAdd)));
     }
 

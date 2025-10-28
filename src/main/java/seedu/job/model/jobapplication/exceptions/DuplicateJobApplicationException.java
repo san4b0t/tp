@@ -6,6 +6,6 @@ package seedu.job.model.jobapplication.exceptions;
  */
 public class DuplicateJobApplicationException extends RuntimeException {
     public DuplicateJobApplicationException() {
-        super("Operation would result in duplicate persons");
+        super("Operation would result in duplicate job applications");
     }
 }

@@ -20,6 +20,8 @@ public class JobApplicationListPanel extends UiPart<Region> {
     @FXML
     private ListView<JobApplication> jobApplicationListView;
 
+    private JobApplication recentlyModifiedApplication;
+
     /**
      * Creates a {@code JobApplicationListPanel} with the given {@code ObservableList}.
      */
@@ -27,6 +29,14 @@ public class JobApplicationListPanel extends UiPart<Region> {
         super(FXML);
         jobApplicationListView.setItems(jobApplicationList);
         jobApplicationListView.setCellFactory(listView -> new JobApplicationListViewCell());
+    }
+
+    /**
+     * Sets the recently modified application and refreshes the view to apply highlighting.
+     */
+    public void setRecentlyModifiedApplication(JobApplication application) {
+        this.recentlyModifiedApplication = application;
+        jobApplicationListView.refresh();
     }
 
     /**
@@ -43,7 +53,8 @@ public class JobApplicationListPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 int displayedIndex = getIndex() + 1;
-                setGraphic(new JobApplicationCard(jobApplication, displayedIndex).getRoot());
+                boolean isRecentlyModified = jobApplication.equals(recentlyModifiedApplication);
+                setGraphic(new JobApplicationCard(jobApplication, displayedIndex, isRecentlyModified).getRoot());
             }
         }
     }

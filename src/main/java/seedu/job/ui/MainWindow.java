@@ -163,7 +163,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public JobApplicationListPanel getPersonListPanel() {
+    public JobApplicationListPanel getJobApplicationListPanel() {
         return jobApplicationListPanel;
     }
 
@@ -178,6 +178,9 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            // Update the recently modified application for highlighting
+            jobApplicationListPanel.setRecentlyModifiedApplication(logic.getRecentlyModifiedApplication());
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
@@ -189,7 +192,7 @@ public class MainWindow extends UiPart<Stage> {
             return commandResult;
         } catch (JobCommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            resultDisplay.setErrorToUser(e.getMessage());
             throw e;
         }
     }

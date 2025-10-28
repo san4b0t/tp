@@ -2,8 +2,8 @@ package seedu.job.logic.jobcommands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.job.model.jobapplication.JobApplication.MAX_TAGS;
-import static seedu.job.model.jobapplication.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -57,12 +57,32 @@ public class TagJobCommand extends Command {
             throw new JobCommandException(MESSAGE_MAX_TAGS);
         }
 
-        jobToTag.addTags(tags);
+        JobApplication taggedJob = createTaggedJob(jobToTag, tags);
 
         // Update the viewed job applications
-        model.updateFilteredJobApplicationList(PREDICATE_SHOW_ALL_APPLICATIONS);
+        model.setRecentlyModifiedApplication(jobToTag);
+        model.setJobApplication(jobToTag, taggedJob);
 
-        return new CommandResult(String.format(MESSAGE_TAG_APPLICATION_SUCCESS, JobMessages.format(jobToTag)));
+        return new CommandResult(String.format(MESSAGE_TAG_APPLICATION_SUCCESS, JobMessages.format(taggedJob)));
+    }
+
+    /**
+     * Creates and returns a {@code JobApplication} with the details of {@code jobToTag}
+     * with additional {@code tags}.
+     */
+    private static JobApplication createTaggedJob(JobApplication jobToTag, Set<Tag> tagsToAdd) {
+        assert jobToTag != null;
+
+        Set<Tag> updatedTags = new HashSet<>(jobToTag.getTags());
+        updatedTags.addAll(tagsToAdd);
+
+        return new JobApplication(
+            jobToTag.getCompanyName(),
+            jobToTag.getRole(),
+            jobToTag.getDeadline(),
+            jobToTag.getStatus(),
+            updatedTags
+        );
     }
 
     @Override
