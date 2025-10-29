@@ -42,6 +42,201 @@ HustleHub is a **desktop application** for computing students keeping track of m
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Understanding HustleHub
+
+Before diving into commands, let's understand the core concepts of HustleHub.
+
+### Application Structure
+
+Every job application in HustleHub contains the following information:
+
+```
+┌─────────────────────────────────────────────────────┐
+│           Job Application Entry                     │
+├─────────────────────────────────────────────────────┤
+│ Company Name: Microsoft              [Required]     │
+│ Role: Cloud Engineer                 [Required]     │
+│ Status: INPROGRESS                   [Required]     │
+│ Deadline: 2025-10-31T23:59           [Required]     │
+│ Tags: remote, urgent, priority       [Optional]     │
+│      (maximum 3 tags)                               │
+└─────────────────────────────────────────────────────┘
+```
+
+**Key Points:**
+- All fields except tags are **required** when adding an application
+- **Company + Role** combination must be unique (no duplicates)
+- **Tags** are optional and limited to 3 per application (max 30 characters each)
+- **Deadline** must be a future date and time
+
+### Status Lifecycle
+
+Applications progress through three distinct stages:
+
+```
+   APPLIED ────────→ INPROGRESS ────────→ REJECTED
+   (Submitted)       (Active Process)      (Closed)
+      │                    │                   │
+      │                    │                   │
+   After you          During interviews,    After receiving
+   click "Apply"      assessments, or       rejection
+                      waiting for response
+```
+
+**Important Notes:**
+- Status changes are **manual** - update them as your application progresses
+- Use **tags** for more detailed tracking (e.g., `t/phone-screen`, `t/final-round`)
+- Applications remain in your records even after rejection for future reference
+
+### Filter vs. Find vs. Sort
+
+Understanding the difference between these three operations:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ FILTER: Narrow down by exact property match                 │
+│ ----------------------------------------------------------- │
+│ [10 apps] ──filter s/APPLIED──> [3 apps with APPLIED]       │
+│                                                             │
+│ • Hides non-matching applications                           │
+│ • Searches one field at a time (status, company, etc.)      │
+│ • Exact match for status/deadline, partial for text         │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ FIND: Search across company name AND role                   │
+│ ----------------------------------------------------------- │
+│ [10 apps] ──find Google engineer──> [4 matching apps]       │
+│                                                             │
+│ • Hides non-matching applications                           │
+│ • Searches BOTH company name and role simultaneously        │
+│ • Partial keyword matching (case-insensitive)               │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ SORT: Reorder applications (no hiding)                      │
+│ ----------------------------------------------------------- │
+│ [A, Z, M, B] ──sort company──> [A, B, M, Z]                 │
+│                                                             │
+│ • Shows ALL applications, just reordered                    │
+│ • Available fields: company, role, deadline                 │
+│ • Ascending (asc) or descending (desc)                      │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Quick Decision Guide:**
+
+| I want to... | Use this command | Example |
+|-------------|------------------|---------|
+| See only applications with a specific status | `filter` | `filter s/APPLIED` |
+| See only applications due on a date | `filter` | `filter d/2025-12-31` |
+| Search for a company or role name | `find` | `find Google` or `find engineer` |
+| Organize by deadline or alphabetically | `sort` | `sort deadline` or `sort company` |
+| Reset and see everything | `filter none` or `list` | `filter none` or `list`|
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Common Workflows
+
+Now that you understand the core concepts, here are practical scenarios showing how to combine commands effectively.
+
+### Scenario 1: Weekly Deadline Check
+**Goal:** Review upcoming deadlines and prioritize urgent applications
+
+1. `sort deadline` — See applications by earliest deadline
+2. Review the top 5 results to identify time-sensitive applications
+3. `tag 1 t/urgent` — Mark the most urgent application
+4. `tag 2 t/urgent` — Mark the second urgent application
+5. `filter t/urgent` — Focus view on only urgent applications
+
+**Why this works:** Sorting by deadline surfaces what needs attention first, tagging creates a reusable category, and filtering lets you focus exclusively on what matters this week.
+
+### Scenario 2: After Receiving Interview Invitation
+**Goal:** Update application status and add preparation notes
+
+1. `find Stripe` — Quickly locate the company (avoid scrolling through full list)
+2. Note the index shown (e.g., application appears as #3)
+3. `update 3 s/INPROGRESS` — Change status from APPLIED to INPROGRESS
+4. `tag 3 t/system-design t/behavioral-prep` — Add interview preparation tags
+
+**Why this works:** `find` is faster than manual searching, `update` changes the status in one command, and tags help you track what interview prep is needed.
+
+### Scenario 3: End-of-Month Cleanup
+**Goal:** Remove old rejected applications to keep your list focused
+
+1. `filter s/REJECTED` — View only rejected applications
+2. Review deadlines to identify outdated entries (e.g., rejections from 3+ months ago)
+3. `delete 1` — Remove the first result
+4. `delete 1` — Remove the next (which is now first after previous deletion)
+5. `list` — Return to viewing all applications
+
+**Why this works:** Filtering isolates what you want to clean up, repeated `delete 1` removes items efficiently as the list re-indexes, and `list` clears the filter to return to normal view.
+
+### Scenario 4: Comparing Similar Roles
+**Goal:** Find and compare backend engineer positions across companies
+
+1. `find backend` — Search for applications with "backend" in company name or role
+2. `sort deadline` — Order by application deadline (earliest first)
+3. Review side-by-side: company names, deadlines, and existing tags
+4. `tag 2 t/top-choice` — Mark your preferred option among the results
+5. `tag 5 t/backup` — Tag a safe backup option
+
+**Why this works:** `find` searches both company and role fields to locate backend positions, deadline sorting shows urgency, and tags help you categorize your preferences within the search results.
+
+### Scenario 5: Preparing for Career Fair
+**Goal:** Add multiple new applications quickly after a career fair
+
+1. `add n/Meta r/Software Engineer s/APPLIED d/2025-11-15T23:59` — Add first company
+2. `add n/Netflix r/Backend Engineer s/APPLIED d/2025-11-20T23:59 t/career-fair` — Add second with tag
+3. `add n/Salesforce r/Cloud Engineer s/APPLIED d/2025-11-18T23:59 t/career-fair` — Add third
+4. `filter t/career-fair` — View all applications from this event
+5. `sort deadline` — Prioritize by earliest deadline
+
+**Why this works:** Batch adding with a consistent tag (`t/career-fair`) lets you track applications from the same source, filtering by that tag groups them together, and sorting helps you tackle applications strategically.
+
+### Scenario 6: Following Up on Pending Applications
+**Goal:** Identify applications with no response for 2+ weeks
+
+1. `filter s/APPLIED` — Show applications still in "applied" status
+2. `sort deadline asc` — Order by deadline (earliest first)
+3. Review companies where deadline is approaching but status hasn't changed
+4. `tag 3 t/follow-up` — Mark applications that need a status check email
+5. `filter t/follow-up` — Focus on applications requiring action
+
+**Why this works:** Status filtering finds stagnant applications, deadline sorting reveals time pressure, tags create an actionable todo list, and re-filtering keeps you focused on follow-up tasks.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Command summary
+
+### General Commands
+
+| Command                                      | Description                                  | Format |
+|----------------------------------------------|----------------------------------------------|--------|
+| [**exit**](#exiting-the-program--exit)       | Exits the program                            | `exit` |
+| [**help**](#viewing-help--help)              | Displays how to use all commands in a window | `help` |
+| [**list**](#listing-all-applications--list)  | Lists all applications                       | `list` |
+
+### Application Management
+
+| Command                                          | Description                                      | Format                                                                     |
+|--------------------------------------------------|--------------------------------------------------|----------------------------------------------------------------------------|
+| [**add**](#adding-a-job-application-add)         | Adds a job application to HustleHub              | `add n/COMPANY_NAME r/ROLE s/STATUS d/DEADLINE [t/TAG]…​`                  |
+| [**delete**](#deleting-an-application--delete)   | Deletes a job application given its index number | `delete INDEX`                                                             |
+| [**find**](#finding-job-applications-find)       | Finds job applications by company name or role   | `find KEYWORD [MORE_KEYWORDS]`                                             |
+| [**filter**](#filtering-job-applications-filter) | Filters job applications by a property           | `filter FLAG/KEYWORD`                                                      |
+| [**sort**](#sorting-the-applications--sort)      | Sorts the job applications in HustleHub          | `sort FIELD`                                                               |
+| [**update**](#updating-a-job-application-update) | Updates an existing job application's details    | `update INDEX [n/COMPANY_NAME] [r/ROLE] [s/STATUS] [d/DEADLINE] [t/TAG]…​` |
+
+### Tag Management
+
+| Command                           | Description                                   | Format                                  |
+|-----------------------------------|-----------------------------------------------|-----------------------------------------|
+| [**tag**](#adding-tags-tag)       | Adds new tags to a specified job application  | `tag JOB_APPLICATION_INDEX t/NEW_TAG`   |
+| [**untag**](#removing-tags-untag) | Removes tags from a specified job application | `untag JOB_APPLICATION_INDEX t/NEW_TAG` |
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -96,36 +291,13 @@ HustleHub is a **desktop application** for computing students keeping track of m
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
-
-### General Commands
-
-| Command                                      | Description                                  | Format |
-|----------------------------------------------|----------------------------------------------|--------|
-| [**help**](#viewing-help--help)              | Displays how to use all commands in a window | `help` |
-| [**exit** ](#exiting-the-program--exit-exit) | Exits the program                            | `exit` |
-
-### Application Management
-
-| Command                                          | Description                                      | Format                                                                     |
-|--------------------------------------------------|--------------------------------------------------|----------------------------------------------------------------------------|
-| [**add**](#adding-a-job-application-add)         | Adds a job application to HustleHub              | `add n/COMPANY_NAME r/ROLE s/STATUS d/DEADLINE [t/TAG]…​`                  |
-| [**delete**](#deleting-an-application--delete)   | Deletes a job application given its index number | `delete INDEX`                                                             |
-| [**find**](#finding-job-applications-find)       | Finds job applications by company name or role   | `find KEYWORD [MORE_KEYWORDS]`                                             |
-| [**filter**](#filtering-job-applications-filter) | Filters job applications by a property           | `filter FLAG/KEYWORD`                                                      |
-| [**sort**](#sorting-the-applications--sort)      | Sorts the job applications in HustleHub          | `sort FIELD`                                                               |
-| [**update**](#updating-a-job-application-update) | Updates an existing job application's details    | `update INDEX [n/COMPANY_NAME] [r/ROLE] [s/STATUS] [d/DEADLINE] [t/TAG]…​` |
-
-### Tag Management
-
-| Command                           | Description                                   | Format                                  |
-|-----------------------------------|-----------------------------------------------|-----------------------------------------|
-| [**tag**](#adding-tags-tag)       | Adds new tags to a specified job application  | `tag JOB_APPLICATION_INDEX t/NEW_TAG`   |
-| [**untag**](#removing-tags-untag) | Removes tags from a specified job application | `untag JOB_APPLICATION_INDEX t/NEW_TAG` |
-
----
-
 ## General Commands
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
 
 ### Viewing help : `help`
 
@@ -136,11 +308,15 @@ Format: `help`
 Result for `help`:
 ![help message](images/helpMessage.png)
 
-### Exiting the program : `exit`
+### Listing all applications : `list`
 
-Exits the program.
+Lists all job applications in HustleHub. This is useful after filtering to return to viewing all applications.
 
-Format: `exit`
+Format: `list`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+`list` and `filter none` have the same effect - both show all applications.
+</div>
 
 ### Saving data
 
@@ -266,12 +442,8 @@ or, to remove all filters: `filter none`
 
 #### **Examples**
 
-* `filter n/Google`
-    * Returns applications where the company name contains "Google" (e.g., "Google LLC", "Googler Inc.").
-
-
-* `filter r/engineer`
-    * Returns applications for roles containing "engineer" (e.g., "Software Engineer", "Data Engineering Intern").
+* `filter t/backend`
+    * Returns applications with tags containing "backend" (e.g., "backend", "backend-dev").
 
 
 * `filter s/applied`
@@ -299,7 +471,7 @@ Sorts the current list of applications by a chosen field, in ascending or descen
 
 **Format:** `sort FIELD [ORDER]`
 - **FIELD**: `company` \| `role` \| `deadline`
-- **ORDER** (optional): `asc` \| `desc` (default: `asc`)
+- **ORDER** (optional): `asc` \| `ascending` \| `desc` \| `descending` (default: `asc`)
 
 **Notes:**
 - Sorting is **stable** and **case-insensitive** for text fields (`company`, `role`).
@@ -308,7 +480,7 @@ Sorts the current list of applications by a chosen field, in ascending or descen
 **Examples:**
 - `sort deadline`
 - `sort company desc`
-- `sort role asc`
+- `sort role ascending`
 
 Before:
 ![sort_before.png](images/sort_before.png)
@@ -367,7 +539,7 @@ Input restrictions:
 1. A `TAG` must be 1 to 30 characters long (cannot be blank).
 2. A `TAG` is a single word (no spaces).
 3. Each job application can have up to 3 tags.
-4. Allowed characters: letters, digits, and at most 2 of the following special characters: `-`, `_`, `.`, `@`, `#`, `+`.
+4. Allowed characters: letters, digits, and at most 2 of the following special characters: `-`, `.`, `@`, `#`, `_`, `+`.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 If you add a mix of duplicate and new tags, the new tags will be added whilst duplicates will be ignored.
@@ -411,8 +583,8 @@ Format: `untag JOB_APPLICATION_INDEX t/TAG...`
 Input restrictions:
 1. A `TAG` must be 1 to 30 characters long (cannot be blank).
 2. A `TAG` is a single word (no spaces).
-3. Allowed characters: letters, digits, and at most 2 of the following special characters: `-`, `_`, `.`, `@`, `#`, `+`.
-4. Inputted tags must already exist.
+3. Allowed characters: letters, digits, and at most 2 of the following special characters: `-`, `.`, `@`, `#`, `_`, `+`.
+4. Inputted tags must already exist on the application.
 
 Examples:
 - `untag 1 t/SQL`
