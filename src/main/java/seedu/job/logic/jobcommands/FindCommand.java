@@ -30,12 +30,10 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredJobApplicationList(predicate);
+        model.setRecentlyModifiedApplication(null);
         return new CommandResult(
-            String.format(
-                JobMessages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW,
-                model.getFilteredApplicationList().size()
-            )
-        );
+                String.format(JobMessages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW,
+                        model.getFilteredApplicationList().size()));
     }
 
     @Override

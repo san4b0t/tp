@@ -30,8 +30,11 @@ public class NameContainsKeywordsPredicate implements Predicate<JobApplication> 
     @Override
     public boolean test(JobApplication jobApplication) {
         String company = jobApplication.getCompanyName();
+        String role = jobApplication.getRole();
+        String position = company + " " + role;
+
         return keywords.stream().anyMatch(
-            keyword -> StringUtil.containsWordIgnoreCase(company, keyword)
+            keyword -> StringUtil.containsWordIgnoreCase(position, keyword)
         );
     }
 

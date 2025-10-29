@@ -43,6 +43,7 @@ public class DeleteJobCommand extends Command {
 
         JobApplication jobToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteJobApplication(jobToDelete);
+        model.setRecentlyModifiedApplication(null);
         return new CommandResult(String.format(MESSAGE_DELETE_APPLICATION_SUCCESS, JobMessages.format(jobToDelete)));
     }
 

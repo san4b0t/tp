@@ -23,7 +23,9 @@ public class TagJobCommand extends Command {
     public static final String MESSAGE_TAG_APPLICATION_SUCCESS = "Application has been tagged!";
     public static final String COMMAND_WORD = "tag";
 
-    public static final String MESSAGE_MAX_TAGS = "Each application can have up to " + MAX_TAGS + " tags.";
+    public static final String MESSAGE_MAX_TAGS = "Cannot add tags: This application would exceed "
+            + MAX_TAGS + " tags (the maximum allowed). "
+            + "Please remove some tags using 'untag' before adding new ones.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Tags a job application.\n"
             + "Parameters: index_name t/tag t/tag t/tag\n"
             + "Example: " + COMMAND_WORD + " 1 t/Intern t/Summer t/on-site";
@@ -59,6 +61,8 @@ public class TagJobCommand extends Command {
 
         JobApplication taggedJob = createTaggedJob(jobToTag, tags);
 
+        // Update the viewed job applications
+        model.setRecentlyModifiedApplication(jobToTag);
         model.setJobApplication(jobToTag, taggedJob);
 
         return new CommandResult(String.format(MESSAGE_TAG_APPLICATION_SUCCESS, JobMessages.format(taggedJob)));

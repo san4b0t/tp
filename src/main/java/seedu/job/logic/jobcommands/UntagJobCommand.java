@@ -22,7 +22,9 @@ public class UntagJobCommand extends Command {
     public static final String MESSAGE_TAG_REMOVAL_SUCCESS = "Tags have been removed!";
     public static final String COMMAND_WORD = "untag";
 
-    public static final String MESSAGE_MISSING_TAG = "The entered tags do not exist!";
+    public static final String MESSAGE_MISSING_TAG = "Cannot remove tags: One or more of the specified tags "
+            + "do not exist on this application. "
+            + "Please check the existing tags and try again.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes tags from a job application.\n"
             + "Parameters: index_name t/tag t/tag t/tag\n"
             + "Example: " + COMMAND_WORD + " 1 t/Intern t/Summer t/on-site";
@@ -58,6 +60,7 @@ public class UntagJobCommand extends Command {
 
         JobApplication untaggedJob = createUntaggedJob(jobToUntag, tagsToRemove);
 
+        model.setRecentlyModifiedApplication(jobToUntag);
         model.setJobApplication(jobToUntag, untaggedJob);
 
         return new CommandResult(String.format(MESSAGE_TAG_REMOVAL_SUCCESS, JobMessages.format(untaggedJob)));
