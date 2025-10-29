@@ -40,10 +40,10 @@ public class UniqueApplicationList implements Iterable<JobApplication> {
     private final Set<String> uniqueHash = new HashSet<>();
 
     /**
-     * Adds an Application to the list. WITHOUT CHECKS
+     * Adds an Application to the list at the beginning. WITHOUT CHECKS
      */
     private void addUnsafe(JobApplication toAdd) {
-        internalList.add(toAdd);
+        internalList.add(0, toAdd);
         uniqueHash.add(toAdd.getUniqueKey());
     }
 

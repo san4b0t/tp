@@ -9,7 +9,6 @@ import static seedu.job.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.job.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.Collections;
@@ -28,7 +27,6 @@ import seedu.job.model.tag.Tag;
  */
 public class UpdateCommandParser implements JobParser<UpdateJobCommand> {
 
-    private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
     /**
      * Parses the given {@code String} of arguments in the context of the UpdateJobCommand
@@ -71,11 +69,12 @@ public class UpdateCommandParser implements JobParser<UpdateJobCommand> {
         if (argMultimap.getValue(PREFIX_DEADLINE).isPresent()) {
             try {
                 String deadlineStr = argMultimap.getValue(PREFIX_DEADLINE).get();
-                LocalDateTime deadline = LocalDateTime.parse(deadlineStr, DATETIME_FORMATTER);
+                LocalDateTime deadline = FlexibleDateTimeParser.parse(deadlineStr);
                 ParserUtil.validateDeadlineNotInPast(deadline);
                 updateJobDescriptor.setDeadline(deadline);
             } catch (DateTimeParseException e) {
-                throw new ParseException("Invalid deadline format. Expected format: yyyy-MM-ddTHH:mm", e);
+                String supportedFormats = String.join(", ", FlexibleDateTimeParser.getSupportedFormatsExamples());
+                throw new ParseException("Invalid deadline format. Supported formats: " + supportedFormats, e);
             }
         }
 

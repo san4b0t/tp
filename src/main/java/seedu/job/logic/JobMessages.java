@@ -45,6 +45,15 @@ public class JobMessages {
                 .append(application.getStatus())
                 .append("; Deadline: ")
                 .append(application.getDeadline());
+
+        // Include tags if present
+        if (!application.getTags().isEmpty()) {
+            builder.append("; Tags: ");
+            builder.append(application.getTags().stream()
+                    .map(tag -> tag.tagName)
+                    .collect(Collectors.joining(", ")));
+        }
+
         return builder.toString();
     }
 

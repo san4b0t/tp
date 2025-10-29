@@ -66,11 +66,13 @@ public class UpdateCommandParserTest {
                 "Invalid status. Valid values are: APPLIED, INPROGRESS, REJECTED");
 
         // invalid deadline format
+        String expectedDeadlineMessage = "Invalid deadline format. Supported formats: "
+                + String.join(", ", FlexibleDateTimeParser.getSupportedFormatsExamples());
         assertParseFailure(parser, "1 " + PREFIX_DEADLINE + "2025-13-01",
-                "Invalid deadline format. Expected format: yyyy-MM-ddTHH:mm");
+                expectedDeadlineMessage);
 
         assertParseFailure(parser, "1 " + PREFIX_DEADLINE + "invalid-date",
-                "Invalid deadline format. Expected format: yyyy-MM-ddTHH:mm");
+                expectedDeadlineMessage);
 
         // past deadline
         assertParseFailure(parser, "1 " + PREFIX_DEADLINE + "2020-01-01T00:00",
