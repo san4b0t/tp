@@ -244,16 +244,16 @@ Now that you understand the core concepts, here are practical scenarios showing 
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add n/COMPANY_NAME`, `COMPANY_NAME` is a parameter which can be used as `add n/Google r/Software Engineer s/APPLIED d/2025-12-31T23:59`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/COMPANY_NAME [t/TAG]` can be used as `n/Google t/priority` or as `n/Google`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/urgent`, `t/urgent t/remote` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/COMPANY_NAME r/ROLE`, `r/ROLE n/COMPANY_NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -351,7 +351,7 @@ Examples:
 
 ### Deleting an application : `delete`
 
-Deletes the specified application from the application book.
+Deletes the specified application from HustleHub.
 
 Format: `delete INDEX`
 
@@ -360,7 +360,7 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd application in the application book.
+* `list` followed by `delete 2` deletes the 2nd application in HustleHub.
 * After filtering the list, `delete 1` deletes the 1st application in the currently displayed results.
 
 ### Finding job applications: `find`
@@ -428,7 +428,7 @@ or, to remove all filters: `filter none`
 
 
 1. **Tags (`t/`)**: Matches if the `KEYWORD` is **contained** in any tag
-   (e.g., `t/backend` matches a tag named "backend engineer").
+   (e.g., `t/backend` matches a tag named "backend-engineer").
     * The search is **case-insensitive**.
 
 
