@@ -299,6 +299,10 @@ Exits the program.
 
 Format: `exit`
 
+<br>
+
+[<u>Back to Command Summary</u>](#command-summary)
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -307,6 +311,10 @@ Format: `help`
 
 Result for `help`:
 ![help message](images/helpMessage.png)
+
+<br>
+
+[<u>Back to Command Summary</u>](#command-summary)
 
 ### Listing all applications : `list`
 
@@ -317,6 +325,10 @@ Format: `list`
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 `list` and `filter none` have the same effect - both show all applications.
 </div>
+
+<br>
+
+[<u>Back to Command Summary</u>](#command-summary)
 
 ### Saving data
 
@@ -349,6 +361,10 @@ Examples:
 * `add n/Microsoft r/Cloud engineer s/INPROGRESS d/2025-10-31T23:59`
 * `add n/Microsoft r/Cloud engineer s/INPROGRESS d/2025-10-31T23:59 t/Low-pay t/Good-boss`
 
+<br>
+
+[<u>Back to Command Summary</u>](#command-summary)
+
 ### Deleting an application : `delete`
 
 Deletes the specified application from the application book.
@@ -362,6 +378,10 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd application in the application book.
 * After filtering the list, `delete 1` deletes the 1st application in the currently displayed results.
+
+<br>
+
+[<u>Back to Command Summary</u>](#command-summary)
 
 ### Finding job applications: `find`
 
@@ -465,6 +485,10 @@ After filtering: `INPROGRESS`
 
 ![result for 'filter s/inprogress'](images/filterInProgressResult.png)
 
+<br>
+
+[<u>Back to Command Summary</u>](#command-summary)
+
 ### Sorting the applications : `sort`
 
 Sorts the current list of applications by a chosen field, in ascending or descending order.
@@ -487,6 +511,10 @@ Before:
 
 After:
 ![sort_after.png](images/sort_after.png)
+
+<br>
+
+[<u>Back to Command Summary</u>](#command-summary)
 
 ### Updating a job application: `update`
 
@@ -524,6 +552,10 @@ Before:
 After updating with `update 2 s/INPROGRESS d/2027-01-15T17:00 t/priority t/urgent`:
 
 ![update_after.png](images/update_after.png)
+
+<br>
+
+[<u>Back to Command Summary</u>](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -563,16 +595,17 @@ If you add a mix of duplicate and new tags, the new tags will be added whilst du
 - `tag 1 t/fast-response t/rolling`
 - `tag 6 t/late-deadline t/backup-plan`
 
-<div style="display: flex; gap: 20px;">
-  <div style="flex: 1;">
-    <strong>Before:</strong><br>
-    <img src="images/tag_before.png" alt="tag_before.png">
-  </div>
-  <div style="flex: 1;">
-    <strong>After tagging:</strong><br>
-    <img src="images/tag_after.png" alt="tag_after.png">
-  </div>
-</div>
+Before:
+
+![tag_before.png](images/tag_before.png)
+
+After tagging:
+
+![tag_after.png](images/tag_after.png)
+
+<br>
+
+[<u>Back to Command Summary</u>](#command-summary)
 
 ### Removing tags: `untag`
 
@@ -598,6 +631,10 @@ Before:
 After untagging:
 
 ![Untag_after.png](images/Untag_after.png)
+
+<br>
+
+[<u>Back to Command Summary</u>](#command-summary)
 
 ---
 
