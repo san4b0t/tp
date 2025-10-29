@@ -15,8 +15,12 @@ public enum SortOrder { ASCENDING, DESCENDING;
     public static SortOrder from(String s) {
         String k = s.trim().toLowerCase();
         switch (k) {
-        case "asc", "ascending" -> { return ASCENDING; }
-        case "desc", "descending" -> { return DESCENDING; }
+        case "asc", "ascending" -> {
+            return ASCENDING;
+        }
+        case "desc", "descending" -> {
+            return DESCENDING;
+        }
         default -> throw new IllegalArgumentException("Unknown sort order: " + s);
         }
     }

@@ -36,7 +36,7 @@ public class Tag {
      */
     public static boolean isValidTagName(String test) {
         return !test.isEmpty()
-            && test.length() < MAX_TAG_LENGTH
+            && test.length() <= MAX_TAG_LENGTH
             && test.matches(VALIDATION_REGEX);
     }
 
