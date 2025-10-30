@@ -1,5 +1,6 @@
 package seedu.job.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.job.logic.JobMessages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.job.logic.parser.JobCommandParserTestUtil.assertParseFailure;
 import static seedu.job.logic.parser.JobCommandParserTestUtil.assertParseSuccess;
@@ -10,6 +11,7 @@ import java.util.HashSet;
 import org.junit.jupiter.api.Test;
 
 import seedu.job.logic.jobcommands.AddJobCommand;
+import seedu.job.logic.parser.exceptions.ParseException;
 import seedu.job.model.jobapplication.JobApplication;
 
 /**
@@ -68,11 +70,33 @@ public class AddCommandParserTest {
     }
 
     @Test
-    public void parse_invalidDeadline_throwsParseException() {
+    public void parse_invalidDeadlineFormat_throwsParseException() {
         String expectedMessage = "Invalid deadline format. Supported formats: "
                 + String.join(", ", FlexibleDateTimeParser.getSupportedFormatsExamples());
         assertParseFailure(parser, " n/Google r/SoftwareEngineer s/APPLIED d/invalid-date",
                 expectedMessage);
+    }
+
+    @Test
+    public void parse_invalidDate_throwsParseException() {
+        // Test that invalid dates like Feb 30 show "Invalid date" message
+        // Use full date format which should definitely catch invalid dates
+        try {
+            parser.parse(" n/Google r/SoftwareEngineer s/APPLIED d/2025-02-30");
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            // The error message should indicate it's an invalid date, not invalid format
+            assertTrue(pe.getMessage().contains("Invalid date") || pe.getMessage().contains("invalid date"),
+                    "Expected 'Invalid date' in message but got: " + pe.getMessage());
+        }
+
+        try {
+            parser.parse(" n/Meta r/Product Manager s/APPLIED d/2025-04-31");
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertTrue(pe.getMessage().contains("Invalid date") || pe.getMessage().contains("invalid date"),
+                    "Expected 'Invalid date' in message but got: " + pe.getMessage());
+        }
     }
 
     @Test

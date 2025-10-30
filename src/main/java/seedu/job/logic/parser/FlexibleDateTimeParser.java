@@ -1,5 +1,6 @@
 package seedu.job.logic.parser;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -19,27 +20,40 @@ public class FlexibleDateTimeParser {
     private static final LocalTime DEFAULT_TIME = LocalTime.of(23, 59);
 
     // List of supported date-time formatters in order of specificity
+    // Use uuuu pattern with STRICT resolver to prevent invalid dates like Feb 30
     private static final List<DateTimeFormatter> DATETIME_FORMATTERS = List.of(
-            // Full date-time formats
-            DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"),
-            DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"),
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"),
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"),
+            // Full date-time formats (with zero-padded values)
+            DateTimeFormatter.ofPattern("uuuu-MM-dd'T'HH:mm:ss")
+                    .withResolverStyle(java.time.format.ResolverStyle.STRICT),
+            DateTimeFormatter.ofPattern("uuuu-MM-dd'T'HH:mm")
+                    .withResolverStyle(java.time.format.ResolverStyle.STRICT),
+            DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss")
+                    .withResolverStyle(java.time.format.ResolverStyle.STRICT),
+            DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm")
+                    .withResolverStyle(java.time.format.ResolverStyle.STRICT),
             // Date-only formats (will use default time)
-            DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            DateTimeFormatter.ofPattern("uuuu-MM-dd")
+                    .withResolverStyle(java.time.format.ResolverStyle.STRICT)
     );
 
     // List of supported date-only formatters that need year inference
+    // Use uuuu pattern with STRICT resolver to prevent invalid dates like Feb 30
     private static final List<DateTimeFormatter> DATE_FORMATTERS_WITH_INFERENCE = List.of(
             // With full month names
-            DateTimeFormatter.ofPattern("dd MMMM"),
-            DateTimeFormatter.ofPattern("dd-MMMM"),
+            DateTimeFormatter.ofPattern("d MMMM")
+                    .withResolverStyle(java.time.format.ResolverStyle.STRICT),
+            DateTimeFormatter.ofPattern("d-MMMM")
+                    .withResolverStyle(java.time.format.ResolverStyle.STRICT),
             // With abbreviated month names
-            DateTimeFormatter.ofPattern("dd MMM"),
-            DateTimeFormatter.ofPattern("dd-MMM"),
+            DateTimeFormatter.ofPattern("d MMM")
+                    .withResolverStyle(java.time.format.ResolverStyle.STRICT),
+            DateTimeFormatter.ofPattern("d-MMM")
+                    .withResolverStyle(java.time.format.ResolverStyle.STRICT),
             // Month-day formats
-            DateTimeFormatter.ofPattern("MM-dd"),
-            DateTimeFormatter.ofPattern("MM/dd")
+            DateTimeFormatter.ofPattern("M-d")
+                    .withResolverStyle(java.time.format.ResolverStyle.STRICT),
+            DateTimeFormatter.ofPattern("M/d")
+                    .withResolverStyle(java.time.format.ResolverStyle.STRICT)
     );
 
     /**
@@ -70,6 +84,10 @@ public class FlexibleDateTimeParser {
             try {
                 return tryParseDateTime(trimmed, formatter);
             } catch (DateTimeParseException e) {
+                // If the error is due to invalid date (not just wrong format), re-throw immediately
+                if (e.getMessage() != null && e.getMessage().startsWith("Invalid date:")) {
+                    throw e;
+                }
                 // Continue to next format
             }
         }
@@ -79,6 +97,10 @@ public class FlexibleDateTimeParser {
             try {
                 return tryParseDateWithYearInference(trimmed, formatter);
             } catch (DateTimeParseException e) {
+                // If the error is due to invalid date (not just wrong format), re-throw immediately
+                if (e.getMessage() != null && e.getMessage().startsWith("Invalid date:")) {
+                    throw e;
+                }
                 // Continue to next format
             }
         }
@@ -102,9 +124,27 @@ public class FlexibleDateTimeParser {
             // Try to parse as full LocalDateTime
             return LocalDateTime.parse(dateTimeStr, formatter);
         } catch (DateTimeParseException e) {
+            // Check if this is due to invalid date values (STRICT resolver rejects invalid dates)
+            // STRICT mode error messages contain "Invalid date" for bad dates like Feb 30
+            if (e.getMessage() != null && e.getMessage().contains("Invalid date")) {
+                throw new DateTimeParseException("Invalid date: " + e.getMessage(), dateTimeStr, 0);
+            }
+
             // Try to parse as LocalDate and add default time
-            LocalDate date = LocalDate.parse(dateTimeStr, formatter);
-            return LocalDateTime.of(date, DEFAULT_TIME);
+            try {
+                LocalDate date = LocalDate.parse(dateTimeStr, formatter);
+                return LocalDateTime.of(date, DEFAULT_TIME);
+            } catch (DateTimeParseException dtpe) {
+                // Check if this is also due to invalid date values
+                if (dtpe.getMessage() != null && dtpe.getMessage().contains("Invalid date")) {
+                    throw new DateTimeParseException("Invalid date: " + dtpe.getMessage(), dateTimeStr, 0);
+                }
+                // Re-throw original exception
+                throw dtpe;
+            } catch (DateTimeException dte) {
+                // Invalid date like Feb 30
+                throw new DateTimeParseException("Invalid date: " + dte.getMessage(), dateTimeStr, 0);
+            }
         }
     }
 
@@ -114,24 +154,33 @@ public class FlexibleDateTimeParser {
      */
     private static LocalDateTime tryParseDateWithYearInference(String dateStr, DateTimeFormatter formatter)
             throws DateTimeParseException {
-        // Parse with current year first
-        int currentYear = Year.now().getValue();
-        LocalDate dateWithCurrentYear = parseMonthDayWithYear(dateStr, formatter, currentYear);
+        try {
+            // Parse with current year first
+            int currentYear = Year.now().getValue();
+            LocalDate dateWithCurrentYear = parseMonthDayWithYear(dateStr, formatter, currentYear);
 
-        // If the date is in the past, use next year
-        LocalDate today = LocalDate.now();
-        LocalDate finalDate;
-        if (dateWithCurrentYear.isBefore(today)) {
-            finalDate = parseMonthDayWithYear(dateStr, formatter, currentYear + 1);
-        } else {
-            finalDate = dateWithCurrentYear;
+            // If the date is in the past, use next year
+            LocalDate today = LocalDate.now();
+            LocalDate finalDate;
+            if (dateWithCurrentYear.isBefore(today)) {
+                finalDate = parseMonthDayWithYear(dateStr, formatter, currentYear + 1);
+            } else {
+                finalDate = dateWithCurrentYear;
+            }
+
+            return LocalDateTime.of(finalDate, DEFAULT_TIME);
+        } catch (DateTimeParseException e) {
+            // Pattern didn't match - let caller try next format
+            throw e;
+        } catch (DateTimeException e) {
+            // Invalid date like Feb 30 (from LocalDate.of())
+            throw new DateTimeParseException("Invalid date: " + e.getMessage(), dateStr, 0);
         }
-
-        return LocalDateTime.of(finalDate, DEFAULT_TIME);
     }
 
     /**
      * Parses a month-day string with a specified year.
+     * With STRICT resolver style, invalid dates like Feb 30 will throw DateTimeParseException.
      */
     private static LocalDate parseMonthDayWithYear(String dateStr, DateTimeFormatter formatter, int year)
             throws DateTimeParseException {
@@ -141,6 +190,7 @@ public class FlexibleDateTimeParser {
         int month = accessor.get(java.time.temporal.ChronoField.MONTH_OF_YEAR);
         int day = accessor.get(java.time.temporal.ChronoField.DAY_OF_MONTH);
 
+        // Create the date with the inferred year
         return LocalDate.of(year, month, day);
     }
 

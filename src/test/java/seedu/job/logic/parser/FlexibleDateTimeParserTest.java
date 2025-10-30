@@ -171,6 +171,16 @@ public class FlexibleDateTimeParserTest {
     }
 
     @Test
+    public void parse_invalidDate_throwsException() {
+        // Test invalid dates like Feb 30, April 31, etc.
+        assertThrows(DateTimeParseException.class, () -> FlexibleDateTimeParser.parse("30 Feb"));
+        assertThrows(DateTimeParseException.class, () -> FlexibleDateTimeParser.parse("30 February"));
+        assertThrows(DateTimeParseException.class, () -> FlexibleDateTimeParser.parse("31 Apr"));
+        assertThrows(DateTimeParseException.class, () -> FlexibleDateTimeParser.parse("2025-02-30"));
+        assertThrows(DateTimeParseException.class, () -> FlexibleDateTimeParser.parse("2025-04-31"));
+    }
+
+    @Test
     public void parse_trimmedInput_success() {
         // Test that leading/trailing whitespace is handled
         LocalDateTime result = FlexibleDateTimeParser.parse("  2025-12-31T23:59  ");

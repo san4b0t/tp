@@ -73,8 +73,13 @@ public class UpdateCommandParser implements JobParser<UpdateJobCommand> {
                 ParserUtil.validateDeadlineNotInPast(deadline);
                 updateJobDescriptor.setDeadline(deadline);
             } catch (DateTimeParseException e) {
-                String supportedFormats = String.join(", ", FlexibleDateTimeParser.getSupportedFormatsExamples());
-                throw new ParseException("Invalid deadline format. Supported formats: " + supportedFormats, e);
+                // Check if the error is due to invalid date (e.g., Feb 30) or invalid format
+                if (e.getMessage() != null && e.getMessage().startsWith("Invalid date:")) {
+                    throw new ParseException(e.getMessage(), e);
+                } else {
+                    String supportedFormats = String.join(", ", FlexibleDateTimeParser.getSupportedFormatsExamples());
+                    throw new ParseException("Invalid deadline format. Supported formats: " + supportedFormats, e);
+                }
             }
         }
 
