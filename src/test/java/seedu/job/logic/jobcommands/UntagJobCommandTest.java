@@ -189,20 +189,21 @@ public class UntagJobCommandTest {
 
         model.addJobApplication(job1);
         model.addJobApplication(job2);
+        // After adding: [job2, job1] (items are added to the top)
 
         Set<Tag> tagsToRemove1 = new HashSet<>();
-        tagsToRemove1.add(new Tag("backend"));
+        tagsToRemove1.add(new Tag("frontend")); // Remove from job2 at index 1
 
         Set<Tag> tagsToRemove2 = new HashSet<>();
-        tagsToRemove2.add(new Tag("frontend"));
+        tagsToRemove2.add(new Tag("backend")); // Remove from job1 at index 2
 
         new UntagJobCommand(Index.fromOneBased(1), tagsToRemove1).execute(model);
         new UntagJobCommand(Index.fromOneBased(2), tagsToRemove2).execute(model);
 
         assertEquals(1, model.getFilteredApplicationList().get(0).getTags().size());
         assertEquals(1, model.getFilteredApplicationList().get(1).getTags().size());
-        assertTrue(model.getFilteredApplicationList().get(0).getTags().contains(new Tag("java")));
-        assertTrue(model.getFilteredApplicationList().get(1).getTags().contains(new Tag("react")));
+        assertTrue(model.getFilteredApplicationList().get(0).getTags().contains(new Tag("react")));
+        assertTrue(model.getFilteredApplicationList().get(1).getTags().contains(new Tag("java")));
     }
 
     @Test

@@ -74,13 +74,15 @@ public class DeleteJobCommandTest {
         model.addJobApplication(job1);
         model.addJobApplication(job2);
         model.addJobApplication(job3);
+        // After adding: [job3, job2, job1] (items are added to the top)
 
         DeleteJobCommand deleteCommand = new DeleteJobCommand(Index.fromOneBased(1));
         deleteCommand.execute(model);
+        // Deletes job3 (first item in the list)
 
-        assertFalse(model.hasApplication(job1));
+        assertTrue(model.hasApplication(job1));
         assertTrue(model.hasApplication(job2));
-        assertTrue(model.hasApplication(job3));
+        assertFalse(model.hasApplication(job3));
         assertEquals(2, model.getFilteredApplicationList().size());
     }
 
@@ -112,13 +114,15 @@ public class DeleteJobCommandTest {
         model.addJobApplication(job1);
         model.addJobApplication(job2);
         model.addJobApplication(job3);
+        // After adding: [job3, job2, job1] (items are added to the top)
 
         DeleteJobCommand deleteCommand = new DeleteJobCommand(Index.fromOneBased(3));
         deleteCommand.execute(model);
+        // Deletes job1 (last item in the list)
 
-        assertTrue(model.hasApplication(job1));
+        assertFalse(model.hasApplication(job1));
         assertTrue(model.hasApplication(job2));
-        assertFalse(model.hasApplication(job3));
+        assertTrue(model.hasApplication(job3));
         assertEquals(2, model.getFilteredApplicationList().size());
     }
 
