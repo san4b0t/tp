@@ -406,6 +406,87 @@ The feature provides clear, actionable error messages:
 * **Tag doesn't exist**: Clarifies which tags don't exist and suggests checking current tags
 * **Invalid tag format**: Explains the validation rules with examples
 
+### [Proposed] Job Application Expiry
+
+#### Requirements
+
+This feature automatically marks job applications as STALE when they have not been edited for 14 days.
+
+- Add a new status value to the existing status enum: `STALE`.
+- Add a new field to `JobApplication`: `lastEditedTime` (type: `java.time.LocalDateTime`). This field records the last time the application was modified by any modifying command (add, update, tag, untag).
+- On application start-up, HustleHub must perform a one-time calculation over all persisted job applications and set any application whose `lastEditedTime` is 14 full days (>= 14 days) in the past to have status `STALE`.
+
+Notes / assumptions:
+- If a persisted application does not contain a `lastEditedTime` (older data format), treat its `lastEditedTime` as the time the application was loaded on startup (i.e., `LocalDateTime.now()` at load). This avoids accidentally marking legacy data as stale unless the user actually hasn't edited it since file creation — see migration notes below.
+- `STALE` is intended to be an additional, non-terminal status used to surface older, unattended applications. It does not replace `REJECTED` and may coexist with other workflows. By default the startup scan will set `STALE` for any application regardless of its current status, except where doing so would conflict with business rules you prefer (see alternatives below). If you want `REJECTED` or other terminal statuses to be exempt, specify and we can update the algorithm accordingly.
+
+#### Data model changes
+
+1. Status enum (in `JobApplication` or `Status` enum type)
+   - Add: `STALE`
+
+2. `JobApplication` fields
+   - Add: `private final LocalDateTime lastEditedTime;`
+   - Constructor(s) and factory methods must accept and persist `lastEditedTime`.
+   - All modifying operations (add, update, tag, untag) must set `lastEditedTime = LocalDateTime.now()` for the newly created `JobApplication` instance.
+   - `SerializableJobApplication` (storage layer) must be updated to read/write `lastEditedTime` (ISO-8601 format via `LocalDateTime.toString()` / `LocalDateTime.parse(...)`). When parsing older JSON that lacks the field, fall back to `LocalDateTime.now()` (see migration note).
+
+#### Startup calculation (where to run)
+
+Run the staleness calculation once during application startup after the persisted data is read from disk but before the `ModelManager` is constructed or before the `Logic`/`Ui` components are initialized and shown. Concretely, a good spot is inside `MainApp.init()` after `storage.readDataFile()` returns the `List<JobApplication>` and before calling `new ModelManager(...)`.
+
+Example high-level algorithm (pseudo-code):
+
+```java
+// in MainApp.init() after reading applicationList from storage
+LocalDateTime now = LocalDateTime.now();
+Duration staleThreshold = Duration.ofDays(14);
+List<JobApplication> migrated = new ArrayList<>();
+for (JobApplication app : applicationList) {
+   LocalDateTime lastEdited = app.getLastEditedTime();
+   if (lastEdited == null) {
+      // migration fallback: treat as just-loaded
+      lastEdited = now;
+   }
+   if (Duration.between(lastEdited, now).compareTo(staleThreshold) >= 0) {
+      if (app.getStatus() != JobApplication.Status.STALE) {
+         JobApplication staleApp = app.withStatus(JobApplication.Status.STALE)
+                                .withLastEditedTime(app.getLastEditedTime());
+         migrated.add(staleApp);
+         continue;
+      }
+   }
+   migrated.add(app);
+}
+// use `migrated` list to build ModelManager / JobBook
+```
+
+Notes:
+- The sample uses immutable-style `withStatus(...)` / `withLastEditedTime(...)` helpers that return a new `JobApplication` instance; implement equivalent constructors if your codebase uses a different pattern.
+- Running the migration in `MainApp.init()` ensures the UI and logic always see the canonical (post-migration) state and that `ModelManager` / `JobBook` invariants (e.g., uniqueness) are preserved.
+
+#### Persistence and migration
+
+- Update `SerializableJobApplication` / `JsonSerializableJobApplicationList` to include `lastEditedTime` when serializing.
+- For backwards compatibility, when deserializing JSON that lacks `lastEditedTime`, set `lastEditedTime = LocalDateTime.now()` (or optionally `Files.getLastModifiedTime(path)` if you prefer file time semantics). Document this behavior in the release notes so users understand the migration effect.
+
+#### Command behavior changes
+
+- Every command that modifies a job application must update `lastEditedTime` to `LocalDateTime.now()` on the newly created `JobApplication` object that replaces the old one. This includes: `AddJobCommand`, `UpdateJobCommand`, `TagJobCommand`, `UntagJobCommand` (and any future modifying commands such as `Clone`, `Archive`, etc.).
+
+#### Edge cases & testing
+
+- Timezones: Use `LocalDateTime` consistently across serialization and comparisons; if your app will run across machines in different timezones, consider `ZonedDateTime` or persist UTC (`Instant`) instead. For single-user desktop app, `LocalDateTime` is acceptable.
+- Clock skew: If tests or users modify system clocks, behavior will follow the system clock. Consider adding a clock abstraction for testability.
+- Tests to add:
+  - Unit: `isStale(lastEditedTime, now)` boundary tests (13d23h59m -> false; 14d00h00m -> true).
+  - Integration: Persisted JSON without `lastEditedTime` -> migration does not accidentally mark as stale unless it truly is.
+
+#### Alternatives / configuration
+
+- Make the stale threshold configurable (user preference or config.json) instead of fixed 14 days.
+- Exempt certain statuses (e.g., `REJECTED`) from being set to `STALE` on startup. If desired, update the startup condition to only mark applications whose status is in a configurable set (default: APPLIED, INPROGRESS).
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
