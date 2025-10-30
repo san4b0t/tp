@@ -668,7 +668,7 @@ If you add a mix of duplicate and new tags, the new tags will be added whilst du
 - `tag 1 t/fast-response t/rolling`
 - `tag 6 t/late-deadline t/backup-plan`
 
-Before:
+Before `tag 1 t/Search`:
 
 ![tag_before.png](images/tag_before.png)
 
@@ -697,7 +697,7 @@ Examples:
 - `untag 2 t/6-Month t/C++`
 - `untag 3 t/python_v3.12 t/BlockChain t/Full-Stack`
 
-Before:
+Before `untag 1 t/Search`:
 
 ![Untag_before.png](images/Untag_before.png)
 
