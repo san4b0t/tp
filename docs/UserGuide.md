@@ -85,6 +85,8 @@ Applications progress through three distinct stages:
 
 **Important Notes:**
 - Status changes are **manual** - update them as your application progresses
+- These are the ONLY valid values; custom statuses are not supported
+- Status values are **case-insensitive** in commands: `applied` = `APPLIED`
 - Use **tags** for more detailed tracking (e.g., `t/phone-screen`, `t/final-round`)
 - Applications remain in your records even after rejection for future reference
 
@@ -205,6 +207,45 @@ Now that you understand the core concepts, here are practical scenarios showing 
 
 **Why this works:** Status filtering finds stagnant applications, deadline sorting reveals time pressure, tags create an actionable todo list, and re-filtering keeps you focused on follow-up tasks.
 
+### Scenario 7: Filtering and Deleting Rejected Applications
+**Goal:** Clean up rejected applications while understanding how deletion works with filtered views
+
+**The Situation:** You have 10 total applications. Several were rejected, and you want to remove them to keep your list focused.
+
+**Important:** ⚠️ Index numbers change when you filter - they always reflect what's currently visible!
+
+**Step-by-step:**
+
+1. `filter s/REJECTED` — Shows only rejected applications (let's say 4 results appear)
+2. Review the filtered list - applications are now numbered 1, 2, 3, 4 in the display
+3. `delete 1` — Deletes the **first application in the filtered view**
+4. The list updates - remaining rejections are now numbered 1, 2, 3
+5. `delete 1` — Deletes what is now the first visible application
+6. `list` — Returns to full view (now shows 8 total applications)
+
+**Why this matters:**
+- **Index numbers always reflect your CURRENT view**, not the original full list
+- After filtering, indices restart from 1 for visible results only
+- `delete 1` always deletes the **first VISIBLE application**, regardless of its original position
+- Same principle applies to `update`, `tag`, and `untag` commands
+
+**Visual Example:**
+```
+Full list (10 apps):          After filter s/REJECTED:     After delete 1:
+1. Google | APPLIED           1. Meta | REJECTED           1. Apple | REJECTED
+2. Meta | REJECTED            2. Apple | REJECTED          2. Netflix | REJECTED
+3. Amazon | APPLIED           3. Netflix | REJECTED        3. Stripe | REJECTED
+4. Apple | REJECTED           4. Stripe | REJECTED         
+5. Tesla | INPROGRESS         (only 4 visible)             (only 3 visible)
+6. Netflix | REJECTED
+7. Uber | APPLIED
+8. Stripe | REJECTED
+9. Airbnb | INPROGRESS
+10. Lyft | APPLIED
+```
+
+**Key Takeaway:** When working with filtered views, always use the index numbers you see in the current display. If unsure, run `list` first to see the unfiltered view.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
@@ -259,18 +300,6 @@ Now that you understand the core concepts, here are practical scenarios showing 
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-
-**HustleHub uses three fixed status values to track your progress**
-
-| Status | Meaning | When to use |
-|--------|---------|-------------|
-| `APPLIED` | Application submitted | After you click "Apply" |
-| `INPROGRESS` | Active process | During interviews, assessments, or waiting for response |
-| `REJECTED` | Closed unsuccessfully | After receiving rejection |
-*Important notes:*
-- Status values are **case-insensitive** in commands: `applied` = `APPLIED`
-- These are the ONLY valid values; custom statuses are not supported
-- Use tags for more granular tracking (e.g., `t/phone-screen`, `t/final-round`)
 
 **Date & Time Formats in HustleHub**
 
