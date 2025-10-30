@@ -3,7 +3,24 @@ layout: page
 title: User Guide
 ---
 
-HustleHub is a **desktop application** for computing students keeping track of multiple internship/job applications who prefer using CLI over GUI. The product will provide computing students an easy way to visualise, add and modify their job application details to multiple positions at multiple companies.
+## Who Should Use HustleHub?
+
+**Ideal for:**
+- Computing students applying to 15+ positions simultaneously
+- Users comfortable with command-line interfaces (CLI)
+- Those who prefer keyboard-driven workflows over mouse clicking
+- Anyone tracking applications with multiple status changes and deadlines
+
+**Not ideal for:**
+- Managing fewer than 5 applications (spreadsheet is simpler)
+- Users unfamiliar with CLI syntax
+- Teams needing collaborative features
+- Users requiring visual calendar integrations
+
+**Why HustleHub over alternatives?**
+HustleHub combines CLI speed with visual overview, letting you update 5 applications in under 30 seconds - much faster than spreadsheets or web apps for heavy users.
+
+---
 
 * Table of Contents
 {:toc}
