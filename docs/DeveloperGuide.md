@@ -247,6 +247,122 @@ Step 5. The panel refreshes, and all cards are rendered without highlighting.
   * Pros: More robust to object recreation
   * Cons: More complex logic, potential edge cases with duplicates
 
+### Job Application Uniqueness
+
+#### Design Decision
+
+**What makes a job application unique?**
+
+A job application in HustleHub is uniquely identified by the combination of:
+- **Company Name** (case-sensitive)
+- **Role** (case-sensitive)
+
+The system enforces that no two job applications can have the same company name and role combination.
+
+**Implementation:**
+
+```java
+public final String getUniqueKey() {
+    return this.companyName + "|" + this.role;
+}
+
+public boolean isSameJobApplication(JobApplication otherJobApplication) {
+    return otherJobApplication != null
+        && otherJobApplication.getUniqueKey().equals(this.getUniqueKey());
+}
+```
+
+#### Why This Choice?
+
+**Requirements Analysis:**
+
+1. **Target User Behavior**: Computing students typically apply to each company for a specific role once per application cycle
+2. **Simplicity**: Students think in terms of "I applied to Google for SWE" - a natural mental model
+3. **Prevents Accidental Duplicates**: Guards against users inadvertently adding the same application multiple times
+4. **Data Integrity**: Ensures clean, organized tracking without confusing duplicate entries in the UI
+
+**Alternative Considerations:**
+
+We considered but rejected these alternatives:
+
+| Uniqueness Criteria | Reason for Rejection |
+|---------------------|---------------------|
+| Company + Role + Deadline | Deadline changes during updates would cause unexpected conflicts; doesn't match user mental model |
+| Company + Role + Tags | Tags are optional and mutable; would force users to add tags to differentiate positions; breaks tag flexibility |
+| Company + Role + Status | Status changes as application progresses; would prevent natural status updates |
+
+#### Pros and Cons
+
+**Advantages ✅**
+
+1. **Simple and Predictable**
+   - Users understand: "One application per company-role pair"
+   - Clear error messages: "You already have an application for this position"
+   - No surprise conflicts from field updates
+
+2. **Minimal Edge Cases**
+   - Only checks 2 required fields (no null handling needed)
+   - Both fields are conceptually immutable (company name and role title don't change)
+   - Consistent behavior across add and update operations
+
+3. **Clean User Experience**
+   - No confusing duplicate "Google | Software Engineer" entries in the UI
+   - Tags remain purely organizational (can be added/removed freely)
+   - Natural workflow for status/deadline updates
+
+4. **Flexible Within Constraints**
+   - Users can differentiate similar positions in the role field:
+     * "Software Engineer - Backend Team"
+     * "Software Engineer (Cloud Infrastructure)"
+     * "SWE - Seattle Office"
+
+**Limitations ❌**
+
+1. **Re-applications Require Deletion**
+   - If rejected and reapplying later, user must delete old entry first
+   - Workaround: Keep old entry and update deadline/status
+   - Future enhancement: Add "clone" or "reapply" command
+
+2. **Same Role at Multiple Teams**
+   - Cannot track "Google SWE - Cloud" and "Google SWE - Search" as separate entries with identical role names
+   - Workaround: Differentiate in the role field itself
+   - Encourages explicit role specification, improving data clarity
+
+3. **No Built-in Historical Tracking**
+   - Previous applications to the same company-role are lost if deleted
+   - Workaround: Update status to REJECTED instead of deleting
+   - Future enhancement: Add archiving feature
+
+#### Design Considerations
+
+**Aspect: What fields determine uniqueness?**
+
+* **Alternative 1 (current choice):** Company + Role only
+  * Pros: Simple mental model, prevents accidental duplicates, minimal edge cases
+  * Cons: Cannot track re-applications or multiple teams for same role title
+
+* **Alternative 2:** Company + Role + Deadline
+  * Pros: Allows re-applications with different deadlines
+  * Cons: Updating deadline causes conflicts; same deadline = artificial conflict
+
+* **Alternative 3:** Company + Role + Tags
+  * Pros: Flexible differentiation using existing tag system
+  * Cons: Tags become mandatory for duplicates; mutable tags break uniqueness; confusing UX
+
+**Aspect: Should tags affect uniqueness?**
+
+* **Alternative 1 (current choice):** Tags are purely organizational
+  * Pros: Tags remain flexible and optional; no unexpected conflicts from tag changes
+  * Cons: Cannot use tags to differentiate positions
+
+* **Alternative 2:** Include tags in uniqueness check
+  * Pros: Allows tracking multiple same-titled positions
+  * Cons: Removing tags creates conflicts; forces tag usage; changes tag purpose from organizational to structural
+
+**Conclusion:** The company + role uniqueness provides the best balance of simplicity, usability, and alignment with user needs. The limitations can be addressed through user guidance (role naming conventions) and future enhancements (clone/archive features).
+
+---
+
 ### Tag Management Feature
 
 #### Implementation
@@ -726,13 +842,14 @@ Similar to UC03 but it deletes all job applications.
 
 ### Glossary
 
-* **Job Application**: A record containing company name, role, application status (APPLIED, INPROGRESS, REJECTED), deadline (date and time), and optional tags
+* **Job Application**: A record containing company name, role, application status (APPLIED, INPROGRESS, REJECTED), deadline (date and time), and optional tags. Each application is uniquely identified by the combination of company name and role.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Tag**: A short label (1-30 characters) used to categorize job applications, containing letters, numbers, and optionally special characters
+* **Tag**: A short label (1-30 characters) used to categorize job applications, containing letters, numbers, and optionally special characters. Tags are purely organizational and do not affect application uniqueness.
 * **Recently Modified Application**: The job application that was last modified by an add, update, tag, or untag operation, visually highlighted in the UI
 * **Serialization**: The process to convert complex objects (like JobApplication) into JSON format for storage
 * **Filtered List**: A subset of job applications displayed based on search, filter, or sort criteria
 * **Immutable Pattern**: A design pattern where objects cannot be modified after creation; modifications create new objects instead
+* **Unique Key**: The combination of company name and role that uniquely identifies a job application. No two applications can have the same unique key.
 
 --------------------------------------------------------------------------------------------------------------------
 
