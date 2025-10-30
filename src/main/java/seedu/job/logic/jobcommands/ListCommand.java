@@ -22,6 +22,7 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredJobApplicationList(PREDICATE_SHOW_ALL_APPLICATIONS);
+        model.setRecentlyModifiedApplication(null);
         return new CommandResult(
                 String.format(JobMessages.MESSAGE_APPLICATIONS_LISTED_OVERVIEW,
                         model.getFilteredApplicationList().size()));
