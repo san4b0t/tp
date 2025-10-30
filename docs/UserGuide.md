@@ -45,7 +45,7 @@ HustleHub combines CLI speed with visual overview, letting you update 5 applicat
 
    * `list` : Lists all applications.
 
-   * `add n/Microsoft r/Cloud engineer s/INPROGRESS d/2025-10-31T23:59` : Adds an application for `Microsoft` to HustleHub.
+   * `add n/Microsoft r/Cloud engineer s/INPROGRESS d/2025-10-31T23:59` : Adds an application for `Microsoft` to HustleHub. (See [date format](#features))
 
    * `delete 3` : Deletes the 3rd application shown in the current list.
 
