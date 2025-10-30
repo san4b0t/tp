@@ -937,6 +937,57 @@ testers are expected to do more *exploratory* testing.
    1. Test case: Tag an application that already has 3 tags<br>
       Expected: No tag added. Error message about maximum tags shown.
 
+### Finding job applications
+
+1. Finding applications by keyword
+
+   1. Prerequisites: At least a few applications in the list with different company names and roles.
+
+   1. Test case: `find Google`<br>
+      Expected: All applications with "Google" in either company name or role shown. Highlighting cleared. Success message with number of applications found.
+
+   1. Test case: `find Software Engineer`<br>
+      Expected: All applications containing both "Software" and "Engineer" in company name or role shown.
+
+   1. Test case: `find XYZ123NonExistent`<br>
+      Expected: Empty list shown. Message indicates 0 applications found.
+
+   1. Test case: `find` (without keywords)<br>
+      Expected: Error message about invalid command format. List remains unchanged.
+
+### Untagging a job application
+
+1. Removing tags from a job application
+
+   1. Prerequisites: At least one application in the list with one or more tags.
+
+   1. Test case: `untag 1 t/urgent`<br>
+      Expected: Tag "urgent" removed from first application if it exists. Card is highlighted. Success message shown.
+
+   1. Test case: `untag 1 t/priority t/remote`<br>
+      Expected: Both tags removed if they exist. Card is highlighted.
+
+   1. Test case: `untag 1 t/nonexistent`<br>
+      Expected: No tag removed. Error message indicating the tag doesn't exist on this application.
+
+   1. Test case: Untag an application with no tags<br>
+      Expected: Error message indicating no tags to remove.
+
+   1. Test case: `untag 0 t/urgent`<br>
+      Expected: Error message about invalid index shown.
+
+### Listing all applications
+
+1. Viewing all job applications after filtering/finding
+
+   1. Prerequisites: Filter or find applications to show a subset.
+
+   1. Test case: `list`<br>
+      Expected: All applications shown again. Highlighting cleared. Success message indicates total number of applications.
+
+   1. Test case: Execute `list` when all applications already shown<br>
+      Expected: No change. Success message still shown.
+
 ### Filtering and Sorting
 
 1. Filtering applications
@@ -944,19 +995,72 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `filter s/APPLIED`<br>
       Expected: Only applications with APPLIED status shown. Highlighting cleared.
 
-   1. Test case: `filter n/Google`<br>
-      Expected: Only applications with "Google" in company name shown.
+   1. Test case: `filter s/INPROGRESS`<br>
+      Expected: Only applications with INPROGRESS status shown.
+
+   1. Test case: `filter s/REJECTED`<br>
+      Expected: Only applications with REJECTED status shown.
+
+   1. Test case: `filter s/STALE` (if expiry feature implemented)<br>
+      Expected: Only applications with STALE status shown.
+
+   1. Test case: `filter t/urgent`<br>
+      Expected: Only applications tagged with "urgent" shown.
+
+   1. Test case: `filter d/2025-12-31`<br>
+      Expected: Only applications with deadline on or after 2025-12-31 shown.
+
+   1. Test case: `filter s/APPLIED t/urgent`<br>
+      Expected: Only applications that are both APPLIED status AND tagged "urgent" shown.
 
    1. Test case: `filter none`<br>
       Expected: All applications shown again.
+
+   1. Test case: `filter s/INVALID`<br>
+      Expected: Error message about invalid status value.
 
 2. Sorting applications
 
    1. Test case: `sort deadline`<br>
       Expected: Applications sorted by deadline ascending. Highlighting cleared.
 
+   1. Test case: `sort deadline desc`<br>
+      Expected: Applications sorted by deadline descending (latest first).
+
+   1. Test case: `sort company`<br>
+      Expected: Applications sorted by company name ascending (A-Z).
+
    1. Test case: `sort company desc`<br>
-      Expected: Applications sorted by company name descending.
+      Expected: Applications sorted by company name descending (Z-A).
+
+   1. Test case: `sort role asc`<br>
+      Expected: Applications sorted by role ascending (A-Z).
+
+   1. Test case: `sort status`<br>
+      Expected: Applications sorted by status (alphabetical order).
+
+   1. Test case: `sort invalid`<br>
+      Expected: Error message about invalid sort field.
+
+### Viewing help
+
+1. Accessing help information
+
+   1. Test case: `help`<br>
+      Expected: Help window opens showing command usage instructions. Link to user guide displayed.
+
+   1. Test case: Execute `help` when help window already open<br>
+      Expected: Help window gains focus (brought to front).
+
+### Exiting the application
+
+1. Closing the application
+
+   1. Test case: `exit`<br>
+      Expected: Application closes gracefully. All data saved.
+
+   1. Test case: Close window using window close button (X)<br>
+      Expected: Same as `exit` command - application closes and data saved.
 
 ### Saving data
 
