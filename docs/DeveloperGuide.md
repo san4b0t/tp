@@ -138,7 +138,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`DataStorage.java`](https://github.com/AY2526S1-CS2103T-T11-1/tp/blob/master/src/main/java/seedu/address/storage/DataStorage.java)
+**API** : [`DataStorage.java`](https://github.com/AY2526S1-CS2103T-T11-1/tp/blob/master/src/main/java/seedu/job/storage/DataStorage.java)
 
 <img src="images/HustleHub-Storage.png"/>
 
@@ -160,7 +160,7 @@ The `Storage` component manages **persistence (saving and loading)** for job app
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.address.commons` package.
+Classes used by multiple components are in the `seedu.job.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -791,22 +791,7 @@ Similar to UC08 but we are searching via keywords instead.
 * Only applications fully matching the keywords are displayed.
 * Original application data remains unchanged.
 
-### UC10 - Clear all job applications
-
-Similar to UC03 but it deletes all job applications.
-
-**MSS**
-1. User requests to clear all applications.
-2. System removes all applications.
-3. System displays confirmation.
-
-   Use case ends.
-
-**Guarantees**
-* All applications are permanently removed.
-* Application list becomes empty.
-
-### UC11 - View help information
+### UC10 - View help information
 
 **MSS**
 1. User requests help information.
