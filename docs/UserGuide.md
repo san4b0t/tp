@@ -45,7 +45,7 @@ HustleHub combines CLI speed with visual overview, letting you update 5 applicat
 
    * `list` : Lists all applications.
 
-   * `add n/Microsoft r/Cloud engineer s/INPROGRESS d/2025-10-31T23:59` : Adds an application for `Microsoft` to HustleHub. (See [date format](#features))
+   * `add n/Microsoft r/Cloud engineer s/INPROGRESS d/2025-10-31T23:59` : Adds an application for `Microsoft` to HustleHub.
 
    * `delete 3` : Deletes the 3rd application shown in the current list.
 
@@ -55,7 +55,7 @@ HustleHub combines CLI speed with visual overview, letting you update 5 applicat
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#features) below for details of each command and formatting datetime values.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -74,17 +74,18 @@ Every job application in HustleHub contains the following information:
 │ Company Name: Microsoft              [Required]     │
 │ Role: Cloud Engineer                 [Required]     │
 │ Status: INPROGRESS                   [Required]     │
-│ Deadline: 2025-10-31T23:59           [Required]     │
+│ Deadline: 31 Oct (23:59)             [Optional*]    │
 │ Tags: remote, urgent, priority       [Optional]     │
 │      (maximum 3 tags)                               │
 └─────────────────────────────────────────────────────┘
 ```
 
 **Key Points:**
-- All fields except tags are **required** when adding an application
+- **Company**, **Role**, and **Status** are **required** when adding an application
+- **Deadline** is **optional** - if omitted, defaults to today at 23:59
 - **Company + Role** combination must be unique (no duplicates)
 - **Tags** are optional and limited to 3 per application (max 30 characters each)
-- **Deadline** must be a future date and time
+- **Deadline** must be a future date (supports multiple flexible formats)
 
 ### Status Lifecycle
 
@@ -205,13 +206,13 @@ Now that you understand the core concepts, here are practical scenarios showing 
 ### Scenario 5: Preparing for Career Fair
 **Goal:** Add multiple new applications quickly after a career fair
 
-1. `add n/Meta r/Software Engineer s/APPLIED d/2025-11-15T23:59` — Add first company
-2. `add n/Netflix r/Backend Engineer s/APPLIED d/2025-11-20T23:59 t/career-fair` — Add second with tag
-3. `add n/Salesforce r/Cloud Engineer s/APPLIED d/2025-11-18T23:59 t/career-fair` — Add third
+1. `add n/Meta r/Software Engineer s/APPLIED d/15 Nov` — Add first company (short date format!)
+2. `add n/Netflix r/Backend Engineer s/APPLIED d/20 Nov t/career-fair` — Add second with tag
+3. `add n/Salesforce r/Cloud Engineer s/APPLIED d/18 Nov t/career-fair` — Add third
 4. `filter t/career-fair` — View all applications from this event
 5. `sort deadline` — Prioritize by earliest deadline
 
-**Why this works:** Batch adding with a consistent tag (`t/career-fair`) lets you track applications from the same source, filtering by that tag groups them together, and sorting helps you tackle applications strategically.
+**Why this works:** Using flexible date formats (like `15 Nov`) makes data entry much faster during busy career fairs. Batch adding with a consistent tag (`t/career-fair`) lets you track applications from the same source, filtering by that tag groups them together, and sorting helps you tackle applications strategically.
 
 ### Scenario 6: Following Up on Pending Applications
 **Goal:** Identify applications with no response for 2+ weeks
@@ -279,7 +280,7 @@ Full list (10 apps):          After filter s/REJECTED:     After delete 1:
 
 | Command                                          | Description                                      | Format                                                                     |
 |--------------------------------------------------|--------------------------------------------------|----------------------------------------------------------------------------|
-| [**add**](#adding-a-job-application-add)         | Adds a job application to HustleHub              | `add n/COMPANY_NAME r/ROLE s/STATUS d/DEADLINE [t/TAG]…​`                  |
+| [**add**](#adding-a-job-application-add)         | Adds a job application to HustleHub              | `add n/COMPANY_NAME r/ROLE s/STATUS [d/DEADLINE] [t/TAG]…​`                |
 | [**delete**](#deleting-an-application--delete)   | Deletes a job application given its index number | `delete INDEX`                                                             |
 | [**find**](#finding-job-applications-find)       | Finds job applications by company name or role   | `find KEYWORD [MORE_KEYWORDS]`                                             |
 | [**filter**](#filtering-job-applications-filter) | Filters job applications by a property           | `filter FLAG/KEYWORD`                                                      |
@@ -302,16 +303,16 @@ Full list (10 apps):          After filter s/REJECTED:     After delete 1:
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add n/COMPANY_NAME`, `COMPANY_NAME` is a parameter which can be used as `add n/Google r/Software Engineer s/APPLIED d/2025-12-31T23:59`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/COMPANY_NAME [t/TAG]` can be used as `n/Google t/priority` or as `n/Google`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/urgent`, `t/urgent t/remote` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/COMPANY_NAME r/ROLE`, `r/ROLE n/COMPANY_NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -320,19 +321,37 @@ Full list (10 apps):          After filter s/REJECTED:     After delete 1:
 
 **Date & Time Formats in HustleHub**
 
-*When adding/updating applications:*
-- Format: `yyyy-MM-ddTHH:mm` (time required)
-- Example: `2025-12-31T23:59`
+HustleHub now supports **flexible date formats** to make adding applications faster and easier!
+
+*When adding/updating applications, you can use any of these formats:*
+
+**Full Date-Time Formats** (if you need a specific time):
+- `yyyy-MM-ddTHH:mm` → `2025-12-31T23:59`
+- `yyyy-MM-dd HH:mm` → `2025-12-31 23:59`
+
+**Date-Only Formats** (defaults to 23:59):
+- `yyyy-MM-dd` → `2025-12-31` (defaults to 23:59)
+- `MM-dd` → `12-31` (infers current or next year, defaults to 23:59)
+- `dd MMM` → `31 Dec` (infers year, defaults to 23:59)
+- `dd MMMM` → `31 December` (infers year, defaults to 23:59)
+- `dd-MMM` → `31-Dec` (infers year, defaults to 23:59)
+
+**No Deadline Specified**:
+- Simply omit the `d/` flag entirely, and the deadline defaults to **today at 23:59**
 
 *When filtering by deadline:*
 - Format: `yyyy-MM-dd` (time not needed)
 - Example: `2025-12-31`
 - Matches all applications due on that date regardless of time
 
+*Smart Year Inference:*
+- When you use formats like `12-31` or `31 Dec` without specifying the year:
+  - If the date would be in the past, HustleHub automatically uses **next year**
+  - Otherwise, it uses the **current year**
+
 *Rules:*
-- Must be future date (no past deadlines)
-- Uses 24-hour format
-- Minutes required even if `:00`
+- Must be a future date (no past deadlines)
+- Time component uses 24-hour format when specified
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -397,15 +416,22 @@ Furthermore, certain edits can cause HustleHub to behave in unexpected ways (e.g
 
 Adds a job application to HustleHub.
 
-Format: `add n/COMPANY_NAME r/ROLE s/STATUS d/DEADLINE [t/TAG]…​`
+Format: `add n/COMPANY_NAME r/ROLE s/STATUS [d/DEADLINE] [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-An application can have up to 3 tags.
+<div markdown="span" class="alert alert-primary">:bulb: **Tips:**
+
+* The deadline (`d/`) is **optional**. If omitted, it defaults to today at 23:59.
+* You can use **flexible date formats** for the deadline - see the Date & Time Formats section above for all supported formats.
+* An application can have up to 3 tags.
+* New applications appear at the **top** of your list for easy visibility.
 </div>
 
 Examples:
-* `add n/Microsoft r/Cloud engineer s/INPROGRESS d/2025-10-31T23:59`
-* `add n/Microsoft r/Cloud engineer s/INPROGRESS d/2025-10-31T23:59 t/Low-pay t/Good-boss`
+* `add n/Google r/Software Engineer s/APPLIED` - No deadline specified, defaults to today
+* `add n/Microsoft r/Cloud Engineer s/INPROGRESS d/31 Oct` - Short date format
+* `add n/Amazon r/Data Scientist s/APPLIED d/12-25` - Month-day format
+* `add n/Meta r/Frontend Developer s/APPLIED d/2025-11-30T14:00` - Full date-time format
+* `add n/Netflix r/Backend Engineer s/APPLIED d/15 December t/remote t/urgent` - With tags
 
 <br>
 
@@ -413,7 +439,7 @@ Examples:
 
 ### Deleting an application : `delete`
 
-Deletes the specified application from the application book.
+Deletes the specified application from HustleHub.
 
 Format: `delete INDEX`
 
@@ -422,7 +448,7 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd application in the application book.
+* `list` followed by `delete 2` deletes the 2nd application in HustleHub.
 * After filtering the list, `delete 1` deletes the 1st application in the currently displayed results.
 
 <br>
@@ -494,7 +520,7 @@ or, to remove all filters: `filter none`
 
 
 1. **Tags (`t/`)**: Matches if the `KEYWORD` is **contained** in any tag
-   (e.g., `t/backend` matches a tag named "backend engineer").
+   (e.g., `t/backend` matches a tag named "backend-engineer").
     * The search is **case-insensitive**.
 
 
@@ -578,7 +604,7 @@ Format: `update INDEX [n/COMPANY_NAME] [r/ROLE] [s/STATUS] [d/DEADLINE] [t/TAG]�
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 
-* Deadline cannot be in the past. Please provide a future date and time in the format `yyyy-MM-ddTHH:mm`.
+* Deadline cannot be in the past. Please provide a future date (supports flexible formats - see Date & Time Formats section).
 * Updating company name and/or role may result in duplicate applications if the combination already exists.
 * Valid status values are: `APPLIED`, `INPROGRESS`, or `REJECTED` (case-insensitive).
 
@@ -587,8 +613,9 @@ Format: `update INDEX [n/COMPANY_NAME] [r/ROLE] [s/STATUS] [d/DEADLINE] [t/TAG]�
 **Examples:**
 
 * `update 1 s/INPROGRESS` - Updates the status of the 1st application to INPROGRESS.
-* `update 2 r/Senior Engineer d/2027-01-15T17:00` - Updates the role and deadline of the 2nd application.
-* `update 3 n/Apple r/iOS Developer s/APPLIED d/2026-06-30T23:59 t/remote t/urgent` - Updates all fields of the 3rd application.
+* `update 2 r/Senior Engineer d/15 Jan` - Updates the role and deadline using short date format.
+* `update 3 n/Apple r/iOS Developer s/APPLIED d/30 June t/remote t/urgent` - Updates all fields with flexible date.
+* `update 4 d/2027-01-15T14:00` - Updates deadline with specific time.
 * `update 1 t/` - Removes all tags from the 1st application.
 
 Before:

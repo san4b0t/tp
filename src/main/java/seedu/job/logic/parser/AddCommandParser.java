@@ -8,7 +8,6 @@ import static seedu.job.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.job.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -23,8 +22,6 @@ import seedu.job.model.tag.Tag;
  */
 public class AddCommandParser implements JobParser<AddJobCommand> {
 
-    private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-
     /**
      * Parses the given {@code String} of arguments in the context of the AddJobCommand
      * and returns an AddJobCommand object for execution.
@@ -34,7 +31,7 @@ public class AddCommandParser implements JobParser<AddJobCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ROLE, PREFIX_STATUS, PREFIX_DEADLINE, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ROLE, PREFIX_STATUS, PREFIX_DEADLINE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ROLE, PREFIX_STATUS)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddJobCommand.MESSAGE_USAGE));
         }
@@ -44,7 +41,6 @@ public class AddCommandParser implements JobParser<AddJobCommand> {
         try {
             String companyName = argMultimap.getValue(PREFIX_NAME).get();
             String role = argMultimap.getValue(PREFIX_ROLE).get();
-            String deadlineStr = argMultimap.getValue(PREFIX_DEADLINE).get();
             String statusStr = argMultimap.getValue(PREFIX_STATUS).get();
             Set<Tag> tags = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
@@ -53,14 +49,29 @@ public class AddCommandParser implements JobParser<AddJobCommand> {
                         + JobApplication.MAX_TAGS);
             }
 
-            LocalDateTime deadline = LocalDateTime.parse(deadlineStr, DATETIME_FORMATTER);
+            // Parse deadline - use FlexibleDateTimeParser to support multiple formats
+            // If no deadline is specified, default to current date at 23:59
+            LocalDateTime deadline;
+            if (argMultimap.getValue(PREFIX_DEADLINE).isPresent()) {
+                String deadlineStr = argMultimap.getValue(PREFIX_DEADLINE).get();
+                deadline = FlexibleDateTimeParser.parse(deadlineStr);
+            } else {
+                deadline = FlexibleDateTimeParser.getDefaultDateTime();
+            }
+
             ParserUtil.validateDeadlineNotInPast(deadline);
             JobApplication.Status status = JobApplication.Status.valueOf(statusStr.toUpperCase());
 
             JobApplication application = new JobApplication(companyName, role, deadline, status, tags);
             return new AddJobCommand(application);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Invalid deadline format. Expected format: yyyy-MM-ddTHH:mm", e);
+            // Check if the error is due to invalid date (e.g., Feb 30) or invalid format
+            if (e.getMessage() != null && e.getMessage().startsWith("Invalid date:")) {
+                throw new ParseException(e.getMessage(), e);
+            } else {
+                String supportedFormats = String.join(", ", FlexibleDateTimeParser.getSupportedFormatsExamples());
+                throw new ParseException("Invalid deadline format. Supported formats: " + supportedFormats, e);
+            }
         } catch (IllegalArgumentException e) {
             throw new ParseException("Invalid status. Valid values are: APPLIED, INPROGRESS, REJECTED", e);
         }
