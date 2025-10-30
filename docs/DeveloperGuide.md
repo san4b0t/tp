@@ -138,7 +138,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`DataStorage.java`](https://github.com/AY2526S1-CS2103T-T11-1/tp/blob/master/src/main/java/seedu/address/storage/DataStorage.java)
+**API** : [`DataStorage.java`](https://github.com/AY2526S1-CS2103T-T11-1/tp/blob/master/src/main/java/seedu/job/storage/DataStorage.java)
 
 <img src="images/HustleHub-Storage.png"/>
 
@@ -160,7 +160,7 @@ The `Storage` component manages **persistence (saving and loading)** for job app
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.address.commons` package.
+Classes used by multiple components are in the `seedu.job.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -247,6 +247,122 @@ Step 5. The panel refreshes, and all cards are rendered without highlighting.
   * Pros: More robust to object recreation
   * Cons: More complex logic, potential edge cases with duplicates
 
+### Job Application Uniqueness
+
+#### Design Decision
+
+**What makes a job application unique?**
+
+A job application in HustleHub is uniquely identified by the combination of:
+- **Company Name** (case-sensitive)
+- **Role** (case-sensitive)
+
+The system enforces that no two job applications can have the same company name and role combination.
+
+**Implementation:**
+
+```java
+public final String getUniqueKey() {
+    return this.companyName + "|" + this.role;
+}
+
+public boolean isSameJobApplication(JobApplication otherJobApplication) {
+    return otherJobApplication != null
+        && otherJobApplication.getUniqueKey().equals(this.getUniqueKey());
+}
+```
+
+#### Why This Choice?
+
+**Requirements Analysis:**
+
+1. **Target User Behavior**: Computing students typically apply to each company for a specific role once per application cycle
+2. **Simplicity**: Students think in terms of "I applied to Google for SWE" - a natural mental model
+3. **Prevents Accidental Duplicates**: Guards against users inadvertently adding the same application multiple times
+4. **Data Integrity**: Ensures clean, organized tracking without confusing duplicate entries in the UI
+
+**Alternative Considerations:**
+
+We considered but rejected these alternatives:
+
+| Uniqueness Criteria | Reason for Rejection |
+|---------------------|---------------------|
+| Company + Role + Deadline | Deadline changes during updates would cause unexpected conflicts; doesn't match user mental model |
+| Company + Role + Tags | Tags are optional and mutable; would force users to add tags to differentiate positions; breaks tag flexibility |
+| Company + Role + Status | Status changes as application progresses; would prevent natural status updates |
+
+#### Pros and Cons
+
+**Advantages ✅**
+
+1. **Simple and Predictable**
+   - Users understand: "One application per company-role pair"
+   - Clear error messages: "You already have an application for this position"
+   - No surprise conflicts from field updates
+
+2. **Minimal Edge Cases**
+   - Only checks 2 required fields (no null handling needed)
+   - Both fields are conceptually immutable (company name and role title don't change)
+   - Consistent behavior across add and update operations
+
+3. **Clean User Experience**
+   - No confusing duplicate "Google | Software Engineer" entries in the UI
+   - Tags remain purely organizational (can be added/removed freely)
+   - Natural workflow for status/deadline updates
+
+4. **Flexible Within Constraints**
+   - Users can differentiate similar positions in the role field:
+     * "Software Engineer - Backend Team"
+     * "Software Engineer (Cloud Infrastructure)"
+     * "SWE - Seattle Office"
+
+**Limitations ❌**
+
+1. **Re-applications Require Deletion**
+   - If rejected and reapplying later, user must delete old entry first
+   - Workaround: Keep old entry and update deadline/status
+   - Future enhancement: Add "clone" or "reapply" command
+
+2. **Same Role at Multiple Teams**
+   - Cannot track "Google SWE - Cloud" and "Google SWE - Search" as separate entries with identical role names
+   - Workaround: Differentiate in the role field itself
+   - Encourages explicit role specification, improving data clarity
+
+3. **No Built-in Historical Tracking**
+   - Previous applications to the same company-role are lost if deleted
+   - Workaround: Update status to REJECTED instead of deleting
+   - Future enhancement: Add archiving feature
+
+#### Design Considerations
+
+**Aspect: What fields determine uniqueness?**
+
+* **Alternative 1 (current choice):** Company + Role only
+  * Pros: Simple mental model, prevents accidental duplicates, minimal edge cases
+  * Cons: Cannot track re-applications or multiple teams for same role title
+
+* **Alternative 2:** Company + Role + Deadline
+  * Pros: Allows re-applications with different deadlines
+  * Cons: Updating deadline causes conflicts; same deadline = artificial conflict
+
+* **Alternative 3:** Company + Role + Tags
+  * Pros: Flexible differentiation using existing tag system
+  * Cons: Tags become mandatory for duplicates; mutable tags break uniqueness; confusing UX
+
+**Aspect: Should tags affect uniqueness?**
+
+* **Alternative 1 (current choice):** Tags are purely organizational
+  * Pros: Tags remain flexible and optional; no unexpected conflicts from tag changes
+  * Cons: Cannot use tags to differentiate positions
+
+* **Alternative 2:** Include tags in uniqueness check
+  * Pros: Allows tracking multiple same-titled positions
+  * Cons: Removing tags creates conflicts; forces tag usage; changes tag purpose from organizational to structural
+
+**Conclusion:** The company + role uniqueness provides the best balance of simplicity, usability, and alignment with user needs. The limitations can be addressed through user guidance (role naming conventions) and future enhancements (clone/archive features).
+
+---
+
 ### Tag Management Feature
 
 #### Implementation
@@ -290,94 +406,86 @@ The feature provides clear, actionable error messages:
 * **Tag doesn't exist**: Clarifies which tags don't exist and suggests checking current tags
 * **Invalid tag format**: Explains the validation rules with examples
 
-### \[Proposed\] Undo/redo feature
+### [Proposed] Job Application Expiry
 
-#### Proposed Implementation
+#### Requirements
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+This feature automatically marks job applications as STALE when they have not been edited for 14 days.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+- Add a new status value to the existing status enum: `STALE`.
+- Add a new field to `JobApplication`: `lastEditedTime` (type: `java.time.LocalDateTime`). This field records the last time the application was modified by any modifying command (add, update, tag, untag).
+- On application start-up, HustleHub must perform a one-time calculation over all persisted job applications and set any application whose `lastEditedTime` is 14 full days (>= 14 days) in the past to have status `STALE`.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+Notes / assumptions:
+- If a persisted application does not contain a `lastEditedTime` (older data format), treat its `lastEditedTime` as the time the application was loaded on startup (i.e., `LocalDateTime.now()` at load). This avoids accidentally marking legacy data as stale unless the user actually hasn't edited it since file creation — see migration notes below.
+- `STALE` is intended to be an additional, non-terminal status used to surface older, unattended applications. It does not replace `REJECTED` and may coexist with other workflows. By default the startup scan will set `STALE` for any application regardless of its current status, except where doing so would conflict with business rules you prefer (see alternatives below). If you want `REJECTED` or other terminal statuses to be exempt, specify and we can update the algorithm accordingly.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+#### Data model changes
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+1. Status enum (in `JobApplication` or `Status` enum type)
+   - Add: `STALE`
 
-![UndoRedoState0](images/UndoRedoState0.png)
+2. `JobApplication` fields
+   - Add: `private final LocalDateTime lastEditedTime;`
+   - Constructor(s) and factory methods must accept and persist `lastEditedTime`.
+   - All modifying operations (add, update, tag, untag) must set `lastEditedTime = LocalDateTime.now()` for the newly created `JobApplication` instance.
+   - `SerializableJobApplication` (storage layer) must be updated to read/write `lastEditedTime` (ISO-8601 format via `LocalDateTime.toString()` / `LocalDateTime.parse(...)`). When parsing older JSON that lacks the field, fall back to `LocalDateTime.now()` (see migration note).
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+#### Startup calculation (where to run)
 
-![UndoRedoState1](images/UndoRedoState1.png)
+Run the staleness calculation once during application startup after the persisted data is read from disk but before the `ModelManager` is constructed or before the `Logic`/`Ui` components are initialized and shown. Concretely, a good spot is inside `MainApp.init()` after `storage.readDataFile()` returns the `List<JobApplication>` and before calling `new ModelManager(...)`.
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Example high-level algorithm (pseudo-code):
 
-![UndoRedoState2](images/UndoRedoState2.png)
+```java
+// in MainApp.init() after reading applicationList from storage
+LocalDateTime now = LocalDateTime.now();
+Duration staleThreshold = Duration.ofDays(14);
+List<JobApplication> migrated = new ArrayList<>();
+for (JobApplication app : applicationList) {
+   LocalDateTime lastEdited = app.getLastEditedTime();
+   if (lastEdited == null) {
+      // migration fallback: treat as just-loaded
+      lastEdited = now;
+   }
+   if (Duration.between(lastEdited, now).compareTo(staleThreshold) >= 0) {
+      if (app.getStatus() != JobApplication.Status.STALE) {
+         JobApplication staleApp = app.withStatus(JobApplication.Status.STALE)
+                                .withLastEditedTime(app.getLastEditedTime());
+         migrated.add(staleApp);
+         continue;
+      }
+   }
+   migrated.add(app);
+}
+// use `migrated` list to build ModelManager / JobBook
+```
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+Notes:
+- The sample uses immutable-style `withStatus(...)` / `withLastEditedTime(...)` helpers that return a new `JobApplication` instance; implement equivalent constructors if your codebase uses a different pattern.
+- Running the migration in `MainApp.init()` ensures the UI and logic always see the canonical (post-migration) state and that `ModelManager` / `JobBook` invariants (e.g., uniqueness) are preserved.
 
-</div>
+#### Persistence and migration
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+- Update `SerializableJobApplication` / `JsonSerializableJobApplicationList` to include `lastEditedTime` when serializing.
+- For backwards compatibility, when deserializing JSON that lacks `lastEditedTime`, set `lastEditedTime = LocalDateTime.now()` (or optionally `Files.getLastModifiedTime(path)` if you prefer file time semantics). Document this behavior in the release notes so users understand the migration effect.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+#### Command behavior changes
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+- Every command that modifies a job application must update `lastEditedTime` to `LocalDateTime.now()` on the newly created `JobApplication` object that replaces the old one. This includes: `AddJobCommand`, `UpdateJobCommand`, `TagJobCommand`, `UntagJobCommand` (and any future modifying commands such as `Clone`, `Archive`, etc.).
 
-</div>
+#### Edge cases & testing
 
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
+- Timezones: Use `LocalDateTime` consistently across serialization and comparisons; if your app will run across machines in different timezones, consider `ZonedDateTime` or persist UTC (`Instant`) instead. For single-user desktop app, `LocalDateTime` is acceptable.
+- Clock skew: If tests or users modify system clocks, behavior will follow the system clock. Consider adding a clock abstraction for testability.
+- Tests to add:
+  - Unit: `isStale(lastEditedTime, now)` boundary tests (13d23h59m -> false; 14d00h00m -> true).
+  - Integration: Persisted JSON without `lastEditedTime` -> migration does not accidentally mark as stale unless it truly is.
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
+#### Alternatives / configuration
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire job book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the job application being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+- Make the stale threshold configurable (user preference or config.json) instead of fixed 14 days.
+- Exempt certain statuses (e.g., `REJECTED`) from being set to `STALE` on startup. If desired, update the startup condition to only mark applications whose status is in a configurable set (default: APPLIED, INPROGRESS).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -683,22 +791,7 @@ Similar to UC08 but we are searching via keywords instead.
 * Only applications fully matching the keywords are displayed.
 * Original application data remains unchanged.
 
-### UC10 - Clear all job applications
-
-Similar to UC03 but it deletes all job applications.
-
-**MSS**
-1. User requests to clear all applications.
-2. System removes all applications.
-3. System displays confirmation.
-
-   Use case ends.
-
-**Guarantees**
-* All applications are permanently removed.
-* Application list becomes empty.
-
-### UC11 - View help information
+### UC10 - View help information
 
 **MSS**
 1. User requests help information.
@@ -726,13 +819,14 @@ Similar to UC03 but it deletes all job applications.
 
 ### Glossary
 
-* **Job Application**: A record containing company name, role, application status (APPLIED, INPROGRESS, REJECTED), deadline (date and time), and optional tags
+* **Job Application**: A record containing company name, role, application status (APPLIED, INPROGRESS, REJECTED), deadline (date and time), and optional tags. Each application is uniquely identified by the combination of company name and role.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Tag**: A short label (1-30 characters) used to categorize job applications, containing letters, numbers, and optionally special characters
+* **Tag**: A short label (1-30 characters) used to categorize job applications, containing letters, numbers, and optionally special characters. Tags are purely organizational and do not affect application uniqueness.
 * **Recently Modified Application**: The job application that was last modified by an add, update, tag, or untag operation, visually highlighted in the UI
 * **Serialization**: The process to convert complex objects (like JobApplication) into JSON format for storage
 * **Filtered List**: A subset of job applications displayed based on search, filter, or sort criteria
 * **Immutable Pattern**: A design pattern where objects cannot be modified after creation; modifications create new objects instead
+* **Unique Key**: The combination of company name and role that uniquely identifies a job application. No two applications can have the same unique key.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -828,6 +922,57 @@ testers are expected to do more *exploratory* testing.
    1. Test case: Tag an application that already has 3 tags<br>
       Expected: No tag added. Error message about maximum tags shown.
 
+### Finding job applications
+
+1. Finding applications by keyword
+
+   1. Prerequisites: At least a few applications in the list with different company names and roles.
+
+   1. Test case: `find Google`<br>
+      Expected: All applications with "Google" in either company name or role shown. Highlighting cleared. Success message with number of applications found.
+
+   1. Test case: `find Software Engineer`<br>
+      Expected: All applications containing both "Software" and "Engineer" in company name or role shown.
+
+   1. Test case: `find XYZ123NonExistent`<br>
+      Expected: Empty list shown. Message indicates 0 applications found.
+
+   1. Test case: `find` (without keywords)<br>
+      Expected: Error message about invalid command format. List remains unchanged.
+
+### Untagging a job application
+
+1. Removing tags from a job application
+
+   1. Prerequisites: At least one application in the list with one or more tags.
+
+   1. Test case: `untag 1 t/urgent`<br>
+      Expected: Tag "urgent" removed from first application if it exists. Card is highlighted. Success message shown.
+
+   1. Test case: `untag 1 t/priority t/remote`<br>
+      Expected: Both tags removed if they exist. Card is highlighted.
+
+   1. Test case: `untag 1 t/nonexistent`<br>
+      Expected: No tag removed. Error message indicating the tag doesn't exist on this application.
+
+   1. Test case: Untag an application with no tags<br>
+      Expected: Error message indicating no tags to remove.
+
+   1. Test case: `untag 0 t/urgent`<br>
+      Expected: Error message about invalid index shown.
+
+### Listing all applications
+
+1. Viewing all job applications after filtering/finding
+
+   1. Prerequisites: Filter or find applications to show a subset.
+
+   1. Test case: `list`<br>
+      Expected: All applications shown again. Highlighting cleared. Success message indicates total number of applications.
+
+   1. Test case: Execute `list` when all applications already shown<br>
+      Expected: No change. Success message still shown.
+
 ### Filtering and Sorting
 
 1. Filtering applications
@@ -835,19 +980,72 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `filter s/APPLIED`<br>
       Expected: Only applications with APPLIED status shown. Highlighting cleared.
 
-   1. Test case: `filter n/Google`<br>
-      Expected: Only applications with "Google" in company name shown.
+   1. Test case: `filter s/INPROGRESS`<br>
+      Expected: Only applications with INPROGRESS status shown.
+
+   1. Test case: `filter s/REJECTED`<br>
+      Expected: Only applications with REJECTED status shown.
+
+   1. Test case: `filter s/STALE` (if expiry feature implemented)<br>
+      Expected: Only applications with STALE status shown.
+
+   1. Test case: `filter t/urgent`<br>
+      Expected: Only applications tagged with "urgent" shown.
+
+   1. Test case: `filter d/2025-12-31`<br>
+      Expected: Only applications with deadline on or after 2025-12-31 shown.
+
+   1. Test case: `filter s/APPLIED t/urgent`<br>
+      Expected: Only applications that are both APPLIED status AND tagged "urgent" shown.
 
    1. Test case: `filter none`<br>
       Expected: All applications shown again.
+
+   1. Test case: `filter s/INVALID`<br>
+      Expected: Error message about invalid status value.
 
 2. Sorting applications
 
    1. Test case: `sort deadline`<br>
       Expected: Applications sorted by deadline ascending. Highlighting cleared.
 
+   1. Test case: `sort deadline desc`<br>
+      Expected: Applications sorted by deadline descending (latest first).
+
+   1. Test case: `sort company`<br>
+      Expected: Applications sorted by company name ascending (A-Z).
+
    1. Test case: `sort company desc`<br>
-      Expected: Applications sorted by company name descending.
+      Expected: Applications sorted by company name descending (Z-A).
+
+   1. Test case: `sort role asc`<br>
+      Expected: Applications sorted by role ascending (A-Z).
+
+   1. Test case: `sort status`<br>
+      Expected: Applications sorted by status (alphabetical order).
+
+   1. Test case: `sort invalid`<br>
+      Expected: Error message about invalid sort field.
+
+### Viewing help
+
+1. Accessing help information
+
+   1. Test case: `help`<br>
+      Expected: Help window opens showing command usage instructions. Link to user guide displayed.
+
+   1. Test case: Execute `help` when help window already open<br>
+      Expected: Help window gains focus (brought to front).
+
+### Exiting the application
+
+1. Closing the application
+
+   1. Test case: `exit`<br>
+      Expected: Application closes gracefully. All data saved.
+
+   1. Test case: Close window using window close button (X)<br>
+      Expected: Same as `exit` command - application closes and data saved.
 
 ### Saving data
 
