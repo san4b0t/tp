@@ -3,7 +3,24 @@ layout: page
 title: User Guide
 ---
 
-HustleHub is a **desktop application** for computing students keeping track of multiple internship/job applications who prefer using CLI over GUI. The product will provide computing students an easy way to visualise, add and modify their job application details to multiple positions at multiple companies.
+## Who Should Use HustleHub?
+
+**Ideal for:**
+- Computing students applying to 15+ positions simultaneously
+- Users comfortable with command-line interfaces (CLI)
+- Those who prefer keyboard-driven workflows over mouse clicking
+- Anyone tracking applications with multiple status changes and deadlines
+
+**Not ideal for:**
+- Managing fewer than 5 applications (spreadsheet is simpler)
+- Users unfamiliar with CLI syntax
+- Teams needing collaborative features
+- Users requiring visual calendar integrations
+
+**Why HustleHub over alternatives?**
+HustleHub combines CLI speed with visual overview, letting you update 5 applications in under 30 seconds - much faster than spreadsheets or web apps for heavy users.
+
+---
 
 * Table of Contents
 {:toc}
@@ -28,7 +45,7 @@ HustleHub is a **desktop application** for computing students keeping track of m
 
    * `list` : Lists all applications.
 
-   * `add n/Microsoft r/Cloud engineer s/INPROGRESS d/31 Oct` : Adds an application for `Microsoft` to HustleHub.
+   * `add n/Microsoft r/Cloud engineer s/INPROGRESS d/2025-10-31T23:59` : Adds an application for `Microsoft` to HustleHub.
 
    * `delete 3` : Deletes the 3rd application shown in the current list.
 
@@ -38,7 +55,7 @@ HustleHub is a **desktop application** for computing students keeping track of m
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#features) below for details of each command and formatting datetime values.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -86,6 +103,8 @@ Applications progress through three distinct stages:
 
 **Important Notes:**
 - Status changes are **manual** - update them as your application progresses
+- These are the ONLY valid values; custom statuses are not supported
+- Status values are **case-insensitive** in commands: `applied` = `APPLIED`
 - Use **tags** for more detailed tracking (e.g., `t/phone-screen`, `t/final-round`)
 - Applications remain in your records even after rejection for future reference
 
@@ -206,6 +225,45 @@ Now that you understand the core concepts, here are practical scenarios showing 
 
 **Why this works:** Status filtering finds stagnant applications, deadline sorting reveals time pressure, tags create an actionable todo list, and re-filtering keeps you focused on follow-up tasks.
 
+### Scenario 7: Filtering and Deleting Rejected Applications
+**Goal:** Clean up rejected applications while understanding how deletion works with filtered views
+
+**The Situation:** You have 10 total applications. Several were rejected, and you want to remove them to keep your list focused.
+
+**Important:** ⚠️ Index numbers change when you filter - they always reflect what's currently visible!
+
+**Step-by-step:**
+
+1. `filter s/REJECTED` — Shows only rejected applications (let's say 4 results appear)
+2. Review the filtered list - applications are now numbered 1, 2, 3, 4 in the display
+3. `delete 1` — Deletes the **first application in the filtered view**
+4. The list updates - remaining rejections are now numbered 1, 2, 3
+5. `delete 1` — Deletes what is now the first visible application
+6. `list` — Returns to full view (now shows 8 total applications)
+
+**Why this matters:**
+- **Index numbers always reflect your CURRENT view**, not the original full list
+- After filtering, indices restart from 1 for visible results only
+- `delete 1` always deletes the **first VISIBLE application**, regardless of its original position
+- Same principle applies to `update`, `tag`, and `untag` commands
+
+**Visual Example:**
+```
+Full list (10 apps):          After filter s/REJECTED:     After delete 1:
+1. Google | APPLIED           1. Meta | REJECTED           1. Apple | REJECTED
+2. Meta | REJECTED            2. Apple | REJECTED          2. Netflix | REJECTED
+3. Amazon | APPLIED           3. Netflix | REJECTED        3. Stripe | REJECTED
+4. Apple | REJECTED           4. Stripe | REJECTED         
+5. Tesla | INPROGRESS         (only 4 visible)             (only 3 visible)
+6. Netflix | REJECTED
+7. Uber | APPLIED
+8. Stripe | REJECTED
+9. Airbnb | INPROGRESS
+10. Lyft | APPLIED
+```
+
+**Key Takeaway:** When working with filtered views, always use the index numbers you see in the current display. If unsure, run `list` first to see the unfiltered view.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
@@ -261,18 +319,6 @@ Now that you understand the core concepts, here are practical scenarios showing 
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
-**HustleHub uses three fixed status values to track your progress**
-
-| Status | Meaning | When to use |
-|--------|---------|-------------|
-| `APPLIED` | Application submitted | After you click "Apply" |
-| `INPROGRESS` | Active process | During interviews, assessments, or waiting for response |
-| `REJECTED` | Closed unsuccessfully | After receiving rejection |
-*Important notes:*
-- Status values are **case-insensitive** in commands: `applied` = `APPLIED`
-- These are the ONLY valid values; custom statuses are not supported
-- Use tags for more granular tracking (e.g., `t/phone-screen`, `t/final-round`)
-
 **Date & Time Formats in HustleHub**
 
 HustleHub now supports **flexible date formats** to make adding applications faster and easier!
@@ -318,6 +364,10 @@ Exits the program.
 
 Format: `exit`
 
+<br>
+
+[<u>Back to Command Summary</u>](#command-summary)
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -326,6 +376,10 @@ Format: `help`
 
 Result for `help`:
 ![help message](images/helpMessage.png)
+
+<br>
+
+[<u>Back to Command Summary</u>](#command-summary)
 
 ### Listing all applications : `list`
 
@@ -336,6 +390,10 @@ Format: `list`
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 `list` and `filter none` have the same effect - both show all applications.
 </div>
+
+<br>
+
+[<u>Back to Command Summary</u>](#command-summary)
 
 ### Saving data
 
@@ -375,6 +433,10 @@ Examples:
 * `add n/Meta r/Frontend Developer s/APPLIED d/2025-11-30T14:00` - Full date-time format
 * `add n/Netflix r/Backend Engineer s/APPLIED d/15 December t/remote t/urgent` - With tags
 
+<br>
+
+[<u>Back to Command Summary</u>](#command-summary)
+
 ### Deleting an application : `delete`
 
 Deletes the specified application from HustleHub.
@@ -388,6 +450,10 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd application in HustleHub.
 * After filtering the list, `delete 1` deletes the 1st application in the currently displayed results.
+
+<br>
+
+[<u>Back to Command Summary</u>](#command-summary)
 
 ### Finding job applications: `find`
 
@@ -491,6 +557,10 @@ After filtering: `INPROGRESS`
 
 ![result for 'filter s/inprogress'](images/filterInProgressResult.png)
 
+<br>
+
+[<u>Back to Command Summary</u>](#command-summary)
+
 ### Sorting the applications : `sort`
 
 Sorts the current list of applications by a chosen field, in ascending or descending order.
@@ -513,6 +583,10 @@ Before:
 
 After:
 ![sort_after.png](images/sort_after.png)
+
+<br>
+
+[<u>Back to Command Summary</u>](#command-summary)
 
 ### Updating a job application: `update`
 
@@ -552,6 +626,10 @@ After updating with `update 2 s/INPROGRESS d/2027-01-15T17:00 t/priority t/urgen
 
 ![update_after.png](images/update_after.png)
 
+<br>
+
+[<u>Back to Command Summary</u>](#command-summary)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Tag Management
@@ -590,16 +668,17 @@ If you add a mix of duplicate and new tags, the new tags will be added whilst du
 - `tag 1 t/fast-response t/rolling`
 - `tag 6 t/late-deadline t/backup-plan`
 
-<div style="display: flex; gap: 20px;">
-  <div style="flex: 1;">
-    <strong>Before:</strong><br>
-    <img src="images/tag_before.png" alt="tag_before.png">
-  </div>
-  <div style="flex: 1;">
-    <strong>After tagging:</strong><br>
-    <img src="images/tag_after.png" alt="tag_after.png">
-  </div>
-</div>
+Before:
+
+![tag_before.png](images/tag_before.png)
+
+After tagging:
+
+![tag_after.png](images/tag_after.png)
+
+<br>
+
+[<u>Back to Command Summary</u>](#command-summary)
 
 ### Removing tags: `untag`
 
@@ -625,6 +704,359 @@ Before:
 After untagging:
 
 ![Untag_after.png](images/Untag_after.png)
+
+<br>
+
+[<u>Back to Command Summary</u>](#command-summary)
+
+---
+
+## Troubleshooting Common Errors
+
+This section helps you resolve common errors you might encounter while using HustleHub.
+
+### Command Format Errors
+
+#### "Invalid command format!"
+**Cause:** Missing required parameters or incorrect syntax.
+
+**Solutions:**
+- Ensure all required fields are provided with their prefixes (n/, r/, s/, d/)
+- Check for typos in command names
+- Verify prefixes are correct (use n/ not name/)
+- Don't put text before the first prefix
+
+**Examples:**
+```
+❌ add Microsoft Cloud Engineer APPLIED 2025-12-31T23:59
+❌ add name/Microsoft role/Cloud Engineer
+✅ add n/Microsoft r/Cloud Engineer s/APPLIED d/2025-12-31T23:59
+```
+
+---
+
+### Date & Time Errors
+
+#### "Invalid deadline format"
+**Error Message:** `Invalid deadline format. Expected format: yyyy-MM-ddTHH:mm`
+
+**Cause:** Incorrect date format or missing time component.
+
+**Solutions:**
+- Use format: `yyyy-MM-ddTHH:mm` (year-month-dayThour:minute)
+- Include the uppercase 'T' separator between date and time
+- Use 24-hour format (17:00, not 5:00 PM)
+- Include minutes even if :00
+
+**Examples:**
+```
+❌ add n/Google r/SWE s/APPLIED d/2025-12-31
+   (missing time - must include T and time)
+
+❌ add n/Google r/SWE s/APPLIED d/31-12-2025T23:59
+   (wrong date order - must be year first)
+
+❌ add n/Google r/SWE s/APPLIED d/2025/12/31T23:59
+   (wrong separators - use hyphens not slashes)
+
+❌ add n/Google r/SWE s/APPLIED d/2025-12-31 23:59
+   (missing T separator)
+
+✅ add n/Google r/SWE s/APPLIED d/2025-12-31T23:59
+✅ update 1 d/2026-01-15T09:00
+```
+
+#### "Deadline cannot be in the past"
+**Cause:** The date/time you provided has already passed.
+
+**Solution:** Use a future date and time.
+
+**Examples:**
+```
+❌ update 1 d/2020-01-01T00:00  (past date)
+❌ add n/Meta r/SWE s/APPLIED d/2024-12-31T23:59  (already passed)
+✅ update 1 d/2026-12-31T23:59  (future date)
+```
+
+---
+
+### Status Errors
+
+#### "Invalid status"
+**Error Message:** `Invalid status. Valid values are: APPLIED, INPROGRESS, REJECTED`
+
+**Cause:** Using a status value that doesn't exist in HustleHub.
+
+**Solutions:**
+- Only use these three values: `APPLIED`, `INPROGRESS`, or `REJECTED`
+- Status is case-insensitive (applied = APPLIED)
+- You cannot create custom statuses
+- Use tags for more detailed tracking (e.g., t/interview, t/offer-received)
+
+**Examples:**
+```
+❌ add n/Meta r/SWE s/PENDING d/2025-12-31T23:59
+   (PENDING is not valid)
+
+❌ add n/Meta r/SWE s/INTERVIEW d/2025-12-31T23:59
+   (INTERVIEW is not valid - use INPROGRESS instead)
+
+❌ add n/Meta r/SWE s/ACCEPTED d/2025-12-31T23:59
+   (ACCEPTED is not valid)
+
+✅ add n/Meta r/SWE s/APPLIED d/2025-12-31T23:59
+✅ add n/Meta r/SWE s/inprogress d/2025-12-31T23:59  (case-insensitive)
+✅ add n/Meta r/SWE s/INPROGRESS d/2025-12-31T23:59 t/phone-screen
+   (use tags for detailed status)
+```
+
+---
+
+### Tag Errors
+
+#### "Cannot add tags: This application would exceed 3 tags"
+**Cause:** Trying to add tags when the application already has 3 tags (the maximum allowed).
+
+**Solutions:**
+1. Remove existing tags first using `untag`
+2. Then add new tags using `tag`
+3. Or use `update` to replace all tags at once
+
+**Examples:**
+```
+# Application already has 3 tags: urgent, remote, priority
+
+❌ tag 1 t/high-pay
+   (would make 4 tags total)
+
+✅ untag 1 t/remote
+   (removes one tag first)
+   
+✅ tag 1 t/high-pay
+   (now you can add - total is 3)
+
+# Alternative: Replace all tags at once
+✅ update 1 t/urgent t/priority t/high-pay
+   (replaces all existing tags)
+```
+
+#### "Tags must be a single word (no spaces)"
+**Error Message:** `Tags must be a single word (no spaces) with up to 30 characters. Allowed: letters, numbers, and at most 2 special characters from: - . @ # _ +`
+
+**Cause:** Tag contains spaces, is too long, or has too many special characters.
+
+**Solutions:**
+- Use hyphens (-) or underscores (_) instead of spaces
+- Keep tags under 30 characters
+- Use at most 2 special characters from: - . @ # _ +
+- Single word only (no spaces allowed)
+
+**Examples:**
+```
+❌ tag 1 t/high priority
+   (contains space - use hyphen instead)
+
+❌ tag 1 t/C+++++
+   (too many special characters - max 2 allowed)
+
+❌ tag 1 t/very-long-tag-name-that-exceeds-thirty-characters-limit
+   (exceeds 30 character limit)
+
+❌ tag 1 t/my tag
+   (contains space)
+
+✅ tag 1 t/high-priority
+✅ tag 1 t/C++
+✅ tag 1 t/python_v3.12
+✅ tag 1 t/6-Month
+✅ tag 1 t/Full-Stack
+✅ tag 1 t/remote-work
+```
+
+#### "Cannot remove tags: One or more of the specified tags do not exist"
+**Cause:** Trying to remove tags that aren't currently on the application.
+
+**Solutions:**
+- Check existing tags by viewing the application in the UI
+- Verify exact spelling (tags are case-sensitive)
+- Use `list` to see all applications with their current tags
+
+**Examples:**
+```
+# Application currently has tags: backend, java
+
+❌ untag 1 t/Backend
+   (wrong case - tag is 'backend' not 'Backend')
+
+❌ untag 1 t/python
+   (tag doesn't exist on this application)
+
+❌ untag 1 t/back-end
+   (wrong format - tag is 'backend' not 'back-end')
+
+✅ untag 1 t/backend t/java
+   (exact matches - both tags exist)
+
+✅ untag 1 t/backend
+   (removes just one tag)
+```
+
+---
+
+### Index Errors
+
+#### "The application index provided is invalid"
+**Cause:** Index doesn't exist in the current displayed list or has invalid format.
+
+**Solutions:**
+- Check the displayed list (numbers shown on the left side of each card)
+- Use only positive integers (1, 2, 3...)
+- After filtering/finding, indices are renumbered - use the currently displayed numbers
+- Run `list` to see all applications and their current indices
+
+**Examples:**
+```
+❌ delete 0
+   (index must be positive - starts from 1)
+
+❌ delete -1
+   (negative numbers not allowed)
+
+❌ delete abc
+   (must be a number, not letters)
+
+❌ delete 99
+   (if only 5 applications exist in current view)
+
+✅ delete 1
+   (deletes first application in current list)
+
+✅ find Google
+✅ delete 1
+   (deletes first result from search, not first in full list)
+```
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Important:**
+After filtering or finding, the indices you see are temporary! An application that was #5 in the full list might be #1 in filtered results. Always use the currently displayed index numbers.
+</div>
+
+---
+
+### Duplicate Application Errors
+
+#### "This job application already exists in the job book"
+**Cause:** Attempting to add or update an application that would create a duplicate Company Name + Role combination.
+
+**Why this happens:** Each company-role pair must be unique. You cannot have two applications for "Google | Software Engineer" even if they have different deadlines or statuses.
+
+**Solutions:**
+1. Differentiate similar roles in the role name itself
+2. Update the existing application instead of adding a new one
+3. Delete the old application first if you're reapplying
+
+**Examples:**
+```
+# You already have: Google | Software Engineer
+
+❌ add n/Google r/Software Engineer s/APPLIED d/2025-12-31T23:59
+   (duplicate - same company and role)
+
+✅ add n/Google r/Software Engineer - Backend Team s/APPLIED d/2025-12-31T23:59
+   (differentiated in role field)
+
+✅ add n/Google r/Software Engineer (Cloud) s/APPLIED d/2025-12-31T23:59
+   (differentiated in role field)
+
+✅ add n/Google r/SWE - Seattle Office s/APPLIED d/2025-12-31T23:59
+   (different role description)
+
+# Alternative: Update the existing application
+✅ update 1 s/INPROGRESS d/2026-01-15T23:59
+   (update existing instead of adding duplicate)
+```
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+If you're reapplying to the same company for the same role, either update your existing application's deadline and status, or delete the old one first. For similar roles at the same company, differentiate them in the role field (e.g., "SWE - Team A" vs "SWE - Team B").
+</div>
+
+---
+
+### Filter & Find Errors
+
+#### "Invalid date format" (when filtering)
+**Important:** Filter uses a DIFFERENT date format than add/update!
+
+**Format for add/update:** `yyyy-MM-ddTHH:mm` (includes time)  
+**Format for filter:** `yyyy-MM-dd` (date only, NO time)
+
+**Examples:**
+```
+❌ filter d/2025-12-31T23:59
+   (don't include time when filtering)
+
+❌ filter d/31-12-2025
+   (wrong date order)
+
+✅ filter d/2025-12-31
+   (date only - correct format for filtering)
+
+✅ add n/Google r/SWE s/APPLIED d/2025-12-31T23:59
+   (add/update commands need time)
+```
+
+#### Can't find applications after filtering/finding?
+**Cause:** Filter and find commands HIDE applications that don't match.
+
+**Solutions:**
+- Run `list` to show all applications again
+- Or run `filter none` (same effect as list)
+- Remember: Your applications aren't deleted, just hidden from view
+
+**Examples:**
+```
+# You filtered by status and now can't see other applications
+
+✅ list
+   (shows all applications again)
+
+✅ filter none
+   (also shows all applications)
+
+# After finding "Google", you want to see everything
+
+✅ list
+   (returns to full list)
+```
+
+---
+
+### General Tips
+
+#### Application disappeared after deletion?
+- **Deletions are permanent** - there is no undo function
+- Before deleting, consider updating status to REJECTED instead
+- If you accidentally deleted, restore from the data file backup (if you made one)
+- The data file is at: `[JAR file location]/data/JobApplications.json`
+
+#### Commands not working?
+**Checklist:**
+1. Check for extra spaces before or after commands
+2. Verify all prefixes are correct (n/, r/, s/, d/, t/)
+3. Ensure required prefixes are present
+4. Parameters can be in any order, but all prefixes are required
+5. Try the example commands from this guide exactly as shown
+
+#### Need to start over?
+If your data gets corrupted:
+1. Close HustleHub
+2. Delete `[JAR file location]/data/JobApplications.json`
+3. Restart HustleHub - it will create a fresh data file with sample data
+
+#### Still stuck?
+1. Check the command format in the [Features](#features) section
+2. Review the [Common Workflows](#common-workflows) for practical examples
+3. Try the exact example commands provided in this guide
+4. Verify your Java version is 17 or above
 
 ---
 
