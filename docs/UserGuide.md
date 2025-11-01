@@ -1068,7 +1068,7 @@ If you're reapplying to the same company for the same role, either update your e
 If your data gets corrupted:
 1. Close HustleHub
 2. Delete `[JAR file location]/data/JobApplications.json`
-3. Restart HustleHub - it will create a fresh data file with sample data
+3. Restart HustleHub - it will start with an empty data file
 
 #### Still stuck?
 1. Check the command format in the [Features](#features) section
