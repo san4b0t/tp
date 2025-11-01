@@ -845,7 +845,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file or run `java -jar hustlehub.jar` from the terminal<br>
+   1. Double-click the jar file or run `java -jar HustleHub.jar` from the terminal<br>
       Expected: Shows the GUI with sample job applications. The window size may not be optimum.
 
 1. Saving window preferences
