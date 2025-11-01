@@ -564,8 +564,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 _For all use cases below, the **System** is `HustleHub` and the **Actor** is the `user`, unless specified otherwise._
 
-![UseCases.png](images/UseCases.png)
-
 ### UC01 - View all job applications
 
 **MSS**
