@@ -27,7 +27,7 @@ public class TagJobCommand extends Command {
             + MAX_TAGS + " tags (the maximum allowed). "
             + "Please remove some tags using 'untag' before adding new ones.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Tags a job application.\n"
-            + "Parameters: INDEX t/tag t/tag t/tag\n"
+            + "Parameters: INDEX (must be a positive integer) t/tag t/tag t/tag\n"
             + "Example: " + COMMAND_WORD + " 1 t/Intern t/Summer t/on-site";
 
     protected final Index targetIndex;
