@@ -644,7 +644,16 @@ Input restrictions:
 1. A `TAG` must be 1 to 30 characters long (cannot be blank).
 2. A `TAG` is a single word (no spaces).
 3. Each job application can have up to 3 tags.
-4. Allowed characters: letters, digits, and at most 2 of the following special characters: `-`, `.`, `@`, `#`, `_`, `+`.
+4. Allowed characters: 
+   - **Letters** (a-z, A-Z)
+   - **Digits** (0-9)
+   - **Special characters** (at most 2 total from this list):
+     - Hyphen (`-`)
+     - Period (`.`)
+     - At sign (`@`)
+     - Hash/Pound (`#`)
+     - Underscore (`_`)
+     - Plus (`+`)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 If you add a mix of duplicate and new tags, the new tags will be added whilst duplicates will be ignored.
@@ -689,7 +698,16 @@ Format: `untag JOB_APPLICATION_INDEX t/TAG...`
 Input restrictions:
 1. A `TAG` must be 1 to 30 characters long (cannot be blank).
 2. A `TAG` is a single word (no spaces).
-3. Allowed characters: letters, digits, and at most 2 of the following special characters: `-`, `.`, `@`, `#`, `_`, `+`.
+3. Allowed characters:
+    - **Letters** (a-z, A-Z)
+    - **Digits** (0-9)
+    - **Special characters** (at most 2 total from this list):
+        - Hyphen (`-`)
+        - Period (`.`)
+        - At sign (`@`)
+        - Hash/Pound (`#`)
+        - Underscore (`_`)
+        - Plus (`+`)
 4. Inputted tags must already exist on the application.
 
 Examples:
