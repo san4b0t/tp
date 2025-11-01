@@ -273,7 +273,7 @@ Full list (10 apps):          After filter s/REJECTED:     After delete 1:
 | Command                                      | Description                                  | Format |
 |----------------------------------------------|----------------------------------------------|--------|
 | [**exit**](#exiting-the-program--exit)       | Exits the program                            | `exit` |
-| [**help**](#viewing-help--help)              | Displays how to use all commands in a window | `help` |
+| [**help**](#viewing-help--help)              | Displays a link to the user guide | `help` |
 | [**list**](#listing-all-applications--list)  | Lists all applications                       | `list` |
 
 ### Application Management
