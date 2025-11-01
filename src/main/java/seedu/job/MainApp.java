@@ -23,6 +23,7 @@ import seedu.job.model.jobapplication.ModelManager;
 import seedu.job.model.jobapplication.ReadOnlyJobBook;
 import seedu.job.model.jobapplication.ReadOnlyUserPrefs;
 import seedu.job.model.jobapplication.UserPrefs;
+import seedu.job.model.jobapplication.exceptions.DuplicateJobApplicationException;
 import seedu.job.storage.DataStorage;
 import seedu.job.storage.DataStorageManager;
 import seedu.job.storage.JobApplicationStorage;
@@ -92,7 +93,11 @@ public class MainApp extends Application {
 
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getDataFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
+                    + " Will be starting with an empty JobBook.");
+            initialData = book;
+        } catch (DuplicateJobApplicationException e) {
+            logger.warning("Data file at " + storage.getDataFilePath() + " contains duplicate job applications."
+                    + " Will be starting with an empty JobBook.");
             initialData = book;
         }
 

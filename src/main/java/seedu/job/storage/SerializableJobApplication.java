@@ -77,15 +77,11 @@ public class SerializableJobApplication {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Status"));
         }
 
-        final Set<Tag> tags = this.tags.stream()
-                .map(tag -> {
-                    try {
-                        return tag.toModelType();
-                    } catch (IllegalValueException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .collect(Collectors.toSet());
+        final List<Tag> tagList = new ArrayList<>();
+        for (JsonAdaptedTag jsonTag : this.tags) {
+            tagList.add(jsonTag.toModelType());
+        }
+        final Set<Tag> tags = Set.copyOf(tagList);
 
         return new JobApplication(companyName, role,
             LocalDateTime.parse(deadline), JobApplication.Status.valueOf(status), tags);
