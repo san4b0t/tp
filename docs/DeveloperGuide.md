@@ -124,6 +124,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the job book data i.e., all `JobApplication` objects (which are contained in a `UniqueJobApplicationList` object).
+* wraps all job application data in a `JobBook` object which implements the `ReadOnlyJobBook` interface to provide read-only access to external components.
 * stores the currently 'selected' `JobApplication` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<JobApplication>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPrefs` object that represents the user's preferences. This is exposed to the outside as a `ReadOnlyUserPrefs` objects.
 * stores a reference to the recently modified `JobApplication` for UI highlighting purposes.
