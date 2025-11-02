@@ -3,10 +3,15 @@ package seedu.job.logic.jobcommands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.job.model.jobapplication.sort.SortField.DEADLINE;
+import static seedu.job.model.jobapplication.sort.SortField.ROLE;
+import static seedu.job.model.jobapplication.sort.SortOrder.ASCENDING;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.function.Predicate;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
@@ -16,19 +21,73 @@ import seedu.job.logic.jobcommands.exceptions.JobCommandException;
 import seedu.job.model.jobapplication.JobApplication;
 import seedu.job.model.jobapplication.JobBook;
 import seedu.job.model.jobapplication.Model;
+import seedu.job.model.jobapplication.ModelManager;
 import seedu.job.model.jobapplication.ReadOnlyJobBook;
 import seedu.job.model.jobapplication.ReadOnlyUserPrefs;
+import seedu.job.model.jobapplication.UserPrefs;
 import seedu.job.model.jobapplication.sort.SortField;
 import seedu.job.model.jobapplication.sort.SortOrder;
+import seedu.job.testutil.JobApplicationBuilder;
 
 /**
  * Contains unit tests for {@link SortCommand}.
  */
 public class SortCommandTest {
 
+    private Model model;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(new JobBook(), new UserPrefs());
+    }
+
+    @Test
+    public void executeSortByDeadlineAscendingSuccess() throws Exception {
+        JobApplication job1 = new JobApplicationBuilder()
+                .withCompanyName("Google")
+                .withDeadline(LocalDateTime.of(2025, 12, 1, 12, 0))
+                .build();
+        JobApplication job2 = new JobApplicationBuilder()
+                .withCompanyName("Meta")
+                .withDeadline(LocalDateTime.of(2025, 11, 1, 12, 0))
+                .build();
+
+        model.addJobApplication(job1);
+        model.addJobApplication(job2);
+
+        SortCommand sortCommand = new SortCommand(DEADLINE, ASCENDING);
+        sortCommand.execute(model);
+
+        assertEquals(job2, model.getFilteredApplicationList().get(0)); // earlier date first
+        assertEquals(job1, model.getFilteredApplicationList().get(1));
+    }
+
+
+    @Test
+    public void executeSortByRoleStableSortSuccess() throws Exception {
+        JobApplication job1 = new JobApplicationBuilder()
+                .withCompanyName("Google")
+                .withRole("Software Engineer")
+                .build();
+
+        JobApplication job2 = new JobApplicationBuilder()
+                .withCompanyName("Google")
+                .withRole("Product Manager")
+                .build();
+
+        model.addJobApplication(job1);
+        model.addJobApplication(job2);
+
+        SortCommand sortCommand = new SortCommand(ROLE, ASCENDING);
+        sortCommand.execute(model);
+
+        assertEquals(job2, model.getFilteredApplicationList().get(0));
+        assertEquals(job1, model.getFilteredApplicationList().get(1));
+    }
+
     @Test
     public void constructor_nullField_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new SortCommand(null, SortOrder.ASCENDING));
+        assertThrows(NullPointerException.class, () -> new SortCommand(null, ASCENDING));
     }
 
     @Test
@@ -59,10 +118,10 @@ public class SortCommandTest {
 
     @Test
     public void equals() {
-        SortCommand a = new SortCommand(SortField.DEADLINE, SortOrder.ASCENDING);
-        SortCommand b = new SortCommand(SortField.DEADLINE, SortOrder.ASCENDING);
-        SortCommand c = new SortCommand(SortField.COMPANY, SortOrder.ASCENDING);
-        SortCommand d = new SortCommand(SortField.DEADLINE, SortOrder.DESCENDING);
+        SortCommand a = new SortCommand(DEADLINE, ASCENDING);
+        SortCommand b = new SortCommand(DEADLINE, ASCENDING);
+        SortCommand c = new SortCommand(SortField.COMPANY, ASCENDING);
+        SortCommand d = new SortCommand(DEADLINE, SortOrder.DESCENDING);
 
         // Same values -> true
         assertEquals(a, b);
@@ -86,7 +145,7 @@ public class SortCommandTest {
     @Test
     public void toStringMethod() {
         SortField field = SortField.ROLE;
-        SortOrder order = SortOrder.ASCENDING;
+        SortOrder order = ASCENDING;
         SortCommand cmd = new SortCommand(field, order);
 
         String expected = SortCommand.class.getCanonicalName()
