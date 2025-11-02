@@ -17,7 +17,7 @@ import seedu.job.commons.util.JsonUtil;
 import seedu.job.model.jobapplication.JobApplication;
 
 /**
- * A class to access Job Application data stored as a csv file on the hard disk.
+ * A class to access Job Application data stored as a json file on the hard disk.
  */
 public class JsonJobApplicationStorage implements JobApplicationStorage {
 

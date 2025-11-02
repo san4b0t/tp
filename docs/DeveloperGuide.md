@@ -24,7 +24,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams are in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams are in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial at se-edu/guides_](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -124,6 +124,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the job book data i.e., all `JobApplication` objects (which are contained in a `UniqueJobApplicationList` object).
+* wraps all job application data in a `JobBook` object which implements the `ReadOnlyJobBook` interface to provide read-only access to external components.
 * stores the currently 'selected' `JobApplication` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<JobApplication>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPrefs` object that represents the user's preferences. This is exposed to the outside as a `ReadOnlyUserPrefs` objects.
 * stores a reference to the recently modified `JobApplication` for UI highlighting purposes.
@@ -563,8 +564,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 _For all use cases below, the **System** is `HustleHub` and the **Actor** is the `user`, unless specified otherwise._
 
-![UseCases.png](images/UseCases.png)
-
 ### UC01 - View all job applications
 
 **MSS**
@@ -845,7 +844,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file or run `java -jar hustlehub.jar` from the terminal<br>
+   1. Double-click the jar file or run `java -jar HustleHub.jar` from the terminal<br>
       Expected: Shows the GUI with sample job applications. The window size may not be optimum.
 
 1. Saving window preferences

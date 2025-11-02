@@ -23,6 +23,7 @@ import seedu.job.model.jobapplication.ModelManager;
 import seedu.job.model.jobapplication.ReadOnlyJobBook;
 import seedu.job.model.jobapplication.ReadOnlyUserPrefs;
 import seedu.job.model.jobapplication.UserPrefs;
+import seedu.job.model.jobapplication.exceptions.DuplicateJobApplicationException;
 import seedu.job.storage.DataStorage;
 import seedu.job.storage.DataStorageManager;
 import seedu.job.storage.JobApplicationStorage;
@@ -49,7 +50,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing HustleHub ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -71,9 +72,9 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s job book and {@code userPrefs}. <br>
+     * The data from the sample address book will be used instead if {@code storage}'s job book is not found,
+     * or an empty job book will be used instead if errors occur when reading {@code storage}'s job book.
      */
     private Model initModelManager(DataStorage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getDataFilePath());
@@ -92,7 +93,11 @@ public class MainApp extends Application {
 
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getDataFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
+                    + " Will be starting with an empty JobBook.");
+            initialData = book;
+        } catch (DuplicateJobApplicationException e) {
+            logger.warning("Data file at " + storage.getDataFilePath() + " contains duplicate job applications."
+                    + " Will be starting with an empty JobBook.");
             initialData = book;
         }
 
@@ -176,13 +181,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting JobBook " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping AddressBook ] =============================");
+        logger.info("============================ [ Stopping HustleHub ] =============================");
         try {
             dataStorage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

@@ -26,7 +26,7 @@ public class UntagJobCommand extends Command {
             + "do not exist on this application. "
             + "Please check the existing tags and try again.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes tags from a job application.\n"
-            + "Parameters: index_name t/tag t/tag t/tag\n"
+            + "Parameters: INDEX (must be a positive integer) t/tag t/tag t/tag\n"
             + "Example: " + COMMAND_WORD + " 1 t/Intern t/Summer t/on-site";
 
     protected final Index targetIndex;

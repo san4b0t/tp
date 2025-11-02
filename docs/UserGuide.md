@@ -37,7 +37,7 @@ HustleHub combines CLI speed with visual overview, letting you update 5 applicat
 1. Copy the file to the folder you want to use as the _home folder_ for HustleHub.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and run `java -jar <downloaded-jar-name>.jar` to start the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. Note that the app does not contain sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -273,7 +273,7 @@ Full list (10 apps):          After filter s/REJECTED:     After delete 1:
 | Command                                      | Description                                  | Format |
 |----------------------------------------------|----------------------------------------------|--------|
 | [**exit**](#exiting-the-program--exit)       | Exits the program                            | `exit` |
-| [**help**](#viewing-help--help)              | Displays how to use all commands in a window | `help` |
+| [**help**](#viewing-help--help)              | Displays a link to the user guide | `help` |
 | [**list**](#listing-all-applications--list)  | Lists all applications                       | `list` |
 
 ### Application Management
@@ -644,7 +644,16 @@ Input restrictions:
 1. A `TAG` must be 1 to 30 characters long (cannot be blank).
 2. A `TAG` is a single word (no spaces).
 3. Each job application can have up to 3 tags.
-4. Allowed characters: letters, digits, and at most 2 of the following special characters: `-`, `.`, `@`, `#`, `_`, `+`.
+4. Allowed characters: 
+   - **Letters** (a-z, A-Z)
+   - **Digits** (0-9)
+   - **Special characters** (at most 2 total from this list):
+     - Hyphen (`-`)
+     - Period (`.`)
+     - At sign (`@`)
+     - Hash/Pound (`#`)
+     - Underscore (`_`)
+     - Plus (`+`)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 If you add a mix of duplicate and new tags, the new tags will be added whilst duplicates will be ignored.
@@ -689,7 +698,16 @@ Format: `untag JOB_APPLICATION_INDEX t/TAG...`
 Input restrictions:
 1. A `TAG` must be 1 to 30 characters long (cannot be blank).
 2. A `TAG` is a single word (no spaces).
-3. Allowed characters: letters, digits, and at most 2 of the following special characters: `-`, `.`, `@`, `#`, `_`, `+`.
+3. Allowed characters:
+    - **Letters** (a-z, A-Z)
+    - **Digits** (0-9)
+    - **Special characters** (at most 2 total from this list):
+        - Hyphen (`-`)
+        - Period (`.`)
+        - At sign (`@`)
+        - Hash/Pound (`#`)
+        - Underscore (`_`)
+        - Plus (`+`)
 4. Inputted tags must already exist on the application.
 
 Examples:
@@ -1050,7 +1068,7 @@ If you're reapplying to the same company for the same role, either update your e
 If your data gets corrupted:
 1. Close HustleHub
 2. Delete `[JAR file location]/data/JobApplications.json`
-3. Restart HustleHub - it will create a fresh data file with sample data
+3. Restart HustleHub - it will start with an empty data file
 
 #### Still stuck?
 1. Check the command format in the [Features](#features) section
