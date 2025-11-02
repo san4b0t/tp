@@ -137,9 +137,9 @@ public class UniqueApplicationList implements Iterable<JobApplication> {
         );
 
         return switch (field) {
-        case DEADLINE -> byDeadline.thenComparing(byCompany).thenComparing(byRole);
-        case COMPANY -> byCompany.thenComparing(byRole).thenComparing(byDeadline);
-        case ROLE -> byRole.thenComparing(byCompany).thenComparing(byDeadline);
+        case DEADLINE -> byDeadline;
+        case COMPANY -> byCompany;
+        case ROLE -> byRole;
         };
     }
 
