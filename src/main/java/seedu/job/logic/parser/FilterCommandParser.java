@@ -94,6 +94,9 @@ public class FilterCommandParser implements JobParser<FilterCommand> {
     private FilterCommand createTagFilter(ArgumentMultimap argMultimap) throws ParseException {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TAG);
         String keyword = argMultimap.getValue(PREFIX_TAG).get();
+        if (keyword.length() == 0) {
+            throw new ParseException("Invalid empty tag for filter.");
+        }
         TagsContainKeywordPredicate predicate = new TagsContainKeywordPredicate(keyword.toLowerCase());
         return new FilterCommand(predicate);
     }
@@ -129,12 +132,16 @@ public class FilterCommandParser implements JobParser<FilterCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DEADLINE);
         String dateStr = argMultimap.getValue(PREFIX_DEADLINE).get();
 
+        if (!dateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            throw new ParseException("Invalid date format. Expected format: yyyy-MM-dd");
+        }
+
         try {
             LocalDate date = LocalDate.parse(dateStr, DATE_FORMATTER);
             DeadlinePredicate predicate = new DeadlinePredicate(date);
             return new FilterCommand(predicate);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Invalid date format. Expected format: yyyy-MM-dd", e);
+            throw new ParseException("Invalid date. Please enter a valid date in yyyy-MM-dd format.", e);
         }
     }
 }

@@ -513,7 +513,7 @@ Filters the list of job applications based on a single field: **Tags**, **Status
 
 Format: `filter FLAG/KEYWORD`
 
-or, to remove all filters: `filter none`
+or, to remove all filters: `filter none` (`filter none` accepts extraneous parameters which will be ignored)
 
 
 #### **Filtering Rules**
@@ -522,6 +522,7 @@ or, to remove all filters: `filter none`
 1. **Tags (`t/`)**: Matches if the `KEYWORD` is **contained** in any tag
    (e.g., `t/backend` matches a tag named "backend-engineer").
     * The search is **case-insensitive**.
+    * Empty tags are considered as invalid inputs.
 
 
 2. **Application Status (`s/`)**: Matches an exact, **case-insensitive** status.
