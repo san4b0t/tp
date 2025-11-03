@@ -993,10 +993,10 @@ testers are expected to do more *exploratory* testing.
       Expected: Only applications tagged with "urgent" shown.
 
    1. Test case: `filter d/2025-12-31`<br>
-      Expected: Only applications with deadline on or after 2025-12-31 shown.
+      Expected: Only applications with deadline on 2025-12-31 are shown.
 
    1. Test case: `filter s/APPLIED t/urgent`<br>
-      Expected: Only applications that are both APPLIED status AND tagged "urgent" shown.
+      Expected: Error message about using more than one filter.
 
    1. Test case: `filter none`<br>
       Expected: All applications shown again.
