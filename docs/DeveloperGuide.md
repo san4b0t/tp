@@ -130,7 +130,8 @@ The `Model` component,
 * stores a reference to the recently modified `JobApplication` for UI highlighting purposes.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `JobBook`, which `JobApplication` references. This allows `JobBook` to only require one `Tag` object per unique tag, instead of each `JobApplication` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `JobBook`, which `JobApplication` references. This allows `JobBook` to only require one `Tag` object per unique tag, instead of each `JobApplication` needing their own `Tag` objects.<br>
+
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -992,10 +993,10 @@ testers are expected to do more *exploratory* testing.
       Expected: Only applications tagged with "urgent" shown.
 
    1. Test case: `filter d/2025-12-31`<br>
-      Expected: Only applications with deadline on or after 2025-12-31 shown.
+      Expected: Only applications with deadline on 2025-12-31 are shown.
 
    1. Test case: `filter s/APPLIED t/urgent`<br>
-      Expected: Only applications that are both APPLIED status AND tagged "urgent" shown.
+      Expected: Error message about using more than one filter.
 
    1. Test case: `filter none`<br>
       Expected: All applications shown again.
