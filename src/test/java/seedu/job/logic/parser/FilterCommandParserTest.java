@@ -229,13 +229,13 @@ public class FilterCommandParserTest {
     @Test
     public void parse_invalidDeadlineInvalidDate_throwsParseException() {
         assertParseFailure(parser, " d/2025-13-01",
-                "Invalid date format. Expected format: yyyy-MM-dd");
+                "Invalid date. Please enter a valid date in yyyy-MM-dd format.");
     }
 
     @Test
     public void parse_invalidDeadlineInvalidDay_throwsParseException() {
         assertParseFailure(parser, " d/2025-02-30",
-                "Invalid date format. Expected format: yyyy-MM-dd");
+                "Invalid date. Please enter a valid date in yyyy-MM-dd format.");
     }
 
     @Test
